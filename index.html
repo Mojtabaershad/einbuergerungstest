@@ -5,10 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Einbürgerungstest Trainer</title>
 
-<!-- Google Font Vazirmatn für alle Farsi-Texte -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet">
+<!-- Schrift Vazirmatn für alle Farsi-Texte – lokal eingebunden (keine Verbindung zu Google, DSGVO) -->
+<style>
+  @font-face { font-family: "Vazirmatn"; font-weight: 400; font-display: swap; src: url("fonts/Vazirmatn-Regular.woff2") format("woff2"); }
+  @font-face { font-family: "Vazirmatn"; font-weight: 500; font-display: swap; src: url("fonts/Vazirmatn-Medium.woff2") format("woff2"); }
+  @font-face { font-family: "Vazirmatn"; font-weight: 700; font-display: swap; src: url("fonts/Vazirmatn-Bold.woff2") format("woff2"); }
+</style>
 
 <style>
   /* ================= Design-Tokens ================= */
@@ -250,6 +252,26 @@
   }
   .fa-box .muted { color: var(--muted); }
 
+  /* ================= Konto / Anmeldung ================= */
+  .auth-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; background: #e6e9f0; padding: 5px; border-radius: 12px; margin: 4px 0 18px; }
+  .auth-tabs button { border: none; background: transparent; border-radius: 9px; padding: 9px; font-weight: 600; color: var(--muted); }
+  .auth-tabs button.active { background: #fff; color: var(--text); box-shadow: 0 1px 3px rgba(16,24,40,.1); }
+  input[type="password"], input.pw { width: 100%; padding: 12px 14px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 1rem; outline: none; }
+  input[type="password"]:focus, input.pw:focus { border-color: var(--primary); }
+  .pw-wrap { position: relative; }
+  .pw-wrap input { padding-right: 46px; }
+  .pw-toggle { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); border: none; background: transparent; font-size: 1.1rem; padding: 6px; color: var(--muted); }
+  .info-text { color: var(--green); font-size: .88rem; min-height: 1.2em; margin: 2px 0 10px; }
+  .link-btn { border: none; background: none; color: var(--primary); font-size: .88rem; padding: 6px 0; text-decoration: underline; }
+  .consent { display: flex; gap: 8px; align-items: flex-start; font-size: .85rem; font-weight: 400; color: var(--muted); margin: 4px 0 8px; }
+  .consent input { margin-top: 3px; }
+  .legal-links { margin-top: 18px; font-size: .78rem; color: var(--muted); text-align: center; }
+  .legal-links a { color: var(--muted); }
+  .sync { font-size: .75rem; color: var(--muted); }
+  .sync.err { color: var(--red); }
+  .verify-banner { background: var(--amber-bg); color: var(--amber); border-radius: 10px; padding: 9px 12px; font-size: .85rem; margin-bottom: 12px; display: flex; gap: 10px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+  .verify-banner button { border: none; background: #fff; color: var(--amber); border-radius: 8px; padding: 5px 10px; font-size: .8rem; font-weight: 600; }
+
   /* ================= Lernhilfen ================= */
   .q-tools { display: flex; gap: 8px; flex-wrap: wrap; margin: -8px 0 14px; }
   .tool-btn { border: 1.5px solid var(--border); background: #fff; border-radius: 999px; padding: 5px 12px; font-size: .82rem; color: var(--text); display: inline-flex; align-items: center; gap: 6px; }
@@ -316,30 +338,76 @@
 </head>
 <body>
 
-<!-- ================= STARTBILDSCHIRM: E-Mail + Bundesland ================= -->
+<!-- ================= STARTBILDSCHIRM: Konto erstellen / Anmelden ================= -->
 <section id="loginScreen">
-  <form class="login-card" id="loginForm" novalidate>
+  <div class="login-card">
     <div class="flag"><span style="background:#000"></span><span style="background:#dd0000"></span><span style="background:#ffce00"></span></div>
     <h1>Einbürgerungstest Trainer</h1>
-    <p>Melde dich mit deiner E-Mail-Adresse an und wähle dein Bundesland. Dein Lernfortschritt wird auf diesem Gerät gespeichert.</p>
-    <p lang="fa" dir="rtl">با ایمیل خود وارد شوید و ایالت محل زندگی خود را انتخاب کنید.</p>
+    <p>Erstelle ein kostenloses Konto. Dein Lernfortschritt wird sicher gespeichert – auf Handy und Laptop.</p>
+    <p lang="fa" dir="rtl">یک حساب رایگان بسازید و وارد شوید. پیشرفت شما روی همهٔ دستگاه‌ها ذخیره می‌شود.</p>
 
-    <div class="field">
-      <label for="emailInput">E-Mail-Adresse</label>
-      <input type="email" id="emailInput" placeholder="name@beispiel.de" autocomplete="email" required>
+    <div id="authLoading" class="hint">⏳ Verbindung wird hergestellt …</div>
+
+    <div id="authUnavailable" class="notice hidden">
+      Die Anmeldung kann hier nicht geladen werden (keine Internetverbindung oder die Seite blockiert den Anmeldedienst).
+      Öffne die App unter <a href="https://mojtabaershad.github.io/einbuergerungstest/">mojtabaershad.github.io/einbuergerungstest</a>.
     </div>
 
-    <div class="field">
-      <label for="bundeslandSelect">Bundesland <span style="color:var(--red)">*</span></label>
-      <select id="bundeslandSelect" required></select>
-      <div class="field-hint" id="bundeslandHint"></div>
+    <div id="authForms" class="hidden">
+      <div class="auth-tabs" role="tablist">
+        <button type="button" id="authTabLogin" class="active">Anmelden</button>
+        <button type="button" id="authTabRegister">Konto erstellen</button>
+      </div>
+
+      <!-- Anmelden -->
+      <form id="loginForm" novalidate>
+        <div class="field">
+          <label for="loginEmail">E-Mail-Adresse</label>
+          <input type="email" id="loginEmail" placeholder="name@beispiel.de" autocomplete="username" required>
+        </div>
+        <div class="field">
+          <label for="loginPassword">Passwort</label>
+          <div class="pw-wrap">
+            <input type="password" id="loginPassword" class="pw" autocomplete="current-password" required>
+            <button type="button" class="pw-toggle" data-for="loginPassword" aria-label="Passwort anzeigen">👁</button>
+          </div>
+        </div>
+        <div class="info-text" id="loginInfo"></div>
+        <div class="error-text" id="loginError"></div>
+        <button type="submit" class="btn btn-primary btn-block" id="loginSubmit">Anmelden</button>
+        <button type="button" class="link-btn" id="forgotBtn">Passwort vergessen?</button>
+      </form>
+
+      <!-- Konto erstellen -->
+      <form id="registerForm" class="hidden" novalidate>
+        <div class="field">
+          <label for="regEmail">E-Mail-Adresse</label>
+          <input type="email" id="regEmail" placeholder="name@beispiel.de" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="regPassword">Passwort <span style="color:var(--muted);font-weight:400">(mindestens 8 Zeichen)</span></label>
+          <div class="pw-wrap">
+            <input type="password" id="regPassword" class="pw" autocomplete="new-password" minlength="8" required>
+            <button type="button" class="pw-toggle" data-for="regPassword" aria-label="Passwort anzeigen">👁</button>
+          </div>
+        </div>
+        <div class="field">
+          <label for="regPassword2">Passwort wiederholen</label>
+          <input type="password" id="regPassword2" class="pw" autocomplete="new-password" required>
+        </div>
+        <div class="field">
+          <label for="bundeslandSelect">Bundesland <span style="color:var(--red)">*</span></label>
+          <select id="bundeslandSelect" required></select>
+        </div>
+        <label class="consent"><input type="checkbox" id="regConsent">
+          <span>Ich habe die <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzhinweise</a> gelesen und bin mit der Speicherung meiner E-Mail-Adresse und meines Lernfortschritts einverstanden.</span></label>
+        <div class="error-text" id="regError"></div>
+        <button type="submit" class="btn btn-primary btn-block" id="regSubmit">Konto erstellen</button>
+      </form>
     </div>
 
-    <div class="error-text" id="loginError"></div>
-
-    <button type="submit" class="btn btn-primary btn-block">Bestätigen &amp; Test starten</button>
-    <div class="hint">Kein Passwort nötig – die E-Mail dient nur zur Zuordnung deines Fortschritts im Browser (localStorage). Zu den allgemeinen Fragen kommen die 10 Fragen deines Bundeslandes.</div>
-  </form>
+    <div class="legal-links"><a href="datenschutz.html" target="_blank" rel="noopener">Datenschutz</a> · <a href="impressum.html" target="_blank" rel="noopener">Impressum</a></div>
+  </div>
 </section>
 
 <!-- ================= HAUPT-APP ================= -->
@@ -351,10 +419,15 @@
         <button class="tool-btn" id="searchBtn" title="Frage suchen oder zu Nummer springen">🔎 Suchen</button>
         <button class="bl-chip" id="changeBlBtn" title="Bundesland ändern">📍 <span id="blLabel"></span> · ändern</button>
         <span class="user-email" id="userEmail"></span>
+        <span class="sync" id="syncState" title="Speicherstatus"></span>
         <button class="btn btn-ghost" id="logoutBtn">Abmelden / Nutzer wechseln</button>
       </div>
     </header>
 
+    <div class="verify-banner hidden" id="verifyBanner">
+      <span>📧 Bitte bestätige deine E-Mail-Adresse über den Link in der E-Mail, die wir dir geschickt haben.</span>
+      <button type="button" id="resendVerify">Erneut senden</button>
+    </div>
     <nav class="tabs" role="tablist">
       <button class="tab" id="tabAlle" role="tab" data-tab="alle">Alle Fragen</button>
       <button class="tab" id="tabFehler" role="tab" data-tab="fehler">
@@ -386,6 +459,46 @@
     </div>
   </div>
 </div>
+
+<!-- Firebase (Konten + Cloud-Speicher). Wird als Modul geladen und meldet sich mit dem Ereignis "fb-ready". -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+  import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword,
+           signOut, sendPasswordResetEmail, sendEmailVerification, setPersistence, browserLocalPersistence }
+    from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+  import { getFirestore, doc, getDoc, setDoc, serverTimestamp }
+    from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+  // Öffentliche Web-Konfiguration des Firebase-Projekts (kein Geheimnis – geschützt wird über die Firestore-Regeln)
+  const firebaseConfig = {
+    apiKey: "AIzaSyBQ4QS-UywnHwMEGyeCFKbRyhywvx-PRQw",
+    authDomain: "einbuergerungstest-70818.firebaseapp.com",
+    projectId: "einbuergerungstest-70818",
+    storageBucket: "einbuergerungstest-70818.firebasestorage.app",
+    messagingSenderId: "610238109203",
+    appId: "1:610238109203:web:b66e611d2ccdfb590f91e6"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  auth.languageCode = "de";                       // E-Mails von Firebase auf Deutsch
+  const db = getFirestore(app);
+  await setPersistence(auth, browserLocalPersistence).catch(() => {});
+
+  window.FB = {
+    onAuth: cb => onAuthStateChanged(auth, cb),
+    register: (email, pw) => createUserWithEmailAndPassword(auth, email, pw).then(c => c.user),
+    login: (email, pw) => signInWithEmailAndPassword(auth, email, pw).then(c => c.user),
+    logout: () => signOut(auth),
+    resetPassword: email => sendPasswordResetEmail(auth, email),
+    sendVerification: () => auth.currentUser ? sendEmailVerification(auth.currentUser) : Promise.resolve(),
+    reloadUser: () => auth.currentUser ? auth.currentUser.reload().then(() => auth.currentUser) : Promise.resolve(null),
+    // Fortschritt: ein Dokument pro Nutzer unter users/{uid}
+    loadState: async uid => { const snap = await getDoc(doc(db, "users", uid)); return snap.exists() ? snap.data() : null; },
+    saveState: (uid, json, email) => setDoc(doc(db, "users", uid), { state: json, email, updatedAt: serverTimestamp() }, { merge: true })
+  };
+  window.dispatchEvent(new Event("fb-ready"));
+</script>
 
 <!-- Fragenkatalog (reine Daten) – muss VOR dem App-Script geladen werden -->
 <script src="fragen.js"></script>
@@ -492,7 +605,8 @@ function fragenFuer(bundesland) {
    KONSTANTEN
    ===================================================================== */
 const ZIEL_RICHTIG_IN_FOLGE = 2;                 // nach 2x richtig -> aus Fehler-Ordner entfernen
-const STORAGE_PREFIX = "ebt-trainer:v1:user:";   // + E-Mail
+const STORAGE_PREFIX = "ebt-trainer:v1:user:";   // ALT (vor den Konten): + E-Mail – nur noch zum Übernehmen alter Fortschritte
+const LOCAL_PREFIX = "ebt-trainer:v2:uid:";      // NEU: lokale Kopie pro Konto (+ Firebase-UID)
 const LAST_EMAIL_KEY = "ebt-trainer:v1:lastEmail";
 const LETTERS = ["A", "B", "C", "D"];
 
@@ -526,7 +640,10 @@ const storage = {
    Bundeslandes bleiben gespeichert, werden aber nur angezeigt, solange
    dieses Bundesland aktiv ist.
    ===================================================================== */
-let currentEmail = null;
+let currentUser = null;      // { uid, email } des angemeldeten Kontos
+let registrierungLaeuft = false;
+let pendingBundesland = null;
+let cloudTimer = null, cloudPending = null;
 let state = null;
 let FRAGEN = [];          // aktueller Testablauf (abhängig vom Bundesland)
 let FRAGEN_IDS = new Set();
@@ -551,9 +668,9 @@ function readSaved(email) {
   try { return JSON.parse(storage.get(storageKey(email)) || "null"); } catch (e) { return null; }
 }
 
-function loadState(email) {
+/** Gespeicherten Zustand prüfen und in ein sauberes Zustandsobjekt umwandeln */
+function normalizeState(saved) {
   const base = defaultState();
-  const saved = readSaved(email);
   if (!saved || typeof saved !== "object") return base;
 
   const s = {
@@ -565,7 +682,8 @@ function loadState(email) {
     stats: Object.assign(base.stats, saved.stats || {}),
     prefs: Object.assign({ faVorher: false }, saved.prefs || {}),
     exam: null,
-    examHistory: Array.isArray(saved.examHistory) ? saved.examHistory.slice(-10) : []
+    examHistory: Array.isArray(saved.examHistory) ? saved.examHistory.slice(-10) : [],
+    updatedAt: Number(saved.updatedAt) || 0
   };
   // Prüfung nur übernehmen, wenn alle Fragen noch existieren
   const ex = saved.exam;
@@ -612,9 +730,28 @@ function setBundesland(neu) {
   applyBundesland();
 }
 
+/** Speichern: sofort lokal (Cache) und kurz verzögert in der Cloud (Firestore) */
 function saveState() {
-  if (currentEmail && state) storage.set(storageKey(currentEmail), JSON.stringify(state));
+  if (!currentUser || !state) return;
+  state.updatedAt = Date.now();
+  const json = JSON.stringify(state);
+  storage.set(LOCAL_PREFIX + currentUser.uid, json);
+  cloudPending = json;
+  clearTimeout(cloudTimer);
+  cloudTimer = setTimeout(flushCloud, 1500);
+  setSync("…");
 }
+function flushCloud() {
+  clearTimeout(cloudTimer);
+  if (!cloudPending || !currentUser || !window.FB) return;
+  const json = cloudPending; cloudPending = null;
+  const uid = currentUser.uid;
+  return window.FB.saveState(uid, json, currentUser.email)
+    .then(() => setSync("☁︎ gespeichert"))
+    .catch(() => { setSync("⚠︎ nur lokal gespeichert", true); if (!cloudPending) cloudPending = json; });
+}
+function setSync(t, err) { const e = $("syncState"); if (e) { e.textContent = t; e.classList.toggle("err", !!err); } }
+function parseJSON(t) { try { return JSON.parse(t); } catch (e) { return null; } }
 
 /* =====================================================================
    LOGIN / LOGOUT
@@ -633,70 +770,169 @@ function fillBundeslandSelect(select, withPlaceholder) {
   BUNDESLAENDER.forEach(bl => select.append(new Option(bl, bl)));
 }
 
-/** Beim Tippen der E-Mail: gespeichertes Bundesland vorauswählen */
-function syncSavedBundesland() {
-  const email = normEmail($("emailInput").value);
-  const saved = EMAIL_REGEX.test(email) ? readSaved(email) : null;
-  const hint = $("bundeslandHint");
-  if (saved && BUNDESLAENDER.includes(saved.bundesland)) {
-    $("bundeslandSelect").value = saved.bundesland;
-    hint.textContent = `✓ Gespeichert für dieses Konto: ${saved.bundesland} – du kannst es hier auch ändern.`;
-  } else {
-    hint.textContent = "";
+/* ---------- Anzeige der Anmelde-Formulare ---------- */
+function zeigeAuth(modus) {
+  $("authLoading").classList.add("hidden");
+  $("authForms").classList.remove("hidden");
+  const reg = modus === "register";
+  $("authTabLogin").classList.toggle("active", !reg);
+  $("authTabRegister").classList.toggle("active", reg);
+  $("loginForm").classList.toggle("hidden", reg);
+  $("registerForm").classList.toggle("hidden", !reg);
+  $("loginError").textContent = ""; $("regError").textContent = "";
+  (reg ? $("regEmail") : ($("loginEmail").value ? $("loginPassword") : $("loginEmail"))).focus();
+}
+
+/** Firebase-Fehlercodes in verständliches Deutsch übersetzen */
+function authFehler(e) {
+  const c = (e && e.code) || "";
+  const t = {
+    "auth/email-already-in-use": "Für diese E-Mail gibt es schon ein Konto. Bitte melde dich an.",
+    "auth/invalid-email": "Bitte gib eine gültige E-Mail-Adresse ein.",
+    "auth/weak-password": "Das Passwort ist zu schwach (mindestens 8 Zeichen).",
+    "auth/invalid-credential": "E-Mail oder Passwort ist falsch.",
+    "auth/invalid-login-credentials": "E-Mail oder Passwort ist falsch.",
+    "auth/wrong-password": "E-Mail oder Passwort ist falsch.",
+    "auth/user-not-found": "E-Mail oder Passwort ist falsch.",
+    "auth/missing-password": "Bitte gib dein Passwort ein.",
+    "auth/user-disabled": "Dieses Konto wurde gesperrt.",
+    "auth/too-many-requests": "Zu viele Versuche. Bitte warte kurz und versuche es dann erneut.",
+    "auth/network-request-failed": "Keine Internetverbindung. Bitte prüfe deine Verbindung.",
+    "auth/unauthorized-domain": "Diese Webseite ist für die Anmeldung nicht freigegeben.",
+    "auth/operation-not-allowed": "Die Anmeldung mit E-Mail und Passwort ist noch nicht aktiviert."
+  };
+  return t[c] || ("Das hat nicht geklappt" + (c ? ` (${c})` : "") + ". Bitte versuche es erneut.");
+}
+
+function busy(btn, an, text) { btn.disabled = an; if (text) btn.textContent = text; }
+
+async function registrieren() {
+  const email = normEmail($("regEmail").value), pw = $("regPassword").value, pw2 = $("regPassword2").value;
+  const bl = $("bundeslandSelect").value, err = $("regError");
+  err.textContent = "";
+  if (!EMAIL_REGEX.test(email)) { err.textContent = "Bitte gib eine gültige E-Mail-Adresse ein."; return $("regEmail").focus(); }
+  if (pw.length < 8) { err.textContent = "Das Passwort muss mindestens 8 Zeichen lang sein."; return $("regPassword").focus(); }
+  if (pw !== pw2) { err.textContent = "Die beiden Passwörter stimmen nicht überein."; return $("regPassword2").focus(); }
+  if (!BUNDESLAENDER.includes(bl)) { err.textContent = "Bitte wähle dein Bundesland aus."; return $("bundeslandSelect").focus(); }
+  if (!$("regConsent").checked) { err.textContent = "Bitte bestätige die Datenschutzhinweise."; return; }
+  const btn = $("regSubmit"); busy(btn, true, "Konto wird erstellt …");
+  registrierungLaeuft = true;
+  try {
+    const user = await window.FB.register(email, pw);
+    // Startzustand mit Bundesland anlegen – inkl. evtl. vorhandenem altem Fortschritt dieser E-Mail
+    const alt = readSaved(email);
+    const start = normalizeState(alt || {});
+    start.bundesland = bl; start.updatedAt = Date.now();
+    await window.FB.saveState(user.uid, JSON.stringify(start), email).catch(() => {});
+    await window.FB.sendVerification().catch(() => {});
+    await window.FB.logout();
+    $("registerForm").reset();
+    $("loginEmail").value = email; $("loginPassword").value = "";
+    zeigeAuth("login");
+    $("loginInfo").textContent = "✓ Konto erstellt! Wir haben dir eine Bestätigungs-E-Mail geschickt. Bitte melde dich jetzt mit deinem Passwort an.";
+  } catch (e) {
+    err.textContent = authFehler(e);
+  } finally {
+    registrierungLaeuft = false;
+    busy(btn, false, "Konto erstellen");
   }
 }
 
-function login() {
-  const email = normEmail($("emailInput").value);
-  const bl = $("bundeslandSelect").value;
-  if (!EMAIL_REGEX.test(email)) {
-    $("loginError").textContent = "Bitte gib eine gültige E-Mail-Adresse ein.";
-    $("emailInput").focus();
-    return;
-  }
-  if (!BUNDESLAENDER.includes(bl)) {
-    $("loginError").textContent = "Bitte wähle dein Bundesland aus.";
-    $("bundeslandSelect").focus();
-    return;
-  }
-  $("loginError").textContent = "";
-  currentEmail = email;
-  state = loadState(email);
-  if (state.bundesland === bl) applyBundesland();
-  else setBundesland(bl);
-  saveState();
-  storage.set(LAST_EMAIL_KEY, email);
+async function anmelden() {
+  const email = normEmail($("loginEmail").value), pw = $("loginPassword").value, err = $("loginError");
+  err.textContent = ""; $("loginInfo").textContent = "";
+  if (!EMAIL_REGEX.test(email)) { err.textContent = "Bitte gib eine gültige E-Mail-Adresse ein."; return $("loginEmail").focus(); }
+  if (!pw) { err.textContent = "Bitte gib dein Passwort ein."; return $("loginPassword").focus(); }
+  const btn = $("loginSubmit"); busy(btn, true, "Anmelden …");
+  try { await window.FB.login(email, pw); storage.set(LAST_EMAIL_KEY, email); }   // weiter geht es in onAuth -> startSession
+  catch (e) { err.textContent = authFehler(e); }
+  finally { busy(btn, false, "Anmelden"); }
+}
 
-  $("userEmail").textContent = email;
-  $("userEmail").title = email;
+async function passwortVergessen() {
+  const email = normEmail($("loginEmail").value), err = $("loginError");
+  err.textContent = ""; $("loginInfo").textContent = "";
+  if (!EMAIL_REGEX.test(email)) { err.textContent = "Bitte trage oben deine E-Mail-Adresse ein und klicke dann auf „Passwort vergessen?“."; return $("loginEmail").focus(); }
+  try {
+    await window.FB.resetPassword(email);
+    $("loginInfo").textContent = "✓ Falls ein Konto existiert, haben wir dir eine E-Mail zum Zurücksetzen des Passworts geschickt. Bitte prüfe auch den Spam-Ordner.";
+  } catch (e) { err.textContent = authFehler(e); }
+}
+
+/** Nach erfolgreicher Anmeldung: Fortschritt laden (Cloud ↔ lokal) und App starten */
+async function startSession(user) {
+  currentUser = { uid: user.uid, email: (user.email || "").toLowerCase() };
+  $("authForms").classList.add("hidden");
+  $("authLoading").classList.remove("hidden");
+  $("authLoading").textContent = "⏳ Lernfortschritt wird geladen …";
+
+  let cloud = null;
+  try { const d = await window.FB.loadState(user.uid); cloud = d && d.state ? parseJSON(d.state) : null; } catch (e) { cloud = null; }
+  const lokal = parseJSON(storage.get(LOCAL_PREFIX + user.uid));
+  const alt = readSaved(currentUser.email);                       // Fortschritt aus der Zeit vor den Konten
+  // Den neuesten Stand verwenden
+  const kandidaten = [cloud, lokal, alt].filter(x => x && typeof x === "object");
+  kandidaten.sort((a, b) => (Number(b.updatedAt) || 0) - (Number(a.updatedAt) || 0));
+  state = normalizeState(kandidaten[0] || null);
+  if (!state.bundesland && kandidaten.find(k => BUNDESLAENDER.includes(k.bundesland))) state.bundesland = kandidaten.find(k => BUNDESLAENDER.includes(k.bundesland)).bundesland;
+
+  $("userEmail").textContent = currentUser.email; $("userEmail").title = currentUser.email;
+  $("verifyBanner").classList.toggle("hidden", !!user.emailVerified);
   $("loginScreen").classList.add("hidden");
   $("appScreen").classList.remove("hidden");
+
+  if (!state.bundesland) { openBlModal(true); return; }            // Pflichtauswahl, falls noch keins gespeichert
+  applyBundesland();
+  saveState();
   render();
 }
 
-function logout() {
-  stopExamTimer();
-  saveState();
-  currentEmail = null;
-  state = null;
+function endeSession() {
+  stopExamTimer(); stopVorlesen();
+  currentUser = null; state = null;
   $("appScreen").classList.add("hidden");
   $("loginScreen").classList.remove("hidden");
-  $("emailInput").value = "";
-  fillBundeslandSelect($("bundeslandSelect"), true);
-  $("bundeslandHint").textContent = "";
-  $("emailInput").focus();
+  $("loginPassword").value = "";
+  const last = storage.get(LAST_EMAIL_KEY); if (last && !$("loginEmail").value) $("loginEmail").value = last;
+  zeigeAuth("login");
 }
 
+async function logout() {
+  stopExamTimer();
+  saveState();
+  try { await flushCloud(); } catch (e) {}
+  try { await window.FB.logout(); } catch (e) { endeSession(); }
+}
+
+/* ---------- Firebase verbinden ---------- */
+let authBereit = false;
+function authInit() {
+  if (authBereit || !window.FB) return;
+  authBereit = true;
+  window.FB.onAuth(user => {
+    if (registrierungLaeuft) return;          // während der Registrierung nicht automatisch einloggen
+    if (user) startSession(user); else endeSession();
+  });
+}
+window.addEventListener("fb-ready", authInit);
+setTimeout(() => {
+  if (!window.FB) { $("authLoading").classList.add("hidden"); $("authUnavailable").classList.remove("hidden"); }
+}, 10000);
+
 /* ---------- Modal: Bundesland ändern ---------- */
-function openBlModal() {
-  $("blModalSelect").value = state.bundesland;
+function openBlModal(pflicht) {
+  $("blModal").dataset.pflicht = pflicht ? "1" : "";
+  $("blModalCancel").classList.toggle("hidden", !!pflicht);
+  $("blModalTitle").textContent = pflicht ? "Bitte wähle dein Bundesland" : "Bundesland ändern";
+  $("blModalSelect").value = state.bundesland || BUNDESLAENDER[0];
   $("blModal").classList.remove("hidden");
   $("blModalSelect").focus();
 }
-function closeBlModal() { $("blModal").classList.add("hidden"); }
+function closeBlModal() { if ($("blModal").dataset.pflicht) return; $("blModal").classList.add("hidden"); }
 function saveBlModal() {
   setBundesland($("blModalSelect").value);
   saveState();
+  $("blModal").dataset.pflicht = "";
   closeBlModal();
   render();
 }
@@ -1360,8 +1596,20 @@ function switchTab(tab) {
 fillBundeslandSelect($("bundeslandSelect"), true);
 fillBundeslandSelect($("blModalSelect"), false);
 
-$("loginForm").addEventListener("submit", e => { e.preventDefault(); login(); });
-$("emailInput").addEventListener("input", syncSavedBundesland);
+$("loginForm").addEventListener("submit", e => { e.preventDefault(); anmelden(); });
+$("registerForm").addEventListener("submit", e => { e.preventDefault(); registrieren(); });
+$("forgotBtn").addEventListener("click", passwortVergessen);
+$("authTabLogin").addEventListener("click", () => zeigeAuth("login"));
+$("authTabRegister").addEventListener("click", () => zeigeAuth("register"));
+document.querySelectorAll(".pw-toggle").forEach(b => b.addEventListener("click", () => {
+  const i = $(b.dataset.for); i.type = i.type === "password" ? "text" : "password";
+}));
+$("resendVerify").addEventListener("click", async () => {
+  const u = await window.FB.reloadUser().catch(() => null);
+  if (u && u.emailVerified) { $("verifyBanner").classList.add("hidden"); return; }
+  window.FB.sendVerification().then(() => { $("resendVerify").textContent = "✓ Gesendet"; $("resendVerify").disabled = true; })
+    .catch(e => { $("resendVerify").textContent = authFehler(e).slice(0, 40); });
+});
 $("logoutBtn").addEventListener("click", logout);
 $("changeBlBtn").addEventListener("click", openBlModal);
 $("searchBtn").addEventListener("click", oeffneSuche);
@@ -1388,13 +1636,14 @@ document.addEventListener("keydown", e => {
   }
 });
 
-// Fortschritt auch beim Schließen sicher speichern
-window.addEventListener("beforeunload", saveState);
+// Fortschritt auch beim Schließen / Wechseln der App sichern
+window.addEventListener("beforeunload", () => { saveState(); flushCloud(); });
+document.addEventListener("visibilitychange", () => { if (document.visibilityState === "hidden") flushCloud(); });
 
-// Letzte E-Mail + deren Bundesland vorausfüllen (Bestätigen bleibt Pflicht)
+// Letzte E-Mail vorausfüllen
 const lastEmail = storage.get(LAST_EMAIL_KEY);
-if (lastEmail) { $("emailInput").value = lastEmail; syncSavedBundesland(); }
-$("emailInput").focus();
+if (lastEmail) $("loginEmail").value = lastEmail;
+if (window.FB) authInit();
 </script>
 </body>
 </html>
