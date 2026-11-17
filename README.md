@@ -6,6 +6,7 @@ Web-App zum Üben für den deutschen Einbürgerungstest / „Leben in Deutschlan
 
 - Alle 460 Fragen aus dem BAMF-Gesamtfragenkatalog (Stand 07.05.2025): 300 allgemeine + 10 Landesfragen für jedes der 16 Bundesländer
 - Sofort-Feedback, Farsi-Übersetzung und kurze Erklärung zu jeder Frage
+- Lernhilfen: Suche/Sprung zu jeder Frage, Farsi-Übersetzung aller Antwortmöglichkeiten (auch vor dem Antworten einblendbar), Vorlesen auf Deutsch
 - Fehler-Ordner: falsche Fragen werden zufällig wiederholt, bis sie 2× richtig beantwortet sind
 - Prüfungssimulation wie im echten Test: 30 + 3 Fragen, 60 Minuten, bestanden ab 17
 - Fortschritt wird pro E-Mail im Browser (localStorage) gespeichert
