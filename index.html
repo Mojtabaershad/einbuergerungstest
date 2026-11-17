@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Einbürgerungstest Trainer</title>
+
+<!-- Google Font Vazirmatn für alle Farsi-Texte -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+  /* ================= Design-Tokens ================= */
+  :root {
+    --bg: #f3f5f9;
+    --card: #ffffff;
+    --text: #1d2433;
+    --muted: #667085;
+    --border: #e3e7ef;
+    --primary: #1f4fd1;
+    --primary-soft: #e8eefc;
+    --green: #14804a;
+    --green-bg: #e3f6ec;
+    --red: #c4321c;
+    --red-bg: #fde8e4;
+    --amber: #b25e09;
+    --amber-bg: #fff4e0;
+    --violet: #6941c6;
+    --violet-bg: #f1ecfc;
+    --radius: 14px;
+    --shadow: 0 1px 2px rgba(16,24,40,.05), 0 4px 16px rgba(16,24,40,.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Alle Farsi-Texte: Vazirmatn + RTL (dir="rtl" wird zusätzlich im HTML gesetzt) */
+  [lang="fa"] {
+    font-family: "Vazirmatn", Tahoma, sans-serif;
+    direction: rtl;
+    text-align: right;
+  }
+
+  .hidden { display: none !important; }
+
+  button { font: inherit; cursor: pointer; }
+
+  .wrap { max-width: 760px; margin: 0 auto; padding: 16px; }
+
+  /* ================= Login ================= */
+  #loginScreen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+  }
+  .login-card {
+    width: 100%;
+    max-width: 440px;
+    background: var(--card);
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    padding: 32px 28px;
+  }
+  .flag {
+    display: flex; height: 8px; border-radius: 4px; overflow: hidden; width: 64px; margin-bottom: 20px;
+  }
+  .flag span { flex: 1; }
+  .login-card h1 { margin: 0 0 6px; font-size: 1.5rem; }
+  .login-card p { margin: 0 0 22px; color: var(--muted); }
+  .login-card p[lang="fa"] { margin-top: -14px; }
+  label { display: block; font-weight: 600; font-size: .9rem; margin-bottom: 6px; }
+  .field { margin-bottom: 14px; }
+  input[type="email"], select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: inherit;
+    background: #fff;
+    color: var(--text);
+    outline: none;
+    transition: border-color .15s;
+  }
+  select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23667085' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 38px;
+  }
+  input[type="email"]:focus, select:focus { border-color: var(--primary); }
+  .field-hint { font-size: .8rem; color: var(--green); margin-top: 6px; min-height: 1em; }
+  .error-text { color: var(--red); font-size: .85rem; min-height: 1.2em; margin: 2px 0 10px; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    border: none; border-radius: 10px; padding: 12px 18px; font-weight: 600;
+    transition: background .15s, transform .05s;
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn-primary { background: var(--primary); color: #fff; }
+  .btn-primary:hover { background: #1a43b4; }
+  .btn-block { width: 100%; }
+  .btn-ghost { background: transparent; border: 1.5px solid var(--border); color: var(--text); padding: 8px 12px; font-size: .85rem; }
+  .btn-ghost:hover { background: #fff; border-color: #cfd5e1; }
+  .hint { font-size: .8rem; color: var(--muted); margin-top: 16px; }
+
+  /* ================= Kopfbereich ================= */
+  header {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    flex-wrap: wrap; padding: 8px 0 16px;
+  }
+  .brand { font-weight: 700; font-size: 1.1rem; }
+  .user { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .user-email {
+    font-size: .85rem; color: var(--muted); max-width: 220px;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .bl-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--violet-bg); color: var(--violet); border: none;
+    border-radius: 999px; padding: 6px 12px; font-size: .82rem; font-weight: 600;
+  }
+  .bl-chip:hover { background: #e6dcfa; }
+
+  /* ================= Tabs ================= */
+  .tabs {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6px;
+    background: #e6e9f0; padding: 5px; border-radius: 12px; margin-bottom: 16px;
+  }
+  .tab {
+    border: none; background: transparent; border-radius: 9px; padding: 10px 8px;
+    font-weight: 600; color: var(--muted); font-size: .92rem;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .tab.active { background: #fff; color: var(--text); box-shadow: 0 1px 3px rgba(16,24,40,.1); }
+  .badge {
+    min-width: 22px; height: 22px; padding: 0 7px; border-radius: 11px;
+    background: var(--red); color: #fff; font-size: .75rem; display: inline-flex;
+    align-items: center; justify-content: center;
+  }
+  .badge.zero { background: #b8c0cf; }
+
+  /* ================= Fortschritt ================= */
+  .progress-row { display: flex; justify-content: space-between; font-size: .85rem; color: var(--muted); margin-bottom: 6px; }
+  .progress { height: 6px; background: #e1e5ee; border-radius: 3px; overflow: hidden; margin-bottom: 16px; }
+  .progress > div { height: 100%; background: var(--primary); width: 0; transition: width .3s; }
+
+  /* ================= Fragekarte ================= */
+  .card { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 22px; }
+  .meta { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; font-size: .8rem; color: var(--muted); margin-bottom: 10px; }
+  .pills { display: flex; gap: 6px; flex-wrap: wrap; }
+  .pill { background: var(--primary-soft); color: var(--primary); padding: 3px 10px; border-radius: 999px; font-weight: 600; }
+  .pill.amber { background: var(--amber-bg); color: var(--amber); }
+  .pill.violet { background: var(--violet-bg); color: var(--violet); }
+  .question { font-size: 1.15rem; font-weight: 600; margin: 0 0 18px; }
+
+  .answers { display: grid; gap: 10px; }
+  .answer {
+    display: flex; align-items: center; gap: 12px; text-align: left; width: 100%;
+    background: #fff; border: 1.5px solid var(--border); border-radius: 12px;
+    padding: 13px 14px; font-size: 1rem; color: var(--text);
+    transition: border-color .15s, background .15s;
+  }
+  .answer:hover:not(:disabled) { border-color: var(--primary); background: #f8faff; }
+  .answer:disabled { cursor: default; }
+  .letter {
+    flex: none; width: 28px; height: 28px; border-radius: 8px; background: #eef1f6;
+    display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: .85rem;
+  }
+  .answer.correct { border-color: var(--green); background: var(--green-bg); }
+  .answer.correct .letter { background: var(--green); color: #fff; }
+  .answer.wrong { border-color: var(--red); background: var(--red-bg); }
+  .answer.wrong .letter { background: var(--red); color: #fff; }
+  .answer.dim { opacity: .55; }
+
+  /* Ergebnis-Meldung */
+  .result { margin-top: 16px; padding: 10px 14px; border-radius: 10px; font-weight: 600; font-size: .92rem; }
+  .result.ok { background: var(--green-bg); color: var(--green); }
+  .result.bad { background: var(--red-bg); color: var(--red); }
+
+  /* Farsi-Infokasten */
+  .fa-box {
+    margin-top: 14px; background: #f6f8fc; border: 1px solid var(--border);
+    border-right: 4px solid var(--primary); border-radius: 12px; padding: 14px 16px;
+    font-size: .98rem; line-height: 1.9;
+  }
+  .fa-box h3 { margin: 0 0 8px; font-size: .95rem; color: var(--primary); }
+  .fa-box .row { margin: 4px 0; }
+  .fa-box .label { font-weight: 700; }
+
+  .actions { display: flex; justify-content: flex-end; margin-top: 18px; }
+
+  /* Leere Zustände / Abschluss */
+  .empty { text-align: center; padding: 36px 20px; }
+  .empty .icon { font-size: 2.6rem; }
+  .empty h2 { margin: 8px 0 6px; }
+  .empty p { color: var(--muted); margin: 0 0 6px; }
+
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 18px 0; }
+  .stat { background: #f6f8fc; border-radius: 12px; padding: 12px; }
+  .stat b { display: block; font-size: 1.4rem; }
+  .stat span { font-size: .8rem; color: var(--muted); }
+
+  .notice { background: var(--amber-bg); color: var(--amber); border-radius: 10px; padding: 10px 14px; font-size: .85rem; margin-bottom: 14px; }
+
+  .kbd-hint { text-align: center; font-size: .75rem; color: var(--muted); margin-top: 14px; }
+
+  /* ================= Modal: Bundesland ändern ================= */
+  .modal-backdrop {
+    position: fixed; inset: 0; background: rgba(16,24,40,.45);
+    display: flex; align-items: center; justify-content: center; padding: 16px; z-index: 50;
+  }
+  .modal {
+    background: #fff; border-radius: 16px; box-shadow: var(--shadow);
+    width: 100%; max-width: 400px; padding: 24px;
+  }
+  .modal h2 { margin: 0 0 6px; font-size: 1.2rem; }
+  .modal p { margin: 0 0 16px; color: var(--muted); font-size: .9rem; }
+  .modal .row-btns { display: flex; justify-content: flex-end; gap: 8px; margin-top: 18px; }
+
+  /* ================= Bilder ================= */
+  .q-figure { margin: -4px 0 18px; text-align: center; }
+  .q-img { max-width: 100%; max-height: 440px; cursor: zoom-in; border-radius: 10px; border: 1px solid var(--border); background: #fff; }
+  .lightbox { position: fixed; inset: 0; z-index: 60; background: rgba(10,14,25,.92);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 12px; cursor: zoom-out; }
+  .lightbox img { max-width: 100%; max-height: calc(100vh - 60px); object-fit: contain; background: #fff; border-radius: 8px; }
+  .lightbox-hint { color: #cfd5e1; font-size: .8rem; margin-top: 10px; }
+  .img-credit { font-size: .72rem; color: var(--muted); margin-top: 4px; }
+  .answers.img-grid { grid-template-columns: repeat(2, 1fr); }
+  .answer.has-img { flex-direction: column; align-items: stretch; gap: 10px; padding: 12px; }
+  .a-img { display: block; width: 100%; height: 120px; object-fit: contain; }
+  .a-label { display: flex; align-items: center; gap: 12px; }
+  .answer.has-img .a-label { justify-content: center; }
+  .img-missing {
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    background: var(--amber-bg); color: var(--amber); border-radius: 8px;
+    font-size: .78rem; padding: 10px; word-break: break-all; min-height: 60px;
+  }
+  .fa-box .muted { color: var(--muted); }
+
+  @media (max-width: 520px) {
+    .a-img { height: 90px; }
+    .wrap { padding: 12px; }
+    .card { padding: 18px 16px; }
+    .question { font-size: 1.05rem; }
+    .tab { font-size: .82rem; }
+    .user-email { max-width: 150px; }
+    .kbd-hint { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= STARTBILDSCHIRM: E-Mail + Bundesland ================= -->
+<section id="loginScreen">
+  <form class="login-card" id="loginForm" novalidate>
+    <div class="flag"><span style="background:#000"></span><span style="background:#dd0000"></span><span style="background:#ffce00"></span></div>
+    <h1>Einbürgerungstest Trainer</h1>
+    <p>Melde dich mit deiner E-Mail-Adresse an und wähle dein Bundesland. Dein Lernfortschritt wird auf diesem Gerät gespeichert.</p>
+    <p lang="fa" dir="rtl">با ایمیل خود وارد شوید و ایالت محل زندگی خود را انتخاب کنید.</p>
+
+    <div class="field">
+      <label for="emailInput">E-Mail-Adresse</label>
+      <input type="email" id="emailInput" placeholder="name@beispiel.de" autocomplete="email" required>
+    </div>
+
+    <div class="field">
+      <label for="bundeslandSelect">Bundesland <span style="color:var(--red)">*</span></label>
+      <select id="bundeslandSelect" required></select>
+      <div class="field-hint" id="bundeslandHint"></div>
+    </div>
+
+    <div class="error-text" id="loginError"></div>
+
+    <button type="submit" class="btn btn-primary btn-block">Bestätigen &amp; Test starten</button>
+    <div class="hint">Kein Passwort nötig – die E-Mail dient nur zur Zuordnung deines Fortschritts im Browser (localStorage). Zu den allgemeinen Fragen kommen die 10 Fragen deines Bundeslandes.</div>
+  </form>
+</section>
+
+<!-- ================= HAUPT-APP ================= -->
+<section id="appScreen" class="hidden">
+  <div class="wrap">
+    <header>
+      <div class="brand">🇩🇪 Einbürgerungstest</div>
+      <div class="user">
+        <button class="bl-chip" id="changeBlBtn" title="Bundesland ändern">📍 <span id="blLabel"></span> · ändern</button>
+        <span class="user-email" id="userEmail"></span>
+        <button class="btn btn-ghost" id="logoutBtn">Abmelden / Nutzer wechseln</button>
+      </div>
+    </header>
+
+    <nav class="tabs" role="tablist">
+      <button class="tab" id="tabAlle" role="tab" data-tab="alle">Alle Fragen</button>
+      <button class="tab" id="tabFehler" role="tab" data-tab="fehler">
+        Fehler-Ordner (Wiederholung) <span class="badge" id="fehlerBadge">0</span>
+      </button>
+    </nav>
+
+    <div id="progressWrap">
+      <div class="progress-row"><span id="progressLabel"></span><span id="scoreLabel"></span></div>
+      <div class="progress"><div id="progressBar"></div></div>
+    </div>
+
+    <main class="card" id="content"></main>
+    <div class="kbd-hint">Tastatur: <b>1–4</b> wählt eine Antwort, <b>Enter</b> geht weiter.</div>
+  </div>
+</section>
+
+<!-- ================= MODAL: Bundesland ändern ================= -->
+<div class="modal-backdrop hidden" id="blModal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="blModalTitle">
+    <h2 id="blModalTitle">Bundesland ändern</h2>
+    <p>Die allgemeinen Fragen behalten ihren Fortschritt. Die Landesfragen werden durch die des neuen Bundeslandes ersetzt.</p>
+    <label for="blModalSelect">Bundesland</label>
+    <select id="blModalSelect"></select>
+    <div class="row-btns">
+      <button class="btn btn-ghost" type="button" id="blModalCancel">Abbrechen</button>
+      <button class="btn btn-primary" type="button" id="blModalSave">Übernehmen</button>
+    </div>
+  </div>
+</div>
+
+<!-- Fragenkatalog (reine Daten) – muss VOR dem App-Script geladen werden -->
+<script src="fragen.js"></script>
+
+<script>
+/* =====================================================================
+   FRAGEN LADEN & PRÜFEN
+   ---------------------------------------------------------------------
+   Die Fragen liegen in der separaten Datei "fragen.js"
+   (window.FRAGEN_DATEN = { allgemeineFragen: [...], bundeslandFragen: {...} }).
+   Hier werden sie geprüft: fehlerhafte Einträge werden mit einer Warnung
+   in der Browser-Konsole (F12) übersprungen, damit die App nie abstürzt.
+   ===================================================================== */
+
+// Offizielle Liste – bestimmt Reihenfolge im Dropdown (unabhängig von der Datendatei)
+const BUNDESLAENDER = [
+  "Baden-Württemberg", "Bayern", "Berlin", "Brandenburg", "Bremen", "Hamburg",
+  "Hessen", "Mecklenburg-Vorpommern", "Niedersachsen", "Nordrhein-Westfalen",
+  "Rheinland-Pfalz", "Saarland", "Sachsen", "Sachsen-Anhalt", "Schleswig-Holstein", "Thüringen"
+];
+
+const DATEN = window.FRAGEN_DATEN;
+if (!DATEN || !Array.isArray(DATEN.allgemeineFragen)) {
+  document.body.innerHTML =
+    '<div style="max-width:520px;margin:15vh auto;padding:24px;background:#fff;border-radius:16px;' +
+    'box-shadow:0 4px 16px rgba(0,0,0,.08);font-family:system-ui,sans-serif">' +
+    '<h2 style="margin-top:0">⚠️ Fragen konnten nicht geladen werden</h2>' +
+    '<p>Die Datei <b>fragen.js</b> fehlt oder enthält einen Syntaxfehler. Sie muss im selben Ordner wie ' +
+    '<b>index.html</b> liegen. Details stehen in der Browser-Konsole (F12).</p></div>';
+  throw new Error("FRAGEN_DATEN nicht gefunden – fragen.js fehlt oder ist fehlerhaft.");
+}
+
+const DATEN_WARNUNGEN = [];
+const FRAGE_BY_ID = {};                       // Schnellzugriff per ID (alle gültigen Fragen)
+
+const istText = v => typeof v === "string" && v.trim() !== "";
+
+/** Prüft eine Frage; gibt eine bereinigte Kopie zurück oder null (wird übersprungen) */
+function pruefeFrage(f, herkunft) {
+  const wo = `${herkunft} (${f && f.id ? f.id : "ohne ID"})`;
+  const fehler = [];
+  if (!f || typeof f !== "object") fehler.push("kein Objekt");
+  else {
+    if (!istText(f.id)) fehler.push("id fehlt");
+    else if (FRAGE_BY_ID[f.id]) fehler.push("id doppelt");
+    if (!istText(f.frage)) fehler.push("frage fehlt");
+    if (!Array.isArray(f.antworten) || f.antworten.length !== 4 || !f.antworten.every(istText)) fehler.push("antworten: genau 4 Texte nötig");
+    if (!Number.isInteger(f.richtig) || f.richtig < 0 || f.richtig > 3) fehler.push("richtig muss 0–3 sein");
+  }
+  if (fehler.length) { DATEN_WARNUNGEN.push(`${wo}: ${fehler.join(", ")} – übersprungen`); return null; }
+
+  const sauber = {
+    id: f.id,
+    nummer: Number.isInteger(f.nummer) ? f.nummer : null,
+    frage: f.frage,
+    antworten: f.antworten.slice(),
+    richtig: f.richtig,
+    bild: istText(f.bild) ? f.bild.trim() : "",
+    bildQuelle: istText(f.bildQuelle) ? f.bildQuelle.trim() : "",
+    antwortBilder: null,
+    fa: (f.fa && typeof f.fa === "object") ? f.fa : null
+  };
+  if (Array.isArray(f.antwortBilder) && f.antwortBilder.some(istText)) {
+    if (f.antwortBilder.length !== 4) DATEN_WARNUNGEN.push(`${wo}: antwortBilder sollte 4 Einträge haben`);
+    sauber.antwortBilder = [0, 1, 2, 3].map(i => istText(f.antwortBilder[i]) ? f.antwortBilder[i].trim() : "");
+  }
+  if (!sauber.fa) DATEN_WARNUNGEN.push(`${wo}: keine Farsi-Hilfe (fa) – Hinweis wird angezeigt`);
+  return sauber;
+}
+
+const allgemeineFragen = [];
+DATEN.allgemeineFragen.forEach((f, i) => {
+  const q = pruefeFrage(f, `allgemeineFragen[${i}]`);
+  if (q) { allgemeineFragen.push(q); FRAGE_BY_ID[q.id] = q; }
+});
+
+const bundeslandFragen = {};
+const rohLaender = DATEN.bundeslandFragen || {};
+Object.keys(rohLaender).forEach(k => {
+  if (!BUNDESLAENDER.includes(k)) DATEN_WARNUNGEN.push(`bundeslandFragen: unbekannter Schlüssel "${k}" – ignoriert`);
+});
+BUNDESLAENDER.forEach(bl => {
+  bundeslandFragen[bl] = [];
+  (Array.isArray(rohLaender[bl]) ? rohLaender[bl] : []).forEach((f, i) => {
+    const q = pruefeFrage(f, `bundeslandFragen["${bl}"][${i}]`);
+    if (q) { q.bundesland = bl; bundeslandFragen[bl].push(q); FRAGE_BY_ID[q.id] = q; }
+  });
+});
+
+if (DATEN_WARNUNGEN.length) {
+  console.groupCollapsed(`Fragenkatalog: ${DATEN_WARNUNGEN.length} Hinweis(e)`);
+  DATEN_WARNUNGEN.forEach(w => console.warn(w));
+  console.groupEnd();
+}
+console.info(`Fragenkatalog geladen: ${allgemeineFragen.length} allgemeine Fragen, ` +
+  BUNDESLAENDER.map(bl => `${bl}: ${bundeslandFragen[bl].length}`).join(", "));
+
+/** Testablauf für das gewählte Bundesland: allgemeine Fragen + 10 Landesfragen hinten dran */
+function fragenFuer(bundesland) {
+  return allgemeineFragen.concat(bundeslandFragen[bundesland] || []);
+}
+
+/* =====================================================================
+   KONSTANTEN
+   ===================================================================== */
+const ZIEL_RICHTIG_IN_FOLGE = 2;                 // nach 2x richtig -> aus Fehler-Ordner entfernen
+const STORAGE_PREFIX = "ebt-trainer:v1:user:";   // + E-Mail
+const LAST_EMAIL_KEY = "ebt-trainer:v1:lastEmail";
+const LETTERS = ["A", "B", "C", "D"];
+
+/* =====================================================================
+   SPEICHER (localStorage mit Fallback, falls blockiert, z. B. privater Modus)
+   ===================================================================== */
+const memoryFallback = {};
+const storage = {
+  get(key) {
+    try { return localStorage.getItem(key); }
+    catch (e) { return key in memoryFallback ? memoryFallback[key] : null; }
+  },
+  set(key, value) {
+    try { localStorage.setItem(key, value); }
+    catch (e) { memoryFallback[key] = value; }
+  }
+};
+
+/* =====================================================================
+   ZUSTAND (pro E-Mail im localStorage)
+   ---------------------------------------------------------------------
+   state = {
+     bundesland: "Bayern" | … | null
+     tab:    "alle" | "fehler",
+     main:   { index, chosen }               // Position im Testablauf + gewählte Antwort
+     review: { currentId, chosen, msg }      // aktuelle Frage im Fehler-Ordner
+     fehler: { [frageId]: { richtigInFolge } }
+     stats:  { beantwortet, richtig }
+   }
+   Hinweis: Fehler-Einträge von Landesfragen eines früher gewählten
+   Bundeslandes bleiben gespeichert, werden aber nur angezeigt, solange
+   dieses Bundesland aktiv ist.
+   ===================================================================== */
+let currentEmail = null;
+let state = null;
+let FRAGEN = [];          // aktueller Testablauf (abhängig vom Bundesland)
+let FRAGEN_IDS = new Set();
+
+function defaultState() {
+  return {
+    bundesland: null,
+    tab: "alle",
+    main: { index: 0, chosen: null },
+    review: { currentId: null, chosen: null, msg: null },
+    fehler: {},
+    stats: { beantwortet: 0, richtig: 0 }
+  };
+}
+
+function storageKey(email) { return STORAGE_PREFIX + email; }
+
+function readSaved(email) {
+  try { return JSON.parse(storage.get(storageKey(email)) || "null"); } catch (e) { return null; }
+}
+
+function loadState(email) {
+  const base = defaultState();
+  const saved = readSaved(email);
+  if (!saved || typeof saved !== "object") return base;
+
+  const s = {
+    bundesland: BUNDESLAENDER.includes(saved.bundesland) ? saved.bundesland : null,
+    tab: saved.tab === "fehler" ? "fehler" : "alle",
+    main: Object.assign(base.main, saved.main || {}),
+    review: Object.assign(base.review, saved.review || {}),
+    fehler: {},
+    stats: Object.assign(base.stats, saved.stats || {})
+  };
+  // Nur Fehler-Einträge übernehmen, deren Frage noch existiert
+  for (const [id, entry] of Object.entries(saved.fehler || {})) {
+    if (FRAGE_BY_ID[id]) s.fehler[id] = { richtigInFolge: Number(entry && entry.richtigInFolge) || 0 };
+  }
+  if (s.review.currentId && !FRAGE_BY_ID[s.review.currentId]) {
+    s.review = { currentId: null, chosen: null, msg: null };
+  }
+  return s;
+}
+
+/** Testablauf für das aktuelle Bundesland aufbauen und Index absichern */
+function applyBundesland() {
+  FRAGEN = fragenFuer(state.bundesland);
+  FRAGEN_IDS = new Set(FRAGEN.map(f => f.id));
+  const m = state.main;
+  if (!Number.isInteger(m.index) || m.index < 0 || m.index > FRAGEN.length) { m.index = 0; m.chosen = null; }
+  if (m.index === FRAGEN.length) m.chosen = null;
+  // Aktuelle Fehler-Frage gehört nicht (mehr) zum Ablauf -> neu wählen
+  if (state.review.currentId && !FRAGEN_IDS.has(state.review.currentId)) {
+    state.review = { currentId: null, chosen: null, msg: null };
+  }
+}
+
+/** Bundesland wechseln: allgemeiner Fortschritt bleibt, Landesteil startet neu */
+function setBundesland(neu) {
+  if (state.bundesland === neu) return;
+  const hatteSchon = state.bundesland !== null;
+  state.bundesland = neu;
+  // Stand der Nutzer bereits im Landesteil (oder war fertig) -> an den Anfang der neuen Landesfragen
+  if (hatteSchon && state.main.index >= allgemeineFragen.length) {
+    state.main = { index: allgemeineFragen.length, chosen: null };
+  }
+  applyBundesland();
+}
+
+function saveState() {
+  if (currentEmail && state) storage.set(storageKey(currentEmail), JSON.stringify(state));
+}
+
+/* =====================================================================
+   LOGIN / LOGOUT
+   ===================================================================== */
+const $ = id => document.getElementById(id);
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const normEmail = v => v.trim().toLowerCase();
+
+function fillBundeslandSelect(select, withPlaceholder) {
+  select.innerHTML = "";
+  if (withPlaceholder) {
+    const ph = new Option("Bitte Bundesland auswählen …", "");
+    ph.disabled = true; ph.selected = true;
+    select.append(ph);
+  }
+  BUNDESLAENDER.forEach(bl => select.append(new Option(bl, bl)));
+}
+
+/** Beim Tippen der E-Mail: gespeichertes Bundesland vorauswählen */
+function syncSavedBundesland() {
+  const email = normEmail($("emailInput").value);
+  const saved = EMAIL_REGEX.test(email) ? readSaved(email) : null;
+  const hint = $("bundeslandHint");
+  if (saved && BUNDESLAENDER.includes(saved.bundesland)) {
+    $("bundeslandSelect").value = saved.bundesland;
+    hint.textContent = `✓ Gespeichert für dieses Konto: ${saved.bundesland} – du kannst es hier auch ändern.`;
+  } else {
+    hint.textContent = "";
+  }
+}
+
+function login() {
+  const email = normEmail($("emailInput").value);
+  const bl = $("bundeslandSelect").value;
+  if (!EMAIL_REGEX.test(email)) {
+    $("loginError").textContent = "Bitte gib eine gültige E-Mail-Adresse ein.";
+    $("emailInput").focus();
+    return;
+  }
+  if (!BUNDESLAENDER.includes(bl)) {
+    $("loginError").textContent = "Bitte wähle dein Bundesland aus.";
+    $("bundeslandSelect").focus();
+    return;
+  }
+  $("loginError").textContent = "";
+  currentEmail = email;
+  state = loadState(email);
+  if (state.bundesland === bl) applyBundesland();
+  else setBundesland(bl);
+  saveState();
+  storage.set(LAST_EMAIL_KEY, email);
+
+  $("userEmail").textContent = email;
+  $("userEmail").title = email;
+  $("loginScreen").classList.add("hidden");
+  $("appScreen").classList.remove("hidden");
+  render();
+}
+
+function logout() {
+  saveState();
+  currentEmail = null;
+  state = null;
+  $("appScreen").classList.add("hidden");
+  $("loginScreen").classList.remove("hidden");
+  $("emailInput").value = "";
+  fillBundeslandSelect($("bundeslandSelect"), true);
+  $("bundeslandHint").textContent = "";
+  $("emailInput").focus();
+}
+
+/* ---------- Modal: Bundesland ändern ---------- */
+function openBlModal() {
+  $("blModalSelect").value = state.bundesland;
+  $("blModal").classList.remove("hidden");
+  $("blModalSelect").focus();
+}
+function closeBlModal() { $("blModal").classList.add("hidden"); }
+function saveBlModal() {
+  setBundesland($("blModalSelect").value);
+  saveState();
+  closeBlModal();
+  render();
+}
+
+/* =====================================================================
+   HILFSFUNKTIONEN
+   ===================================================================== */
+function el(tag, attrs = {}, children = []) {
+  const node = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k === "class") node.className = v;
+    else if (k === "text") node.textContent = v;
+    else if (k.startsWith("on")) node.addEventListener(k.slice(2), v);
+    else node.setAttribute(k, v);
+  }
+  for (const c of [].concat(children)) if (c) node.append(c);
+  return node;
+}
+
+/** Nur Fehler-Fragen, die zum aktuellen Testablauf gehören */
+function fehlerIds() { return Object.keys(state.fehler).filter(id => FRAGEN_IDS.has(id)); }
+
+/** Zufällige Frage aus dem Fehler-Ordner – nach Möglichkeit nicht dieselbe wie zuletzt */
+function pickRandomFehler(excludeId) {
+  let ids = fehlerIds();
+  if (ids.length > 1 && excludeId) ids = ids.filter(id => id !== excludeId);
+  if (!ids.length) return null;
+  return ids[Math.floor(Math.random() * ids.length)];
+}
+
+/** Bild mit Fallback: fehlt die Datei, erscheint ein gut sichtbarer Hinweis statt eines kaputten Icons */
+function bildElement(src, alt, cls) {
+  const img = el("img", { src, alt, class: cls, loading: "lazy" });
+  img.addEventListener("error", () => {
+    img.replaceWith(el("span", { class: "img-missing " + cls, text: "⚠️ Bild fehlt: " + src }));
+  }, { once: true });
+  return img;
+}
+
+/** Bild groß anzeigen (Overlay in der Seite; Klick/Esc schließt) */
+function zeigeLightbox(src) {
+  const box = el("div", { class: "lightbox", role: "dialog", "aria-label": "Bild vergrößert" }, [
+    el("img", { src, alt: "Abbildung vergrößert" }),
+    el("div", { class: "lightbox-hint", text: "Tippen zum Schließen" })
+  ]);
+  const zu = () => { box.remove(); document.removeEventListener("keydown", esc, true); };
+  const esc = e => { if (e.key === "Escape") { e.stopPropagation(); zu(); } };
+  box.addEventListener("click", zu);
+  document.addEventListener("keydown", esc, true);
+  document.body.append(box);
+}
+
+/** Offizielle Katalog-Nummer als Text (falls vorhanden) */
+function katalogNr(frage) {
+  if (!frage.nummer) return "";
+  return frage.bundesland ? ` · Katalog ${frage.bundesland} Nr. ${frage.nummer}` : ` · Katalog-Nr. ${frage.nummer}`;
+}
+
+/** Kennzeichnung für Fragen (allgemein / Landesfrage) */
+function frageTags(frage) {
+  const f = FRAGE_BY_ID[frage.id];
+  return f && f.bundesland ? [{ text: "Landesfrage " + f.bundesland, cls: "violet" }] : [];
+}
+
+/* =====================================================================
+   RENDERING
+   ===================================================================== */
+function render() {
+  $("blLabel").textContent = state.bundesland;
+  $("tabAlle").classList.toggle("active", state.tab === "alle");
+  $("tabFehler").classList.toggle("active", state.tab === "fehler");
+  const n = fehlerIds().length;
+  $("fehlerBadge").textContent = n;
+  $("fehlerBadge").classList.toggle("zero", n === 0);
+
+  if (state.tab === "alle") renderMain();
+  else renderReview();
+}
+
+/** Baut die Fragekarte (für beide Modi) */
+function buildQuestionCard({ frage, chosen, metaLeft, tags, onAnswer, onNext, resultMsg, resultOk, nextLabel, notice }) {
+  const content = $("content");
+  content.innerHTML = "";
+
+  if (notice) content.append(el("div", { class: "notice", text: notice }));
+
+  content.append(el("div", { class: "meta" }, [
+    el("span", { text: metaLeft }),
+    el("div", { class: "pills" }, (tags || []).map(t => el("span", { class: "pill " + (t.cls || ""), text: t.text })))
+  ]));
+  content.append(el("p", { class: "question", text: frage.frage }));
+
+  // Optionales Fragebild (z. B. Landkarte)
+  if (frage.bild) {
+    content.append(el("figure", { class: "q-figure" }, [
+      (() => { const img = bildElement(frage.bild, "Abbildung zur Frage", "q-img");
+               img.addEventListener("click", () => zeigeLightbox(frage.bild)); return img; })(),
+      el("div", { class: "img-credit", text: "🔍 Antippen zum Vergrößern" }),
+      frage.bildQuelle ? el("figcaption", { class: "img-credit", text: frage.bildQuelle }) : null
+    ]));
+  }
+
+  const answered = chosen !== null && chosen !== undefined;
+  const mitBildern = !!frage.antwortBilder;
+  const list = el("div", { class: "answers" + (mitBildern ? " img-grid" : "") });
+  frage.antworten.forEach((txt, i) => {
+    let cls = "answer" + (mitBildern ? " has-img" : "");
+    if (answered) {
+      if (i === frage.richtig) cls += " correct";           // richtige Antwort immer grün
+      else if (i === chosen) cls += " wrong";               // falsche Wahl rot
+      else cls += " dim";
+    }
+    const bildSrc = mitBildern ? frage.antwortBilder[i] : "";
+    const btn = el("button", { class: cls, type: "button" }, [
+      bildSrc ? bildElement(bildSrc, txt, "a-img") : null,
+      el("span", { class: "a-label" }, [
+        el("span", { class: "letter", text: LETTERS[i] }),
+        el("span", { text: txt })
+      ])
+    ]);
+    if (answered) btn.disabled = true;
+    else btn.addEventListener("click", () => onAnswer(i));
+    list.append(btn);
+  });
+  content.append(list);
+
+  if (answered) {
+    content.append(el("div", { class: "result " + (resultOk ? "ok" : "bad"), text: resultMsg }));
+
+    // Farsi-Infokasten (RTL + Vazirmatn)
+    // (fa ist optional – fehlende Teile werden einfach weggelassen)
+    const fa = frage.fa || {};
+    const zeile = (label, wert) => istText(wert)
+      ? el("div", { class: "row" }, [el("span", { class: "label", text: label }), el("span", { text: wert })])
+      : null;
+    const zeilen = [
+      zeile("ترجمهٔ سؤال: ", fa.frage),
+      zeile("پاسخ درست: ", fa.antwort),
+      zeile("توضیح: ", fa.erklaerung)
+    ].filter(Boolean);
+    content.append(el("div", { class: "fa-box", lang: "fa", dir: "rtl" }, [
+      el("h3", { text: "راهنمای فارسی" }),
+      ...(zeilen.length ? zeilen : [el("div", { class: "row muted", text: "ترجمهٔ فارسی برای این سؤال هنوز اضافه نشده است." })])
+    ]));
+
+    const next = el("button", { class: "btn btn-primary", type: "button", id: "nextBtn", text: nextLabel || "Weiter →" });
+    next.addEventListener("click", onNext);
+    content.append(el("div", { class: "actions" }, next));
+    next.focus({ preventScroll: true });
+  }
+}
+
+/* ---------- Hauptmodus: allgemeine Fragen, danach Landesfragen ---------- */
+function renderMain() {
+  $("progressWrap").classList.remove("hidden");
+  const idx = state.main.index;
+  const total = FRAGEN.length;
+  const done = Math.min(idx + (state.main.chosen !== null ? 1 : 0), total);
+  $("progressLabel").textContent = `Fortschritt: ${done} / ${total}`;
+  const quote = state.stats.beantwortet ? Math.round(100 * state.stats.richtig / state.stats.beantwortet) : 0;
+  $("scoreLabel").textContent = `Trefferquote: ${quote} %`;
+  $("progressBar").style.width = (total ? 100 * done / total : 0) + "%";
+
+  const landAnzahl = (bundeslandFragen[state.bundesland] || []).length;
+
+  // Alle Fragen durchgearbeitet
+  if (idx >= total) {
+    const n = fehlerIds().length;
+    const content = $("content");
+    content.innerHTML = "";
+    content.append(el("div", { class: "empty" }, [
+      el("div", { class: "icon", text: "🎉" }),
+      el("h2", { text: "Alle Fragen bearbeitet!" }),
+      el("p", { text: n ? `Im Fehler-Ordner warten noch ${n} Frage(n) auf dich.` : "Dein Fehler-Ordner ist leer – sehr gut!" }),
+      landAnzahl ? null : el("p", { text: `Hinweis: Für ${state.bundesland} sind noch keine Landesfragen hinterlegt.` }),
+      el("div", { class: "stats" }, [
+        el("div", { class: "stat" }, [el("b", { text: state.stats.beantwortet }), el("span", { text: "beantwortet" })]),
+        el("div", { class: "stat" }, [el("b", { text: state.stats.richtig }), el("span", { text: "richtig" })]),
+        el("div", { class: "stat" }, [el("b", { text: quote + " %" }), el("span", { text: "Quote" })])
+      ]),
+      el("div", { class: "actions", style: "justify-content:center; gap:10px; flex-wrap:wrap" }, [
+        n ? el("button", { class: "btn btn-ghost", type: "button", text: "Zum Fehler-Ordner", onclick: () => switchTab("fehler") }) : null,
+        el("button", { class: "btn btn-primary", type: "button", text: "Von vorne beginnen", onclick: restartMain })
+      ])
+    ]));
+    return;
+  }
+
+  const frage = FRAGEN[idx];
+  const chosen = state.main.chosen;
+  const isRight = chosen === frage.richtig;
+  const istLandesfrage = idx >= allgemeineFragen.length;
+  const tags = frageTags(frage);
+  if (state.fehler[frage.id]) tags.push({ text: "im Fehler-Ordner", cls: "amber" });
+
+  buildQuestionCard({
+    frage,
+    chosen,
+    metaLeft: (istLandesfrage
+      ? `Frage ${idx + 1} von ${total} · Landesfrage ${idx - allgemeineFragen.length + 1} von ${landAnzahl}`
+      : `Frage ${idx + 1} von ${total}`) + katalogNr(frage),
+    tags,
+    notice: (idx === allgemeineFragen.length && chosen === null)
+      ? `Die allgemeinen Fragen sind geschafft – jetzt folgen die ${landAnzahl} Fragen zu ${state.bundesland}.`
+      : null,
+    onAnswer: answerMain,
+    onNext: nextMain,
+    resultOk: isRight,
+    resultMsg: isRight ? "✓ Richtig!" : "✗ Leider falsch – die Frage wurde im Fehler-Ordner gespeichert.",
+    nextLabel: idx === total - 1 ? "Abschließen" : "Nächste Frage →"
+  });
+}
+
+function answerMain(i) {
+  if (state.main.chosen !== null) return;
+  const frage = FRAGEN[state.main.index];
+  state.main.chosen = i;
+  state.stats.beantwortet++;
+  if (i === frage.richtig) {
+    state.stats.richtig++;
+  } else {
+    // Falsch -> in den Fehler-Ordner (bzw. Zähler zurücksetzen, falls schon drin)
+    state.fehler[frage.id] = { richtigInFolge: 0 };
+  }
+  saveState();
+  render();
+}
+
+function nextMain() {
+  state.main.index = Math.min(state.main.index + 1, FRAGEN.length);
+  state.main.chosen = null;
+  saveState();
+  render();
+}
+
+function restartMain() {
+  state.main = { index: 0, chosen: null };
+  state.stats = { beantwortet: 0, richtig: 0 };
+  saveState();
+  render();
+}
+
+/* ---------- Fehler-Ordner: zufällige Wiederholung ---------- */
+function renderReview() {
+  $("progressWrap").classList.add("hidden");
+  const r = state.review;
+
+  // Neue Zufallsfrage wählen, wenn keine aktive (unbeantwortete) Frage existiert
+  if (r.chosen === null && (!r.currentId || !state.fehler[r.currentId] || !FRAGEN_IDS.has(r.currentId))) {
+    r.currentId = pickRandomFehler(null);
+    r.msg = null;
+    saveState();
+  }
+
+  if (!r.currentId) {
+    const content = $("content");
+    content.innerHTML = "";
+    content.append(el("div", { class: "empty" }, [
+      el("div", { class: "icon", text: "✅" }),
+      el("h2", { text: "Fehler-Ordner ist leer" }),
+      el("p", { text: "Falsch beantwortete Fragen aus „Alle Fragen“ landen automatisch hier." }),
+      el("p", { lang: "fa", dir: "rtl", style: "text-align:center", text: "پوشهٔ اشتباه‌ها خالی است. سؤال‌هایی که اشتباه جواب بدهید، خودکار اینجا ذخیره می‌شوند." }),
+      el("div", { class: "actions", style: "justify-content:center" },
+        el("button", { class: "btn btn-primary", type: "button", text: "Zu allen Fragen", onclick: () => switchTab("alle") }))
+    ]));
+    return;
+  }
+
+  const frage = FRAGE_BY_ID[r.currentId];
+  const entry = state.fehler[r.currentId];
+  const counter = entry ? entry.richtigInFolge : ZIEL_RICHTIG_IN_FOLGE;
+  const n = fehlerIds().length;
+  const tags = frageTags(frage);
+  tags.push({ text: `Richtig in Folge: ${counter} / ${ZIEL_RICHTIG_IN_FOLGE}`, cls: "amber" });
+
+  buildQuestionCard({
+    frage,
+    chosen: r.chosen,
+    metaLeft: `Zufallsfrage · ${n} Frage(n) im Ordner` + katalogNr(frage),
+    tags,
+    onAnswer: answerReview,
+    onNext: nextReview,
+    resultOk: r.chosen === frage.richtig,
+    resultMsg: r.msg || "",
+    nextLabel: n ? "Nächste Zufallsfrage →" : "Fertig"
+  });
+}
+
+function answerReview(i) {
+  const r = state.review;
+  if (r.chosen !== null) return;
+  const frage = FRAGE_BY_ID[r.currentId];
+  const entry = state.fehler[r.currentId];
+  r.chosen = i;
+
+  if (i === frage.richtig) {
+    entry.richtigInFolge++;
+    if (entry.richtigInFolge >= ZIEL_RICHTIG_IN_FOLGE) {
+      delete state.fehler[r.currentId];   // 2x richtig -> entfernen
+      r.msg = `✓ Richtig! (${ZIEL_RICHTIG_IN_FOLGE}/${ZIEL_RICHTIG_IN_FOLGE}) – Frage wurde aus dem Fehler-Ordner entfernt.`;
+    } else {
+      r.msg = `✓ Richtig! (${entry.richtigInFolge}/${ZIEL_RICHTIG_IN_FOLGE}) – noch ${ZIEL_RICHTIG_IN_FOLGE - entry.richtigInFolge}× richtig, dann wird sie entfernt.`;
+    }
+  } else {
+    entry.richtigInFolge = 0;             // falsch -> Zähler zurücksetzen, bleibt im Ordner
+    r.msg = `✗ Falsch – Zähler zurückgesetzt (0/${ZIEL_RICHTIG_IN_FOLGE}). Die Frage bleibt im Ordner.`;
+  }
+  saveState();
+  render();
+}
+
+function nextReview() {
+  const r = state.review;
+  r.currentId = pickRandomFehler(r.currentId);
+  r.chosen = null;
+  r.msg = null;
+  saveState();
+  render();
+}
+
+function switchTab(tab) {
+  state.tab = tab;
+  saveState();
+  render();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+/* =====================================================================
+   EVENTS
+   ===================================================================== */
+fillBundeslandSelect($("bundeslandSelect"), true);
+fillBundeslandSelect($("blModalSelect"), false);
+
+$("loginForm").addEventListener("submit", e => { e.preventDefault(); login(); });
+$("emailInput").addEventListener("input", syncSavedBundesland);
+$("logoutBtn").addEventListener("click", logout);
+$("changeBlBtn").addEventListener("click", openBlModal);
+$("blModalCancel").addEventListener("click", closeBlModal);
+$("blModalSave").addEventListener("click", saveBlModal);
+$("blModal").addEventListener("click", e => { if (e.target === $("blModal")) closeBlModal(); });
+document.querySelectorAll(".tab").forEach(t => t.addEventListener("click", () => switchTab(t.dataset.tab)));
+
+// Tastatur: 1–4 = Antwort, Enter = weiter, Esc = Modal schließen
+document.addEventListener("keydown", e => {
+  if (!state || $("appScreen").classList.contains("hidden")) return;
+  if (!$("blModal").classList.contains("hidden")) {
+    if (e.key === "Escape") closeBlModal();
+    return;
+  }
+  if (["1", "2", "3", "4"].includes(e.key)) {
+    const btns = document.querySelectorAll(".answer:not(:disabled)");
+    const b = btns[Number(e.key) - 1];
+    if (b) b.click();
+  } else if (e.key === "Enter") {
+    const next = $("nextBtn");
+    if (next && document.activeElement !== next) { e.preventDefault(); next.click(); }
+  }
+});
+
+// Fortschritt auch beim Schließen sicher speichern
+window.addEventListener("beforeunload", saveState);
+
+// Letzte E-Mail + deren Bundesland vorausfüllen (Bestätigen bleibt Pflicht)
+const lastEmail = storage.get(LAST_EMAIL_KEY);
+if (lastEmail) { $("emailInput").value = lastEmail; syncSavedBundesland(); }
+$("emailInput").focus();
+</script>
+</body>
+</html>
