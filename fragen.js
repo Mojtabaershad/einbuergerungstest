@@ -5476,171 +5476,3013 @@ window.FRAGEN_DATEN = {
      Schlüssel = Name des Bundeslandes, alphabetisch sortiert.
      ------------------------------------------------------------------- */
   bundeslandFragen: {
-    "Baden-Württemberg": [],
-
-    "Bayern": [
+    "Baden-Württemberg": [
       {
-        id: "by-01",
-        nummer: 1,
-        frage: "Welches Wappen gehört zum Freistaat Bayern?",
-        antworten: ["Bild 1", "Bild 2", "Bild 3", "Bild 4"],
-        richtig: 1,
-        bild: "",
-        antwortBilder: ["bilder/by-01-1.png", "bilder/by-01-2.png", "bilder/by-01-3.png", "bilder/by-01-4.png"],
-        fa: {
-          frage: "کدام نشان متعلق به ایالت آزاد بایرن است؟",
-          antwort: "تصویر ۲ (لوزی‌های سفید و آبی)",
-          erklaerung: "نشان بایرن لوزی‌های سفید و آبی با یک تاج در بالا دارد. تصویر ۱ نشان بادن-وورتمبرگ است."
+        "id": "bw-01",
+        "nummer": 1,
+        "frage": "Welches Wappen gehört zum Bundesland Baden-Württemberg?",
+        "antworten": [
+          "Bild 1",
+          "Bild 2",
+          "Bild 3",
+          "Bild 4"
+        ],
+        "richtig": 0,
+        "bild": "",
+        "antwortBilder": [
+          "bilder/bw-01-1.png",
+          "bilder/bw-01-2.png",
+          "bilder/bw-01-3.png",
+          "bilder/bw-01-4.png"
+        ],
+        "fa": {
+          "frage": "کدام نشان متعلق به ایالت بادن-وورتمبرگ است؟",
+          "antwort": "تصویر ۱ (سه شیر سیاه روی زمینهٔ طلایی با تاج)",
+          "erklaerung": "نشان بادن-وورتمبرگ سه شیر سیاه روی سپر طلایی است."
         }
       },
       {
-        id: "by-02",
-        nummer: 2,
-        frage: "Welches ist ein Landkreis in Bayern?",
-        antworten: ["Prignitz", "Rhein-Sieg-Kreis", "Nordfriesland", "Altötting"],
-        richtig: 3,
-        bild: "",
-        fa: {
-          frage: "کدام یک شهرستان (لاندکرایس) در بایرن است؟",
-          antwort: "آلتؤتینگ (Altötting)",
-          erklaerung: "آلتؤتینگ در جنوب‌شرق بایرن است. پریگنیتس در براندنبورگ، راین-زیگ در نوردراین-وستفالن و نوردفریسلاند در شلسویگ-هولشتاین قرار دارد."
+        "id": "bw-02",
+        "nummer": 2,
+        "frage": "Welches ist ein Landkreis in Baden-Württemberg?",
+        "antworten": [
+          "Mecklenburgische Seenplatte",
+          "Neckar-Odenwald-Kreis",
+          "Nordfriesland",
+          "Altötting"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "کدام یک شهرستان (لاندکرایس) در بادن-وورتمبرگ است؟",
+          "antwort": "نکار-اودن‌والد (Neckar-Odenwald-Kreis)",
+          "erklaerung": "این شهرستان در شمال بادن-وورتمبرگ است. آلتؤتینگ در بایرن و نوردفریسلاند در شلسویگ-هولشتاین قرار دارد."
         }
       },
       {
-        id: "by-03",
-        nummer: 3,
-        frage: "Für wie viele Jahre wird der Landtag in Bayern gewählt?",
-        antworten: ["3", "4", "5", "6"],
-        richtig: 2,
-        bild: "",
-        fa: {
-          frage: "پارلمان ایالتی (لندتاگ) بایرن برای چند سال انتخاب می‌شود؟",
-          antwort: "۵ سال",
-          erklaerung: "مردم بایرن هر پنج سال یک‌بار نمایندگان لندتاگ را انتخاب می‌کنند."
+        "id": "bw-03",
+        "nummer": 3,
+        "frage": "Für wie viele Jahre wird der Landtag in Baden-Württemberg gewählt?",
+        "antworten": [
+          "3",
+          "4",
+          "5",
+          "6"
+        ],
+        "richtig": 2,
+        "bild": "",
+        "fa": {
+          "frage": "پارلمان ایالتی (لندتاگ) بادن-وورتمبرگ برای چند سال انتخاب می‌شود؟",
+          "antwort": "۵ سال",
+          "erklaerung": "مردم بادن-وورتمبرگ هر ۵ سال یک‌بار نمایندگان پارلمان ایالتی را انتخاب می‌کنند."
         }
       },
       {
-        id: "by-04",
-        nummer: 4,
-        frage: "Ab welchem Alter darf man in Bayern bei Kommunalwahlen wählen?",
-        antworten: ["14", "16", "18", "20"],
-        richtig: 2,
-        bild: "",
-        fa: {
-          frage: "در بایرن از چند سالگی می‌توان در انتخابات محلی (شهر و شهرستان) رأی داد؟",
-          antwort: "از ۱۸ سالگی",
-          erklaerung: "در بایرن برای رأی دادن در انتخابات محلی باید دست‌کم ۱۸ ساله بود. در برخی ایالت‌های دیگر این سن ۱۶ سال است."
+        "id": "bw-04",
+        "nummer": 4,
+        "frage": "Ab welchem Alter darf man in Baden-Württemberg bei Kommunalwahlen wählen?",
+        "antworten": [
+          "14",
+          "16",
+          "18",
+          "20"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "در بادن-وورتمبرگ از چند سالگی می‌توان در انتخابات محلی رأی داد؟",
+          "antwort": "از ۱۶ سالگی",
+          "erklaerung": "در بادن-وورتمبرگ نوجوانان از ۱۶ سالگی اجازهٔ رأی دادن در این انتخابات را دارند."
         }
       },
       {
-        id: "by-05",
-        nummer: 5,
-        frage: "Welche Farben hat die Landesflagge von Bayern?",
-        antworten: ["blau-weiß-rot", "weiß-blau", "grün-weiß-rot", "schwarz-gelb"],
-        richtig: 1,
-        bild: "",
-        fa: {
-          frage: "پرچم ایالت بایرن چه رنگ‌هایی دارد؟",
-          antwort: "سفید و آبی",
-          erklaerung: "رنگ‌های بایرن سفید و آبی است؛ معروف‌ترین شکل پرچم آن لوزی‌های سفید و آبی است."
+        "id": "bw-05",
+        "nummer": 5,
+        "frage": "Welche Farben hat die Landesflagge von Baden-Württemberg?",
+        "antworten": [
+          "blau-weiß-rot",
+          "schwarz-gold",
+          "weiß-blau",
+          "grün-weiß-rot"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "پرچم ایالت بادن-وورتمبرگ چه رنگ‌هایی دارد؟",
+          "antwort": "سیاه و طلایی",
+          "erklaerung": "رنگ‌های پرچم بادن-وورتمبرگ: سیاه و طلایی."
         }
       },
       {
-        id: "by-06",
-        nummer: 6,
-        frage: "Wo können Sie sich in Bayern über politische Themen informieren?",
-        antworten: [
+        "id": "bw-06",
+        "nummer": 6,
+        "frage": "Wo können Sie sich in Baden-Württemberg über politische Themen informieren?",
+        "antworten": [
           "beim Ordnungsamt der Gemeinde",
-          "bei der Landeszentrale für politische Bildung",
           "bei der Verbraucherzentrale",
+          "bei der Landeszentrale für politische Bildung",
           "bei den Kirchen"
         ],
-        richtig: 1,
-        bild: "",
-        fa: {
-          frage: "در بایرن کجا می‌توانید دربارهٔ موضوعات سیاسی اطلاعات بگیرید؟",
-          antwort: "در مرکز ایالتی آموزش سیاسی",
-          erklaerung: "این یک ادارهٔ دولتی است که اطلاعات بی‌طرف و اغلب رایگان دربارهٔ سیاست و دموکراسی ارائه می‌دهد."
+        "richtig": 2,
+        "bild": "",
+        "fa": {
+          "frage": "در بادن-وورتمبرگ کجا می‌توانید دربارهٔ موضوعات سیاسی اطلاعات بگیرید؟",
+          "antwort": "در مرکز ایالتی آموزش سیاسی (Landeszentrale für politische Bildung)",
+          "erklaerung": "این یک ادارهٔ دولتی است که اطلاعات بی‌طرف و اغلب رایگان دربارهٔ سیاست و دموکراسی ارائه می‌دهد."
         }
       },
       {
-        id: "by-07",
-        nummer: 7,
-        frage: "Die Landeshauptstadt von Bayern heißt …",
-        antworten: ["Ingolstadt.", "Regensburg.", "Nürnberg.", "München."],
-        richtig: 3,
-        bild: "",
-        fa: {
-          frage: "پایتخت ایالت بایرن … نام دارد.",
-          antwort: "مونیخ",
-          erklaerung: "مونیخ مرکز دولت و پارلمان ایالت بایرن است."
+        "id": "bw-07",
+        "nummer": 7,
+        "frage": "Die Landeshauptstadt von Baden-Württemberg heißt …",
+        "antworten": [
+          "Heidelberg.",
+          "Stuttgart.",
+          "Karlsruhe.",
+          "Mannheim."
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "پایتخت ایالت بادن-وورتمبرگ … نام دارد.",
+          "antwort": "اشتوتگارت",
+          "erklaerung": "اشتوتگارت مرکز دولت و پارلمان بادن-وورتمبرگ است."
         }
       },
       {
-        // Beispiel für eine Frage mit EINEM Fragebild (Landkarte)
-        id: "by-08",
-        nummer: 8,
-        frage: "Welches Bundesland ist Bayern?",
-        antworten: ["1", "2", "3", "4"],
-        richtig: 3,
-        bild: "bilder/by-08.png",
-        fa: {
-          frage: "در نقشه، کدام ایالت بایرن است؟",
-          antwort: "شمارهٔ ۴",
-          erklaerung: "بایرن بزرگ‌ترین ایالت آلمان است و در جنوب‌شرق کشور قرار دارد."
+        "id": "bw-08",
+        "nummer": 8,
+        "frage": "Welches Bundesland ist Baden-Württemberg?",
+        "antworten": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "richtig": 1,
+        "bild": "bilder/bw-08.png",
+        "fa": {
+          "frage": "در نقشه، کدام ایالت بادن-وورتمبرگ است؟",
+          "antwort": "شمارهٔ ۲",
+          "erklaerung": "بادن-وورتمبرگ در جنوب‌غرب آلمان، کنار فرانسه و سوئیس قرار دارد."
         }
       },
       {
-        id: "by-09",
-        nummer: 9,
-        frage: "Wie nennt man die Regierungschefin/den Regierungschef in Bayern?",
-        antworten: [
+        "id": "bw-09",
+        "nummer": 9,
+        "frage": "Wie nennt man die Regierungschefin/den Regierungschef in Baden-Württemberg?",
+        "antworten": [
           "Erste Ministerin/Erster Minister",
           "Premierministerin/Premierminister",
           "Bürgermeisterin/Bürgermeister",
           "Ministerpräsidentin/Ministerpräsident"
         ],
-        richtig: 3,
-        bild: "",
-        fa: {
-          frage: "رئیس دولت ایالت بایرن را چه می‌نامند؟",
-          antwort: "نخست‌وزیر ایالتی (Ministerpräsident)",
-          erklaerung: "رئیس دولت هر ایالت آلمان «مینیستِرپرِزیدِنت» نام دارد. او را پارلمان ایالت (لندتاگ) انتخاب می‌کند."
+        "richtig": 3,
+        "bild": "",
+        "fa": {
+          "frage": "رئیس دولت ایالت بادن-وورتمبرگ را چه می‌نامند؟",
+          "antwort": "نخست‌وزیر ایالتی (Ministerpräsident)",
+          "erklaerung": "رئیس دولت بادن-وورتمبرگ «مینیستِرپرِزیدِنت» نام دارد و پارلمان ایالت او را انتخاب می‌کند."
         }
       },
       {
-        id: "by-10",
-        nummer: 10,
-        frage: "Welche Ministerin/welchen Minister hat Bayern nicht?",
-        antworten: [
+        "id": "bw-10",
+        "nummer": 10,
+        "frage": "Welche Ministerin/welchen Minister hat Baden-Württemberg nicht?",
+        "antworten": [
+          "Finanzministerin/Finanzminister",
+          "Justizministerin/Justizminister",
+          "Innenministerin/Innenminister",
+          "Außenministerin/Außenminister"
+        ],
+        "richtig": 3,
+        "bild": "",
+        "fa": {
+          "frage": "بادن-وورتمبرگ کدام وزیر را ندارد؟",
+          "antwort": "وزیر امور خارجه",
+          "erklaerung": "سیاست خارجی وظیفهٔ دولت فدرال است، نه ایالت‌ها؛ بنابراین ایالت‌ها وزیر خارجه ندارند."
+        }
+      }
+    ],
+    "Bayern": [
+      {
+        "id": "by-01",
+        "nummer": 1,
+        "frage": "Welches Wappen gehört zum Freistaat Bayern?",
+        "antworten": [
+          "Bild 1",
+          "Bild 2",
+          "Bild 3",
+          "Bild 4"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "antwortBilder": [
+          "bilder/by-01-1.png",
+          "bilder/by-01-2.png",
+          "bilder/by-01-3.png",
+          "bilder/by-01-4.png"
+        ],
+        "fa": {
+          "frage": "کدام نشان متعلق به ایالت آزاد بایرن است؟",
+          "antwort": "تصویر ۲ (لوزی‌های سفید و آبی)",
+          "erklaerung": "نشان بایرن لوزی‌های سفید و آبی با یک تاج در بالا دارد. تصویر ۱ نشان بادن-وورتمبرگ است."
+        }
+      },
+      {
+        "id": "by-02",
+        "nummer": 2,
+        "frage": "Welches ist ein Landkreis in Bayern?",
+        "antworten": [
+          "Prignitz",
+          "Rhein-Sieg-Kreis",
+          "Nordfriesland",
+          "Altötting"
+        ],
+        "richtig": 3,
+        "bild": "",
+        "fa": {
+          "frage": "کدام یک شهرستان (لاندکرایس) در بایرن است؟",
+          "antwort": "آلتؤتینگ (Altötting)",
+          "erklaerung": "آلتؤتینگ در جنوب‌شرق بایرن است. پریگنیتس در براندنبورگ، راین-زیگ در نوردراین-وستفالن و نوردفریسلاند در شلسویگ-هولشتاین قرار دارد."
+        }
+      },
+      {
+        "id": "by-03",
+        "nummer": 3,
+        "frage": "Für wie viele Jahre wird der Landtag in Bayern gewählt?",
+        "antworten": [
+          "3",
+          "4",
+          "5",
+          "6"
+        ],
+        "richtig": 2,
+        "bild": "",
+        "fa": {
+          "frage": "پارلمان ایالتی (لندتاگ) بایرن برای چند سال انتخاب می‌شود؟",
+          "antwort": "۵ سال",
+          "erklaerung": "مردم بایرن هر پنج سال یک‌بار نمایندگان لندتاگ را انتخاب می‌کنند."
+        }
+      },
+      {
+        "id": "by-04",
+        "nummer": 4,
+        "frage": "Ab welchem Alter darf man in Bayern bei Kommunalwahlen wählen?",
+        "antworten": [
+          "14",
+          "16",
+          "18",
+          "20"
+        ],
+        "richtig": 2,
+        "bild": "",
+        "fa": {
+          "frage": "در بایرن از چند سالگی می‌توان در انتخابات محلی (شهر و شهرستان) رأی داد؟",
+          "antwort": "از ۱۸ سالگی",
+          "erklaerung": "در بایرن برای رأی دادن در انتخابات محلی باید دست‌کم ۱۸ ساله بود. در برخی ایالت‌های دیگر این سن ۱۶ سال است."
+        }
+      },
+      {
+        "id": "by-05",
+        "nummer": 5,
+        "frage": "Welche Farben hat die Landesflagge von Bayern?",
+        "antworten": [
+          "blau-weiß-rot",
+          "weiß-blau",
+          "grün-weiß-rot",
+          "schwarz-gelb"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "پرچم ایالت بایرن چه رنگ‌هایی دارد؟",
+          "antwort": "سفید و آبی",
+          "erklaerung": "رنگ‌های بایرن سفید و آبی است؛ معروف‌ترین شکل پرچم آن لوزی‌های سفید و آبی است."
+        }
+      },
+      {
+        "id": "by-06",
+        "nummer": 6,
+        "frage": "Wo können Sie sich in Bayern über politische Themen informieren?",
+        "antworten": [
+          "beim Ordnungsamt der Gemeinde",
+          "bei der Landeszentrale für politische Bildung",
+          "bei der Verbraucherzentrale",
+          "bei den Kirchen"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "در بایرن کجا می‌توانید دربارهٔ موضوعات سیاسی اطلاعات بگیرید؟",
+          "antwort": "در مرکز ایالتی آموزش سیاسی",
+          "erklaerung": "این یک ادارهٔ دولتی است که اطلاعات بی‌طرف و اغلب رایگان دربارهٔ سیاست و دموکراسی ارائه می‌دهد."
+        }
+      },
+      {
+        "id": "by-07",
+        "nummer": 7,
+        "frage": "Die Landeshauptstadt von Bayern heißt …",
+        "antworten": [
+          "Ingolstadt.",
+          "Regensburg.",
+          "Nürnberg.",
+          "München."
+        ],
+        "richtig": 3,
+        "bild": "",
+        "fa": {
+          "frage": "پایتخت ایالت بایرن … نام دارد.",
+          "antwort": "مونیخ",
+          "erklaerung": "مونیخ مرکز دولت و پارلمان ایالت بایرن است."
+        }
+      },
+      {
+        "id": "by-08",
+        "nummer": 8,
+        "frage": "Welches Bundesland ist Bayern?",
+        "antworten": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "richtig": 3,
+        "bild": "bilder/by-08.png",
+        "fa": {
+          "frage": "در نقشه، کدام ایالت بایرن است؟",
+          "antwort": "شمارهٔ ۴",
+          "erklaerung": "بایرن بزرگ‌ترین ایالت آلمان است و در جنوب‌شرق کشور قرار دارد."
+        }
+      },
+      {
+        "id": "by-09",
+        "nummer": 9,
+        "frage": "Wie nennt man die Regierungschefin/den Regierungschef in Bayern?",
+        "antworten": [
+          "Erste Ministerin/Erster Minister",
+          "Premierministerin/Premierminister",
+          "Bürgermeisterin/Bürgermeister",
+          "Ministerpräsidentin/Ministerpräsident"
+        ],
+        "richtig": 3,
+        "bild": "",
+        "fa": {
+          "frage": "رئیس دولت ایالت بایرن را چه می‌نامند؟",
+          "antwort": "نخست‌وزیر ایالتی (Ministerpräsident)",
+          "erklaerung": "رئیس دولت هر ایالت آلمان «مینیستِرپرِزیدِنت» نام دارد. او را پارلمان ایالت (لندتاگ) انتخاب می‌کند."
+        }
+      },
+      {
+        "id": "by-10",
+        "nummer": 10,
+        "frage": "Welche Ministerin/welchen Minister hat Bayern nicht?",
+        "antworten": [
           "Justizministerin/Justizminister",
           "Außenministerin/Außenminister",
           "Finanzministerin/Finanzminister",
           "Innenministerin/Innenminister"
         ],
-        richtig: 1,
-        bild: "",
-        fa: {
-          frage: "بایرن کدام وزیر را ندارد؟",
-          antwort: "وزیر امور خارجه",
-          erklaerung: "سیاست خارجی وظیفهٔ دولت فدرال است، نه ایالت‌ها؛ بنابراین ایالت‌ها وزیر خارجه ندارند."
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "بایرن کدام وزیر را ندارد؟",
+          "antwort": "وزیر امور خارجه",
+          "erklaerung": "سیاست خارجی وظیفهٔ دولت فدرال است، نه ایالت‌ها؛ بنابراین ایالت‌ها وزیر خارجه ندارند."
         }
       }
     ],
-
-    "Berlin": [],
-    "Brandenburg": [],
-    "Bremen": [],
-    "Hamburg": [],
-    "Hessen": [],
-    "Mecklenburg-Vorpommern": [],
-    "Niedersachsen": [],
-    "Nordrhein-Westfalen": [],
-    "Rheinland-Pfalz": [],
-    "Saarland": [],
-    "Sachsen": [],
-    "Sachsen-Anhalt": [],
-    "Schleswig-Holstein": [],
-    "Thüringen": []
+    "Berlin": [
+      {
+        "id": "be-01",
+        "nummer": 1,
+        "frage": "Welches Wappen gehört zum Bundesland Berlin?",
+        "antworten": [
+          "Bild 1",
+          "Bild 2",
+          "Bild 3",
+          "Bild 4"
+        ],
+        "richtig": 3,
+        "bild": "",
+        "antwortBilder": [
+          "bilder/be-01-1.png",
+          "bilder/be-01-2.png",
+          "bilder/be-01-3.png",
+          "bilder/be-01-4.png"
+        ],
+        "fa": {
+          "frage": "کدام نشان متعلق به ایالت برلین است؟",
+          "antwort": "تصویر ۴ (خرس سیاه با تاج)",
+          "erklaerung": "نشان برلین یک خرس سیاه روی زمینهٔ سفید است. تصویر ۱ نشان هامبورگ و تصویر ۲ نشان برمن است."
+        }
+      },
+      {
+        "id": "be-02",
+        "nummer": 2,
+        "frage": "Welches ist ein Bezirk von Berlin?",
+        "antworten": [
+          "Altona",
+          "Prignitz",
+          "Pankow",
+          "Mecklenburgische Seenplatte"
+        ],
+        "richtig": 2,
+        "bild": "",
+        "fa": {
+          "frage": "کدام یک بخش (Bezirk) در برلین است؟",
+          "antwort": "پانکو (Pankow)",
+          "erklaerung": "پانکو یکی از ۱۲ بخش برلین است. آلتونا در هامبورگ و پریگنیتس در براندنبورگ است."
+        }
+      },
+      {
+        "id": "be-03",
+        "nummer": 3,
+        "frage": "Für wie viele Jahre wird das Landesparlament in Berlin gewählt?",
+        "antworten": [
+          "3",
+          "4",
+          "5",
+          "6"
+        ],
+        "richtig": 2,
+        "bild": "",
+        "fa": {
+          "frage": "پارلمان ایالتی (Abgeordnetenhaus) برلین برای چند سال انتخاب می‌شود؟",
+          "antwort": "۵ سال",
+          "erklaerung": "مردم برلین هر ۵ سال یک‌بار نمایندگان پارلمان ایالتی را انتخاب می‌کنند."
+        }
+      },
+      {
+        "id": "be-04",
+        "nummer": 4,
+        "frage": "Ab welchem Alter darf man in Berlin bei Kommunalwahlen (Wahl der Bezirksverordnetenversammlung) wählen?",
+        "antworten": [
+          "14",
+          "16",
+          "18",
+          "20"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "در برلین از چند سالگی می‌توان در انتخابات محلی رأی داد؟",
+          "antwort": "از ۱۶ سالگی",
+          "erklaerung": "در برلین نوجوانان از ۱۶ سالگی اجازهٔ رأی دادن در این انتخابات را دارند."
+        }
+      },
+      {
+        "id": "be-05",
+        "nummer": 5,
+        "frage": "Welche Farben hat die Landesflagge von Berlin?",
+        "antworten": [
+          "blau-weiß-rot",
+          "weiß-rot",
+          "grün-weiß-rot",
+          "schwarz-gold"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "پرچم ایالت برلین چه رنگ‌هایی دارد؟",
+          "antwort": "سفید و قرمز",
+          "erklaerung": "رنگ‌های پرچم برلین: سفید و قرمز."
+        }
+      },
+      {
+        "id": "be-06",
+        "nummer": 6,
+        "frage": "Wo können Sie sich in Berlin über politische Themen informieren?",
+        "antworten": [
+          "beim Ordnungsamt der Gemeinde",
+          "bei den Kirchen",
+          "bei der Verbraucherzentrale",
+          "bei der Landeszentrale für politische Bildung"
+        ],
+        "richtig": 3,
+        "bild": "",
+        "fa": {
+          "frage": "در برلین کجا می‌توانید دربارهٔ موضوعات سیاسی اطلاعات بگیرید؟",
+          "antwort": "در مرکز ایالتی آموزش سیاسی (Landeszentrale für politische Bildung)",
+          "erklaerung": "این یک ادارهٔ دولتی است که اطلاعات بی‌طرف و اغلب رایگان دربارهٔ سیاست و دموکراسی ارائه می‌دهد."
+        }
+      },
+      {
+        "id": "be-07",
+        "nummer": 7,
+        "frage": "Welches Bundesland ist ein Stadtstaat?",
+        "antworten": [
+          "Berlin",
+          "Saarland",
+          "Brandenburg",
+          "Hessen"
+        ],
+        "richtig": 0,
+        "bild": "",
+        "fa": {
+          "frage": "کدام ایالت یک «دولت‌شهر» است؟",
+          "antwort": "برلین",
+          "erklaerung": "دولت‌شهر یعنی شهری که خودش یک ایالت است. سه دولت‌شهر آلمان: برلین، هامبورگ و برمن."
+        }
+      },
+      {
+        "id": "be-08",
+        "nummer": 8,
+        "frage": "Welches Bundesland ist Berlin?",
+        "antworten": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "richtig": 3,
+        "bild": "bilder/be-08.png",
+        "fa": {
+          "frage": "در نقشه، کدام ایالت برلین است؟",
+          "antwort": "شمارهٔ ۴",
+          "erklaerung": "برلین یک شهر-ایالت در شرق آلمان است که از همه طرف با براندنبورگ احاطه شده است."
+        }
+      },
+      {
+        "id": "be-09",
+        "nummer": 9,
+        "frage": "Wie nennt man die Regierungschefin/den Regierungschef des Stadtstaates Berlin?",
+        "antworten": [
+          "Ministerpräsidentin/Ministerpräsident",
+          "Oberbürgermeisterin/Oberbürgermeister",
+          "Präsidentin/Präsident des Senates",
+          "Regierende Bürgermeisterin/Regierender Bürgermeister"
+        ],
+        "richtig": 3,
+        "bild": "",
+        "fa": {
+          "frage": "رئیس دولت دولت‌شهر برلین را چه می‌نامند؟",
+          "antwort": "شهردار حاکم (Regierender Bürgermeister)",
+          "erklaerung": "رئیس دولت برلین «شهردار حاکم» نامیده می‌شود."
+        }
+      },
+      {
+        "id": "be-10",
+        "nummer": 10,
+        "frage": "Welche Senatorin/welchen Senator hat Berlin nicht?",
+        "antworten": [
+          "Finanzsenatorin/Finanzsenator",
+          "Innensenatorin/Innensenator",
+          "Senatorin/Senator für Außenbeziehungen",
+          "Justizsenatorin/Justizsenator"
+        ],
+        "richtig": 2,
+        "bild": "",
+        "fa": {
+          "frage": "برلین کدام سناتور (وزیر) را ندارد؟",
+          "antwort": "سناتور امور خارجه",
+          "erklaerung": "سیاست خارجی وظیفهٔ دولت فدرال است؛ پس برلین سناتوری برای امور خارجه ندارد."
+        }
+      }
+    ],
+    "Brandenburg": [
+      {
+        "id": "bb-01",
+        "nummer": 1,
+        "frage": "Welches Wappen gehört zum Bundesland Brandenburg?",
+        "antworten": [
+          "Bild 1",
+          "Bild 2",
+          "Bild 3",
+          "Bild 4"
+        ],
+        "richtig": 0,
+        "bild": "",
+        "antwortBilder": [
+          "bilder/bb-01-1.png",
+          "bilder/bb-01-2.png",
+          "bilder/bb-01-3.png",
+          "bilder/bb-01-4.png"
+        ],
+        "fa": {
+          "frage": "کدام نشان متعلق به ایالت براندنبورگ است؟",
+          "antwort": "تصویر ۱ (عقاب قرمز روی زمینهٔ سفید)",
+          "erklaerung": "نشان براندنبورگ یک عقاب قرمز روی سپر سفید است."
+        }
+      },
+      {
+        "id": "bb-02",
+        "nummer": 2,
+        "frage": "Welches ist ein Landkreis in Brandenburg?",
+        "antworten": [
+          "Prignitz",
+          "Rhein-Sieg-Kreis",
+          "Vogtlandkreis",
+          "Amberg-Sulzbach"
+        ],
+        "richtig": 0,
+        "bild": "",
+        "fa": {
+          "frage": "کدام یک شهرستان (لاندکرایس) در براندنبورگ است؟",
+          "antwort": "پریگنیتس (Prignitz)",
+          "erklaerung": "پریگنیتس در شمال‌غرب براندنبورگ است. فوگت‌لاندکرایس در زاکسن و آمبرگ-زولتسباخ در بایرن قرار دارد."
+        }
+      },
+      {
+        "id": "bb-03",
+        "nummer": 3,
+        "frage": "Für wie viele Jahre wird der Landtag in Brandenburg gewählt?",
+        "antworten": [
+          "3",
+          "4",
+          "5",
+          "6"
+        ],
+        "richtig": 2,
+        "bild": "",
+        "fa": {
+          "frage": "پارلمان ایالتی (لندتاگ) براندنبورگ برای چند سال انتخاب می‌شود؟",
+          "antwort": "۵ سال",
+          "erklaerung": "مردم براندنبورگ هر ۵ سال یک‌بار نمایندگان پارلمان ایالتی را انتخاب می‌کنند."
+        }
+      },
+      {
+        "id": "bb-04",
+        "nummer": 4,
+        "frage": "Ab welchem Alter darf man in Brandenburg bei Kommunalwahlen wählen?",
+        "antworten": [
+          "14",
+          "16",
+          "18",
+          "20"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "در براندنبورگ از چند سالگی می‌توان در انتخابات محلی رأی داد؟",
+          "antwort": "از ۱۶ سالگی",
+          "erklaerung": "در براندنبورگ نوجوانان از ۱۶ سالگی اجازهٔ رأی دادن در این انتخابات را دارند."
+        }
+      },
+      {
+        "id": "bb-05",
+        "nummer": 5,
+        "frage": "Welche Farben hat die Landesflagge von Brandenburg?",
+        "antworten": [
+          "blau-weiß-rot",
+          "rot-weiß",
+          "grün-weiß-rot",
+          "schwarz-gelb"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "پرچم ایالت براندنبورگ چه رنگ‌هایی دارد؟",
+          "antwort": "قرمز و سفید",
+          "erklaerung": "رنگ‌های پرچم براندنبورگ: قرمز و سفید."
+        }
+      },
+      {
+        "id": "bb-06",
+        "nummer": 6,
+        "frage": "Wo können Sie sich in Brandenburg über politische Themen informieren?",
+        "antworten": [
+          "bei den Kirchen",
+          "beim Ordnungsamt der Gemeinde",
+          "bei der Landeszentrale für politische Bildung",
+          "bei der Verbraucherzentrale"
+        ],
+        "richtig": 2,
+        "bild": "",
+        "fa": {
+          "frage": "در براندنبورگ کجا می‌توانید دربارهٔ موضوعات سیاسی اطلاعات بگیرید؟",
+          "antwort": "در مرکز ایالتی آموزش سیاسی (Landeszentrale für politische Bildung)",
+          "erklaerung": "این یک ادارهٔ دولتی است که اطلاعات بی‌طرف و اغلب رایگان دربارهٔ سیاست و دموکراسی ارائه می‌دهد."
+        }
+      },
+      {
+        "id": "bb-07",
+        "nummer": 7,
+        "frage": "Die Landeshauptstadt von Brandenburg heißt …",
+        "antworten": [
+          "Potsdam.",
+          "Cottbus.",
+          "Brandenburg.",
+          "Frankfurt/Oder."
+        ],
+        "richtig": 0,
+        "bild": "",
+        "fa": {
+          "frage": "پایتخت ایالت براندنبورگ … نام دارد.",
+          "antwort": "پوتسدام",
+          "erklaerung": "پوتسدام نزدیک برلین است و مرکز دولت و پارلمان براندنبورگ است."
+        }
+      },
+      {
+        "id": "bb-08",
+        "nummer": 8,
+        "frage": "Welches Bundesland ist Brandenburg?",
+        "antworten": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "richtig": 3,
+        "bild": "bilder/bb-08.png",
+        "fa": {
+          "frage": "در نقشه، کدام ایالت براندنبورگ است؟",
+          "antwort": "شمارهٔ ۴",
+          "erklaerung": "براندنبورگ در شرق آلمان است و برلین را احاطه می‌کند (جای خالی وسط آن برلین است)."
+        }
+      },
+      {
+        "id": "bb-09",
+        "nummer": 9,
+        "frage": "Wie nennt man die Regierungschefin/den Regierungschef in Brandenburg?",
+        "antworten": [
+          "Erste Ministerin/Erster Minister",
+          "Premierministerin/Premierminister",
+          "Bürgermeisterin/Bürgermeister",
+          "Ministerpräsidentin/Ministerpräsident"
+        ],
+        "richtig": 3,
+        "bild": "",
+        "fa": {
+          "frage": "رئیس دولت ایالت براندنبورگ را چه می‌نامند؟",
+          "antwort": "نخست‌وزیر ایالتی (Ministerpräsident)",
+          "erklaerung": "رئیس دولت براندنبورگ «مینیستِرپرِزیدِنت» نام دارد و پارلمان ایالت او را انتخاب می‌کند."
+        }
+      },
+      {
+        "id": "bb-10",
+        "nummer": 10,
+        "frage": "Welche Ministerin/welchen Minister hat Brandenburg nicht?",
+        "antworten": [
+          "Justizministerin/Justizminister",
+          "Außenministerin/Außenminister",
+          "Finanzministerin/Finanzminister",
+          "Innenministerin/Innenminister"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "براندنبورگ کدام وزیر را ندارد؟",
+          "antwort": "وزیر امور خارجه",
+          "erklaerung": "سیاست خارجی وظیفهٔ دولت فدرال است، نه ایالت‌ها؛ بنابراین ایالت‌ها وزیر خارجه ندارند."
+        }
+      }
+    ],
+    "Bremen": [
+      {
+        "id": "hb-01",
+        "nummer": 1,
+        "frage": "Welches Wappen gehört zur Freien Hansestadt Bremen?",
+        "antworten": [
+          "Bild 1",
+          "Bild 2",
+          "Bild 3",
+          "Bild 4"
+        ],
+        "richtig": 2,
+        "bild": "",
+        "antwortBilder": [
+          "bilder/hb-01-1.png",
+          "bilder/hb-01-2.png",
+          "bilder/hb-01-3.png",
+          "bilder/hb-01-4.png"
+        ],
+        "fa": {
+          "frage": "کدام نشان متعلق به ایالت برمن است؟",
+          "antwort": "تصویر ۳ (کلید نقره‌ای روی زمینهٔ قرمز با تاج)",
+          "erklaerung": "نشان برمن یک کلید نقره‌ای روی سپر قرمز است. تصویر ۱ نشان شلسویگ-هولشتاین است."
+        }
+      },
+      {
+        "id": "hb-02",
+        "nummer": 2,
+        "frage": "Welches ist ein Stadtteil von Bremen?",
+        "antworten": [
+          "Altona",
+          "Hemelingen",
+          "Pankow",
+          "Babelsberg"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "کدام یک محله (Stadtteil) در برمن است؟",
+          "antwort": "همه‌لینگن (Hemelingen)",
+          "erklaerung": "همه‌لینگن محله‌ای در برمن است. آلتونا در هامبورگ، پانکو در برلین و بابلسبرگ در پوتسدام است."
+        }
+      },
+      {
+        "id": "hb-03",
+        "nummer": 3,
+        "frage": "Für wie viele Jahre wird das Landesparlament in Bremen gewählt?",
+        "antworten": [
+          "3",
+          "4",
+          "5",
+          "6"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "پارلمان ایالتی (Bürgerschaft) برمن برای چند سال انتخاب می‌شود؟",
+          "antwort": "۴ سال",
+          "erklaerung": "مردم برمن هر ۴ سال یک‌بار نمایندگان پارلمان ایالتی را انتخاب می‌کنند. برمن تنها ایالتی است که دورهٔ پارلمانش ۴ سال است."
+        }
+      },
+      {
+        "id": "hb-04",
+        "nummer": 4,
+        "frage": "Ab welchem Alter darf man in Bremen bei den Wahlen zur Bürgerschaft (Landtag) wählen?",
+        "antworten": [
+          "14",
+          "16",
+          "18",
+          "20"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "در برمن از چند سالگی می‌توان در انتخابات «بورگرشافت» (پارلمان ایالتی) رأی داد؟",
+          "antwort": "از ۱۶ سالگی",
+          "erklaerung": "در برمن نوجوانان از ۱۶ سالگی اجازهٔ رأی دادن در این انتخابات را دارند."
+        }
+      },
+      {
+        "id": "hb-05",
+        "nummer": 5,
+        "frage": "Welche Farben hat die Landesflagge von Bremen?",
+        "antworten": [
+          "blau-weiß-rot",
+          "rot-weiß",
+          "grün-weiß-rot",
+          "schwarz-gold"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "پرچم ایالت برمن چه رنگ‌هایی دارد؟",
+          "antwort": "قرمز و سفید",
+          "erklaerung": "رنگ‌های پرچم برمن: قرمز و سفید."
+        }
+      },
+      {
+        "id": "hb-06",
+        "nummer": 6,
+        "frage": "Wo können Sie sich in Bremen über politische Themen informieren?",
+        "antworten": [
+          "beim Ordnungsamt der Gemeinde",
+          "bei der Landeszentrale für politische Bildung",
+          "bei den Kirchen",
+          "bei der Verbraucherzentrale"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "در برمن کجا می‌توانید دربارهٔ موضوعات سیاسی اطلاعات بگیرید؟",
+          "antwort": "در مرکز ایالتی آموزش سیاسی (Landeszentrale für politische Bildung)",
+          "erklaerung": "این یک ادارهٔ دولتی است که اطلاعات بی‌طرف و اغلب رایگان دربارهٔ سیاست و دموکراسی ارائه می‌دهد."
+        }
+      },
+      {
+        "id": "hb-07",
+        "nummer": 7,
+        "frage": "Was ist ein deutscher Stadtstaat?",
+        "antworten": [
+          "Bremen",
+          "München",
+          "Frankfurt",
+          "Erfurt"
+        ],
+        "richtig": 0,
+        "bild": "",
+        "fa": {
+          "frage": "دولت‌شهر آلمانی کدام است؟",
+          "antwort": "برمن",
+          "erklaerung": "برمن، همراه با برلین و هامبورگ، یکی از سه دولت‌شهر آلمان است. مونیخ، فرانکفورت و ارفورت شهرهای معمولی‌اند."
+        }
+      },
+      {
+        "id": "hb-08",
+        "nummer": 8,
+        "frage": "Welches Bundesland ist Bremen?",
+        "antworten": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "richtig": 0,
+        "bild": "bilder/hb-08.png",
+        "fa": {
+          "frage": "در نقشه، کدام ایالت برمن است؟",
+          "antwort": "شمارهٔ ۱",
+          "erklaerung": "برمن یک دولت‌شهر کوچک در شمال‌غرب آلمان، کنار رود وزر است."
+        }
+      },
+      {
+        "id": "hb-09",
+        "nummer": 9,
+        "frage": "Wie nennt man die Regierungschefin/den Regierungschef des Stadtstaates Bremen?",
+        "antworten": [
+          "Ministerpräsidentin/Ministerpräsident",
+          "Erste Bürgermeisterin/Erster Bürgermeister",
+          "Präsidentin/Präsident des Senates",
+          "Regierende Bürgermeisterin/Regierender Bürgermeister"
+        ],
+        "richtig": 2,
+        "bild": "",
+        "fa": {
+          "frage": "رئیس دولت دولت‌شهر برمن را چه می‌نامند؟",
+          "antwort": "رئیس سنا (Präsident des Senates)",
+          "erklaerung": "رئیس دولت برمن «رئیس سنا و شهردار» نامیده می‌شود."
+        }
+      },
+      {
+        "id": "hb-10",
+        "nummer": 10,
+        "frage": "Welche Senatorin/welchen Senator hat Bremen nicht?",
+        "antworten": [
+          "Senatorin/Senator für Außenbeziehungen",
+          "Finanzsenatorin/Finanzsenator",
+          "Justizsenatorin/Justizsenator",
+          "Innensenatorin/Innensenator"
+        ],
+        "richtig": 0,
+        "bild": "",
+        "fa": {
+          "frage": "برمن کدام سناتور (وزیر) را ندارد؟",
+          "antwort": "سناتور امور خارجه",
+          "erklaerung": "سیاست خارجی وظیفهٔ دولت فدرال است؛ پس برمن سناتوری برای امور خارجه ندارد."
+        }
+      }
+    ],
+    "Hamburg": [
+      {
+        "id": "hh-01",
+        "nummer": 1,
+        "frage": "Welches Wappen gehört zur Freien und Hansestadt Hamburg?",
+        "antworten": [
+          "Bild 1",
+          "Bild 2",
+          "Bild 3",
+          "Bild 4"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "antwortBilder": [
+          "bilder/hh-01-1.png",
+          "bilder/hh-01-2.png",
+          "bilder/hh-01-3.png",
+          "bilder/hh-01-4.png"
+        ],
+        "fa": {
+          "frage": "کدام نشان متعلق به ایالت هامبورگ است؟",
+          "antwort": "تصویر ۲ (قلعهٔ سفید روی زمینهٔ قرمز)",
+          "erklaerung": "نشان هامبورگ یک قلعهٔ سفید با سه برج روی سپر قرمز است. تصویر ۱ نشان نیدرزاکسن است."
+        }
+      },
+      {
+        "id": "hh-02",
+        "nummer": 2,
+        "frage": "Welches ist ein Bezirk von Hamburg?",
+        "antworten": [
+          "Altona",
+          "Hemelingen",
+          "Pankow",
+          "Mecklenburgische Seenplatte"
+        ],
+        "richtig": 0,
+        "bild": "",
+        "fa": {
+          "frage": "کدام یک بخش (Bezirk) در هامبورگ است؟",
+          "antwort": "آلتونا (Altona)",
+          "erklaerung": "آلتونا یکی از هفت بخش هامبورگ است. همه‌لینگن در برمن و پانکو در برلین است."
+        }
+      },
+      {
+        "id": "hh-03",
+        "nummer": 3,
+        "frage": "Für wie viele Jahre wird das Landesparlament in Hamburg gewählt?",
+        "antworten": [
+          "3",
+          "4",
+          "5",
+          "6"
+        ],
+        "richtig": 2,
+        "bild": "",
+        "fa": {
+          "frage": "پارلمان ایالتی (Bürgerschaft) هامبورگ برای چند سال انتخاب می‌شود؟",
+          "antwort": "۵ سال",
+          "erklaerung": "مردم هامبورگ هر ۵ سال یک‌بار نمایندگان پارلمان ایالتی را انتخاب می‌کنند."
+        }
+      },
+      {
+        "id": "hh-04",
+        "nummer": 4,
+        "frage": "Ab welchem Alter darf man in Hamburg bei Kommunalwahlen (Wahl der Bezirksversammlungen) wählen?",
+        "antworten": [
+          "14",
+          "16",
+          "18",
+          "20"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "در هامبورگ از چند سالگی می‌توان در انتخابات محلی رأی داد؟",
+          "antwort": "از ۱۶ سالگی",
+          "erklaerung": "در هامبورگ نوجوانان از ۱۶ سالگی اجازهٔ رأی دادن در این انتخابات را دارند."
+        }
+      },
+      {
+        "id": "hh-05",
+        "nummer": 5,
+        "frage": "Welche Farben hat die Landesflagge von Hamburg?",
+        "antworten": [
+          "blau-weiß-rot",
+          "weiß-rot",
+          "grün-weiß-rot",
+          "schwarz-gelb"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "پرچم ایالت هامبورگ چه رنگ‌هایی دارد؟",
+          "antwort": "سفید و قرمز",
+          "erklaerung": "رنگ‌های پرچم هامبورگ: سفید و قرمز."
+        }
+      },
+      {
+        "id": "hh-06",
+        "nummer": 6,
+        "frage": "Wo können Sie sich in Hamburg über politische Themen informieren?",
+        "antworten": [
+          "beim Ordnungsamt der Gemeinde",
+          "bei der Verbraucherzentrale",
+          "bei den Kirchen",
+          "bei der Landeszentrale für politische Bildung"
+        ],
+        "richtig": 3,
+        "bild": "",
+        "fa": {
+          "frage": "در هامبورگ کجا می‌توانید دربارهٔ موضوعات سیاسی اطلاعات بگیرید؟",
+          "antwort": "در مرکز ایالتی آموزش سیاسی (Landeszentrale für politische Bildung)",
+          "erklaerung": "این یک ادارهٔ دولتی است که اطلاعات بی‌طرف و اغلب رایگان دربارهٔ سیاست و دموکراسی ارائه می‌دهد."
+        }
+      },
+      {
+        "id": "hh-07",
+        "nummer": 7,
+        "frage": "Welches Bundesland ist ein Stadtstaat?",
+        "antworten": [
+          "Hamburg",
+          "Sachsen",
+          "Bayern",
+          "Thüringen"
+        ],
+        "richtig": 0,
+        "bild": "",
+        "fa": {
+          "frage": "کدام ایالت یک «دولت‌شهر» است؟",
+          "antwort": "هامبورگ",
+          "erklaerung": "هامبورگ شهری است که خودش یک ایالت است؛ مثل برلین و برمن."
+        }
+      },
+      {
+        "id": "hh-08",
+        "nummer": 8,
+        "frage": "Welches Bundesland ist Hamburg?",
+        "antworten": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "richtig": 2,
+        "bild": "bilder/hh-08.png",
+        "fa": {
+          "frage": "در نقشه، کدام ایالت هامبورگ است؟",
+          "antwort": "شمارهٔ ۳",
+          "erklaerung": "هامبورگ یک دولت‌شهر در شمال آلمان، کنار رود البه است."
+        }
+      },
+      {
+        "id": "hh-09",
+        "nummer": 9,
+        "frage": "Wie nennt man die Regierungschefin/den Regierungschef des Stadtstaates Hamburg?",
+        "antworten": [
+          "Ministerpräsidentin/Ministerpräsident",
+          "Erste Bürgermeisterin/Erster Bürgermeister",
+          "Regierende Senatorin/Regierender Senator",
+          "Oberbürgermeisterin/Oberbürgermeister"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "رئیس دولت دولت‌شهر هامبورگ را چه می‌نامند؟",
+          "antwort": "شهردار اول (Erster Bürgermeister)",
+          "erklaerung": "رئیس دولت هامبورگ «شهردار اول» نامیده می‌شود."
+        }
+      },
+      {
+        "id": "hh-10",
+        "nummer": 10,
+        "frage": "Welche Senatorin/welchen Senator hat Hamburg nicht?",
+        "antworten": [
+          "Justizsenatorin/Justizsenator",
+          "Senatorin/Senator für Außenbeziehungen",
+          "Finanzsenatorin/Finanzsenator",
+          "Innensenatorin/Innensenator"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "هامبورگ کدام سناتور (وزیر) را ندارد؟",
+          "antwort": "سناتور امور خارجه",
+          "erklaerung": "سیاست خارجی وظیفهٔ دولت فدرال است؛ پس هامبورگ سناتوری برای امور خارجه ندارد."
+        }
+      }
+    ],
+    "Hessen": [
+      {
+        "id": "he-01",
+        "nummer": 1,
+        "frage": "Welches Wappen gehört zum Bundesland Hessen?",
+        "antworten": [
+          "Bild 1",
+          "Bild 2",
+          "Bild 3",
+          "Bild 4"
+        ],
+        "richtig": 0,
+        "bild": "",
+        "antwortBilder": [
+          "bilder/he-01-1.png",
+          "bilder/he-01-2.png",
+          "bilder/he-01-3.png",
+          "bilder/he-01-4.png"
+        ],
+        "fa": {
+          "frage": "کدام نشان متعلق به ایالت هسن است؟",
+          "antwort": "تصویر ۱ (شیر راه‌راه سفید و قرمز روی زمینهٔ آبی)",
+          "erklaerung": "نشان هسن یک شیر با نوارهای سفید و قرمز روی سپر آبی است."
+        }
+      },
+      {
+        "id": "he-02",
+        "nummer": 2,
+        "frage": "Welches ist ein Landkreis in Hessen?",
+        "antworten": [
+          "Ammerland",
+          "Altötting",
+          "Prignitz",
+          "Main-Taunus-Kreis"
+        ],
+        "richtig": 3,
+        "bild": "",
+        "fa": {
+          "frage": "کدام یک شهرستان (لاندکرایس) در هسن است؟",
+          "antwort": "ماین-تاونوس (Main-Taunus-Kreis)",
+          "erklaerung": "این شهرستان نزدیک فرانکفورت است. آمرلند در نیدرزاکسن، آلتؤتینگ در بایرن و پریگنیتس در براندنبورگ است."
+        }
+      },
+      {
+        "id": "he-03",
+        "nummer": 3,
+        "frage": "Für wie viele Jahre wird der Landtag in Hessen gewählt?",
+        "antworten": [
+          "3",
+          "4",
+          "5",
+          "6"
+        ],
+        "richtig": 2,
+        "bild": "",
+        "fa": {
+          "frage": "پارلمان ایالتی (لندتاگ) هسن برای چند سال انتخاب می‌شود؟",
+          "antwort": "۵ سال",
+          "erklaerung": "مردم هسن هر ۵ سال یک‌بار نمایندگان پارلمان ایالتی را انتخاب می‌کنند."
+        }
+      },
+      {
+        "id": "he-04",
+        "nummer": 4,
+        "frage": "Ab welchem Alter darf man in Hessen bei Kommunalwahlen wählen?",
+        "antworten": [
+          "14",
+          "16",
+          "18",
+          "20"
+        ],
+        "richtig": 2,
+        "bild": "",
+        "fa": {
+          "frage": "در هسن از چند سالگی می‌توان در انتخابات محلی رأی داد؟",
+          "antwort": "از ۱۸ سالگی",
+          "erklaerung": "در هسن برای رأی دادن در انتخابات محلی باید دست‌کم ۱۸ ساله بود؛ در بیشتر ایالت‌های دیگر این سن ۱۶ سال است."
+        }
+      },
+      {
+        "id": "he-05",
+        "nummer": 5,
+        "frage": "Welche Farben hat die Landesflagge von Hessen?",
+        "antworten": [
+          "blau-weiß-rot",
+          "rot-weiß",
+          "schwarz-gold",
+          "grün-weiß-rot"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "پرچم ایالت هسن چه رنگ‌هایی دارد؟",
+          "antwort": "قرمز و سفید",
+          "erklaerung": "رنگ‌های پرچم هسن: قرمز و سفید."
+        }
+      },
+      {
+        "id": "he-06",
+        "nummer": 6,
+        "frage": "Wo können Sie sich in Hessen über politische Themen informieren?",
+        "antworten": [
+          "bei der Landeszentrale für politische Bildung",
+          "bei der Verbraucherzentrale",
+          "beim Ordnungsamt der Gemeinde",
+          "bei den Kirchen"
+        ],
+        "richtig": 0,
+        "bild": "",
+        "fa": {
+          "frage": "در هسن کجا می‌توانید دربارهٔ موضوعات سیاسی اطلاعات بگیرید؟",
+          "antwort": "در مرکز ایالتی آموزش سیاسی (Landeszentrale für politische Bildung)",
+          "erklaerung": "این یک ادارهٔ دولتی است که اطلاعات بی‌طرف و اغلب رایگان دربارهٔ سیاست و دموکراسی ارائه می‌دهد."
+        }
+      },
+      {
+        "id": "he-07",
+        "nummer": 7,
+        "frage": "Die Landeshauptstadt von Hessen heißt …",
+        "antworten": [
+          "Kassel.",
+          "Darmstadt.",
+          "Frankfurt.",
+          "Wiesbaden."
+        ],
+        "richtig": 3,
+        "bild": "",
+        "fa": {
+          "frage": "پایتخت ایالت هسن … نام دارد.",
+          "antwort": "ویسبادن",
+          "erklaerung": "پایتخت هسن ویسبادن است، نه فرانکفورت که بزرگ‌ترین شهر آن است."
+        }
+      },
+      {
+        "id": "he-08",
+        "nummer": 8,
+        "frage": "Welches Bundesland ist Hessen?",
+        "antworten": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "richtig": 2,
+        "bild": "bilder/he-08.png",
+        "fa": {
+          "frage": "در نقشه، کدام ایالت هسن است؟",
+          "antwort": "شمارهٔ ۳",
+          "erklaerung": "هسن در مرکز آلمان قرار دارد؛ فرانکفورت در این ایالت است."
+        }
+      },
+      {
+        "id": "he-09",
+        "nummer": 9,
+        "frage": "Wie nennt man die Regierungschefin/den Regierungschef in Hessen?",
+        "antworten": [
+          "Erste Ministerin/Erster Minister",
+          "Premierministerin/Premierminister",
+          "Bürgermeisterin/Bürgermeister",
+          "Ministerpräsidentin/Ministerpräsident"
+        ],
+        "richtig": 3,
+        "bild": "",
+        "fa": {
+          "frage": "رئیس دولت ایالت هسن را چه می‌نامند؟",
+          "antwort": "نخست‌وزیر ایالتی (Ministerpräsident)",
+          "erklaerung": "رئیس دولت هسن «مینیستِرپرِزیدِنت» نام دارد و پارلمان ایالت او را انتخاب می‌کند."
+        }
+      },
+      {
+        "id": "he-10",
+        "nummer": 10,
+        "frage": "Welche Ministerin/welchen Minister hat Hessen nicht?",
+        "antworten": [
+          "Justizministerin/Justizminister",
+          "Außenministerin/Außenminister",
+          "Finanzministerin/Finanzminister",
+          "Innenministerin/Innenminister"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "هسن کدام وزیر را ندارد؟",
+          "antwort": "وزیر امور خارجه",
+          "erklaerung": "سیاست خارجی وظیفهٔ دولت فدرال است، نه ایالت‌ها؛ بنابراین ایالت‌ها وزیر خارجه ندارند."
+        }
+      }
+    ],
+    "Mecklenburg-Vorpommern": [
+      {
+        "id": "mv-01",
+        "nummer": 1,
+        "frage": "Welches Wappen gehört zum Bundesland Mecklenburg-Vorpommern?",
+        "antworten": [
+          "Bild 1",
+          "Bild 2",
+          "Bild 3",
+          "Bild 4"
+        ],
+        "richtig": 2,
+        "bild": "",
+        "antwortBilder": [
+          "bilder/mv-01-1.png",
+          "bilder/mv-01-2.png",
+          "bilder/mv-01-3.png",
+          "bilder/mv-01-4.png"
+        ],
+        "fa": {
+          "frage": "کدام نشان متعلق به ایالت مکلنبورگ-فورپومرن است؟",
+          "antwort": "تصویر ۳ (سر گاو و گریفین قرمز، نیمه زرد و نیمه سفید)",
+          "erklaerung": "نشان مکلنبورگ-فورپومرن سر گاو سیاه (مکلنبورگ) و گریفین قرمز (پومرن) دارد."
+        }
+      },
+      {
+        "id": "mv-02",
+        "nummer": 2,
+        "frage": "Welches ist ein Landkreis in Mecklenburg-Vorpommern?",
+        "antworten": [
+          "Prignitz",
+          "Mecklenburgische Seenplatte",
+          "Vogtlandkreis",
+          "Rhein-Sieg-Kreis"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "کدام یک شهرستان (لاندکرایس) در مکلنبورگ-فورپومرن است؟",
+          "antwort": "دریاچه‌های مکلنبورگ (Mecklenburgische Seenplatte)",
+          "erklaerung": "این شهرستان پر از دریاچه است. پریگنیتس در براندنبورگ و فوگت‌لاندکرایس در زاکسن است."
+        }
+      },
+      {
+        "id": "mv-03",
+        "nummer": 3,
+        "frage": "Für wie viele Jahre wird der Landtag in Mecklenburg-Vorpommern gewählt?",
+        "antworten": [
+          "3",
+          "4",
+          "5",
+          "6"
+        ],
+        "richtig": 2,
+        "bild": "",
+        "fa": {
+          "frage": "پارلمان ایالتی (لندتاگ) مکلنبورگ-فورپومرن برای چند سال انتخاب می‌شود؟",
+          "antwort": "۵ سال",
+          "erklaerung": "مردم مکلنبورگ-فورپومرن هر ۵ سال یک‌بار نمایندگان پارلمان ایالتی را انتخاب می‌کنند."
+        }
+      },
+      {
+        "id": "mv-04",
+        "nummer": 4,
+        "frage": "Ab welchem Alter darf man in Mecklenburg-Vorpommern bei Kommunalwahlen wählen?",
+        "antworten": [
+          "14",
+          "16",
+          "18",
+          "20"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "در مکلنبورگ-فورپومرن از چند سالگی می‌توان در انتخابات محلی رأی داد؟",
+          "antwort": "از ۱۶ سالگی",
+          "erklaerung": "در مکلنبورگ-فورپومرن نوجوانان از ۱۶ سالگی اجازهٔ رأی دادن در این انتخابات را دارند."
+        }
+      },
+      {
+        "id": "mv-05",
+        "nummer": 5,
+        "frage": "Welche Farben hat die Landesflagge von Mecklenburg-Vorpommern?",
+        "antworten": [
+          "schwarz-rot-gold",
+          "blau-weiß-gelb-rot",
+          "grün-weiß-rot",
+          "schwarz-gelb"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "پرچم ایالت مکلنبورگ-فورپومرن چه رنگ‌هایی دارد؟",
+          "antwort": "آبی، سفید، زرد و قرمز",
+          "erklaerung": "رنگ‌های پرچم مکلنبورگ-فورپومرن: آبی، سفید، زرد و قرمز."
+        }
+      },
+      {
+        "id": "mv-06",
+        "nummer": 6,
+        "frage": "Wo können Sie sich in Mecklenburg-Vorpommern über politische Themen informieren?",
+        "antworten": [
+          "bei der Landeszentrale für politische Bildung",
+          "bei den Kirchen",
+          "beim Ordnungsamt der Gemeinde",
+          "bei der Verbraucherzentrale"
+        ],
+        "richtig": 0,
+        "bild": "",
+        "fa": {
+          "frage": "در مکلنبورگ-فورپومرن کجا می‌توانید دربارهٔ موضوعات سیاسی اطلاعات بگیرید؟",
+          "antwort": "در مرکز ایالتی آموزش سیاسی (Landeszentrale für politische Bildung)",
+          "erklaerung": "این یک ادارهٔ دولتی است که اطلاعات بی‌طرف و اغلب رایگان دربارهٔ سیاست و دموکراسی ارائه می‌دهد."
+        }
+      },
+      {
+        "id": "mv-07",
+        "nummer": 7,
+        "frage": "Die Landeshauptstadt von Mecklenburg-Vorpommern heißt …",
+        "antworten": [
+          "Greifswald.",
+          "Schwerin.",
+          "Rostock.",
+          "Wismar."
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "پایتخت ایالت مکلنبورگ-فورپومرن … نام دارد.",
+          "antwort": "شورین",
+          "erklaerung": "پایتخت شورین است، نه روستوک که بزرگ‌ترین شهر ایالت است."
+        }
+      },
+      {
+        "id": "mv-08",
+        "nummer": 8,
+        "frage": "Welches Bundesland ist Mecklenburg-Vorpommern?",
+        "antworten": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "richtig": 2,
+        "bild": "bilder/mv-08.png",
+        "fa": {
+          "frage": "در نقشه، کدام ایالت مکلنبورگ-فورپومرن است؟",
+          "antwort": "شمارهٔ ۳",
+          "erklaerung": "مکلنبورگ-فورپومرن در شمال‌شرق آلمان، کنار دریای بالتیک قرار دارد."
+        }
+      },
+      {
+        "id": "mv-09",
+        "nummer": 9,
+        "frage": "Wie nennt man die Regierungschefin/den Regierungschef in Mecklenburg-Vorpommern?",
+        "antworten": [
+          "Erste Ministerin/Erster Minister",
+          "Premierministerin/Premierminister",
+          "Bürgermeisterin/Bürgermeister",
+          "Ministerpräsidentin/Ministerpräsident"
+        ],
+        "richtig": 3,
+        "bild": "",
+        "fa": {
+          "frage": "رئیس دولت ایالت مکلنبورگ-فورپومرن را چه می‌نامند؟",
+          "antwort": "نخست‌وزیر ایالتی (Ministerpräsident)",
+          "erklaerung": "رئیس دولت مکلنبورگ-فورپومرن «مینیستِرپرِزیدِنت» نام دارد و پارلمان ایالت او را انتخاب می‌کند."
+        }
+      },
+      {
+        "id": "mv-10",
+        "nummer": 10,
+        "frage": "Welche Ministerin/welchen Minister hat Mecklenburg-Vorpommern nicht?",
+        "antworten": [
+          "Justizministerin/Justizminister",
+          "Außenministerin/Außenminister",
+          "Finanzministerin/Finanzminister",
+          "Innenministerin/Innenminister"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "مکلنبورگ-فورپومرن کدام وزیر را ندارد؟",
+          "antwort": "وزیر امور خارجه",
+          "erklaerung": "سیاست خارجی وظیفهٔ دولت فدرال است، نه ایالت‌ها؛ بنابراین ایالت‌ها وزیر خارجه ندارند."
+        }
+      }
+    ],
+    "Niedersachsen": [
+      {
+        "id": "ni-01",
+        "nummer": 1,
+        "frage": "Welches Wappen gehört zum Bundesland Niedersachsen?",
+        "antworten": [
+          "Bild 1",
+          "Bild 2",
+          "Bild 3",
+          "Bild 4"
+        ],
+        "richtig": 2,
+        "bild": "",
+        "antwortBilder": [
+          "bilder/ni-01-1.png",
+          "bilder/ni-01-2.png",
+          "bilder/ni-01-3.png",
+          "bilder/ni-01-4.png"
+        ],
+        "fa": {
+          "frage": "کدام نشان متعلق به ایالت نیدرزاکسن است؟",
+          "antwort": "تصویر ۳ (اسب سفید روی زمینهٔ قرمز)",
+          "erklaerung": "نشان نیدرزاکسن یک اسب سفید در حال جهش روی سپر قرمز است."
+        }
+      },
+      {
+        "id": "ni-02",
+        "nummer": 2,
+        "frage": "Welches ist ein Landkreis in Niedersachsen?",
+        "antworten": [
+          "Ammerland",
+          "Rhein-Sieg-Kreis",
+          "Nordfriesland",
+          "Vogtlandkreis"
+        ],
+        "richtig": 0,
+        "bild": "",
+        "fa": {
+          "frage": "کدام یک شهرستان (لاندکرایس) در نیدرزاکسن است؟",
+          "antwort": "آمرلند (Ammerland)",
+          "erklaerung": "آمرلند در شمال‌غرب نیدرزاکسن است. راین-زیگ در نوردراین-وستفالن و فوگت‌لاندکرایس در زاکسن است."
+        }
+      },
+      {
+        "id": "ni-03",
+        "nummer": 3,
+        "frage": "Für wie viele Jahre wird der Landtag in Niedersachsen gewählt?",
+        "antworten": [
+          "3",
+          "4",
+          "5",
+          "6"
+        ],
+        "richtig": 2,
+        "bild": "",
+        "fa": {
+          "frage": "پارلمان ایالتی (لندتاگ) نیدرزاکسن برای چند سال انتخاب می‌شود؟",
+          "antwort": "۵ سال",
+          "erklaerung": "مردم نیدرزاکسن هر ۵ سال یک‌بار نمایندگان پارلمان ایالتی را انتخاب می‌کنند."
+        }
+      },
+      {
+        "id": "ni-04",
+        "nummer": 4,
+        "frage": "Ab welchem Alter darf man in Niedersachsen bei Kommunalwahlen wählen?",
+        "antworten": [
+          "14",
+          "16",
+          "18",
+          "20"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "در نیدرزاکسن از چند سالگی می‌توان در انتخابات محلی رأی داد؟",
+          "antwort": "از ۱۶ سالگی",
+          "erklaerung": "در نیدرزاکسن نوجوانان از ۱۶ سالگی اجازهٔ رأی دادن در این انتخابات را دارند."
+        }
+      },
+      {
+        "id": "ni-05",
+        "nummer": 5,
+        "frage": "Welche Farben hat die Landesflagge von Niedersachsen?",
+        "antworten": [
+          "weiß-blau",
+          "schwarz-rot-gold",
+          "schwarz-gelb",
+          "blau-weiß-rot"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "پرچم ایالت نیدرزاکسن چه رنگ‌هایی دارد؟",
+          "antwort": "سیاه، قرمز و طلایی (با نشان ایالت)",
+          "erklaerung": "رنگ‌های پرچم نیدرزاکسن: سیاه، قرمز و طلایی (با نشان ایالت)."
+        }
+      },
+      {
+        "id": "ni-06",
+        "nummer": 6,
+        "frage": "Wo können Sie sich in Niedersachsen über politische Themen informieren?",
+        "antworten": [
+          "bei der Landeszentrale für politische Bildung",
+          "beim Ordnungsamt der Gemeinde",
+          "bei der Verbraucherzentrale",
+          "bei den Kirchen"
+        ],
+        "richtig": 0,
+        "bild": "",
+        "fa": {
+          "frage": "در نیدرزاکسن کجا می‌توانید دربارهٔ موضوعات سیاسی اطلاعات بگیرید؟",
+          "antwort": "در مرکز ایالتی آموزش سیاسی (Landeszentrale für politische Bildung)",
+          "erklaerung": "این یک ادارهٔ دولتی است که اطلاعات بی‌طرف و اغلب رایگان دربارهٔ سیاست و دموکراسی ارائه می‌دهد."
+        }
+      },
+      {
+        "id": "ni-07",
+        "nummer": 7,
+        "frage": "Die Landeshauptstadt von Niedersachsen heißt …",
+        "antworten": [
+          "Hannover.",
+          "Braunschweig.",
+          "Wolfsburg.",
+          "Osnabrück."
+        ],
+        "richtig": 0,
+        "bild": "",
+        "fa": {
+          "frage": "پایتخت ایالت نیدرزاکسن … نام دارد.",
+          "antwort": "هانوفر",
+          "erklaerung": "هانوفر مرکز دولت و پارلمان نیدرزاکسن است."
+        }
+      },
+      {
+        "id": "ni-08",
+        "nummer": 8,
+        "frage": "Welches Bundesland ist Niedersachsen?",
+        "antworten": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "richtig": 0,
+        "bild": "bilder/ni-08.png",
+        "fa": {
+          "frage": "در نقشه، کدام ایالت نیدرزاکسن است؟",
+          "antwort": "شمارهٔ ۱",
+          "erklaerung": "نیدرزاکسن در شمال‌غرب آلمان است و دومین ایالت بزرگ کشور است."
+        }
+      },
+      {
+        "id": "ni-09",
+        "nummer": 9,
+        "frage": "Wie nennt man die Regierungschefin/den Regierungschef in Niedersachsen?",
+        "antworten": [
+          "Erste Ministerin/Erster Minister",
+          "Premierministerin/Premierminister",
+          "Bürgermeisterin/Bürgermeister",
+          "Ministerpräsidentin/Ministerpräsident"
+        ],
+        "richtig": 3,
+        "bild": "",
+        "fa": {
+          "frage": "رئیس دولت ایالت نیدرزاکسن را چه می‌نامند؟",
+          "antwort": "نخست‌وزیر ایالتی (Ministerpräsident)",
+          "erklaerung": "رئیس دولت نیدرزاکسن «مینیستِرپرِزیدِنت» نام دارد و پارلمان ایالت او را انتخاب می‌کند."
+        }
+      },
+      {
+        "id": "ni-10",
+        "nummer": 10,
+        "frage": "Welche Ministerin/welchen Minister hat Niedersachsen nicht?",
+        "antworten": [
+          "Justizministerin/Justizminister",
+          "Außenministerin/Außenminister",
+          "Finanzministerin/Finanzminister",
+          "Innenministerin/Innenminister"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "نیدرزاکسن کدام وزیر را ندارد؟",
+          "antwort": "وزیر امور خارجه",
+          "erklaerung": "سیاست خارجی وظیفهٔ دولت فدرال است، نه ایالت‌ها؛ بنابراین ایالت‌ها وزیر خارجه ندارند."
+        }
+      }
+    ],
+    "Nordrhein-Westfalen": [
+      {
+        "id": "nw-01",
+        "nummer": 1,
+        "frage": "Welches Wappen gehört zum Bundesland Nordrhein-Westfalen?",
+        "antworten": [
+          "Bild 1",
+          "Bild 2",
+          "Bild 3",
+          "Bild 4"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "antwortBilder": [
+          "bilder/nw-01-1.png",
+          "bilder/nw-01-2.png",
+          "bilder/nw-01-3.png",
+          "bilder/nw-01-4.png"
+        ],
+        "fa": {
+          "frage": "کدام نشان متعلق به ایالت نوردراین-وستفالن است؟",
+          "antwort": "تصویر ۲ (رود موج‌دار، اسب سفید و گل سرخ)",
+          "erklaerung": "نشان نوردراین-وستفالن سه بخش دارد: رود راین، اسب وستفالن و گل سرخ لیپه."
+        }
+      },
+      {
+        "id": "nw-02",
+        "nummer": 2,
+        "frage": "Welches ist ein Landkreis in Nordrhein-Westfalen?",
+        "antworten": [
+          "Ammerland",
+          "Rhein-Sieg-Kreis",
+          "Nordfriesland",
+          "Vogtlandkreis"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "کدام یک شهرستان (لاندکرایس) در نوردراین-وستفالن است؟",
+          "antwort": "راین-زیگ (Rhein-Sieg-Kreis)",
+          "erklaerung": "این شهرستان نزدیک بن است. آمرلند در نیدرزاکسن و نوردفریسلاند در شلسویگ-هولشتاین است."
+        }
+      },
+      {
+        "id": "nw-03",
+        "nummer": 3,
+        "frage": "Für wie viele Jahre wird der Landtag in Nordrhein-Westfalen gewählt?",
+        "antworten": [
+          "3",
+          "4",
+          "5",
+          "6"
+        ],
+        "richtig": 2,
+        "bild": "",
+        "fa": {
+          "frage": "پارلمان ایالتی (لندتاگ) نوردراین-وستفالن برای چند سال انتخاب می‌شود؟",
+          "antwort": "۵ سال",
+          "erklaerung": "مردم نوردراین-وستفالن هر ۵ سال یک‌بار نمایندگان پارلمان ایالتی را انتخاب می‌کنند."
+        }
+      },
+      {
+        "id": "nw-04",
+        "nummer": 4,
+        "frage": "Ab welchem Alter darf man in Nordrhein-Westfalen bei Kommunalwahlen wählen?",
+        "antworten": [
+          "14",
+          "16",
+          "18",
+          "20"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "در نوردراین-وستفالن از چند سالگی می‌توان در انتخابات محلی رأی داد؟",
+          "antwort": "از ۱۶ سالگی",
+          "erklaerung": "در نوردراین-وستفالن نوجوانان از ۱۶ سالگی اجازهٔ رأی دادن در این انتخابات را دارند."
+        }
+      },
+      {
+        "id": "nw-05",
+        "nummer": 5,
+        "frage": "Welche Farben hat die Landesflagge von Nordrhein-Westfalen?",
+        "antworten": [
+          "rot-weiß",
+          "grün-weiß-rot",
+          "schwarz-gold",
+          "blau-weiß-rot"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "پرچم ایالت نوردراین-وستفالن چه رنگ‌هایی دارد؟",
+          "antwort": "سبز، سفید و قرمز",
+          "erklaerung": "رنگ‌های پرچم نوردراین-وستفالن: سبز، سفید و قرمز."
+        }
+      },
+      {
+        "id": "nw-06",
+        "nummer": 6,
+        "frage": "Wo können Sie sich in Nordrhein-Westfalen über politische Themen informieren?",
+        "antworten": [
+          "bei den Kirchen",
+          "beim Ordnungsamt der Gemeinde",
+          "bei der Verbraucherzentrale",
+          "bei der Landeszentrale für politische Bildung"
+        ],
+        "richtig": 3,
+        "bild": "",
+        "fa": {
+          "frage": "در نوردراین-وستفالن کجا می‌توانید دربارهٔ موضوعات سیاسی اطلاعات بگیرید؟",
+          "antwort": "در مرکز ایالتی آموزش سیاسی (Landeszentrale für politische Bildung)",
+          "erklaerung": "این یک ادارهٔ دولتی است که اطلاعات بی‌طرف و اغلب رایگان دربارهٔ سیاست و دموکراسی ارائه می‌دهد."
+        }
+      },
+      {
+        "id": "nw-07",
+        "nummer": 7,
+        "frage": "Die Landeshauptstadt von Nordrhein-Westfalen heißt …",
+        "antworten": [
+          "Köln.",
+          "Bonn.",
+          "Düsseldorf.",
+          "Dortmund."
+        ],
+        "richtig": 2,
+        "bild": "",
+        "fa": {
+          "frage": "پایتخت ایالت نوردراین-وستفالن … نام دارد.",
+          "antwort": "دوسلدورف",
+          "erklaerung": "پایتخت دوسلدورف است، نه کلن که بزرگ‌ترین شهر ایالت است."
+        }
+      },
+      {
+        "id": "nw-08",
+        "nummer": 8,
+        "frage": "Welches Bundesland ist Nordrhein-Westfalen?",
+        "antworten": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "richtig": 2,
+        "bild": "bilder/nw-08.png",
+        "fa": {
+          "frage": "در نقشه، کدام ایالت نوردراین-وستفالن است؟",
+          "antwort": "شمارهٔ ۳",
+          "erklaerung": "نوردراین-وستفالن در غرب آلمان است و پرجمعیت‌ترین ایالت کشور است."
+        }
+      },
+      {
+        "id": "nw-09",
+        "nummer": 9,
+        "frage": "Wie nennt man die Regierungschefin/den Regierungschef in Nordrhein-Westfalen?",
+        "antworten": [
+          "Erste Ministerin/Erster Minister",
+          "Premierministerin/Premierminister",
+          "Bürgermeisterin/Bürgermeister",
+          "Ministerpräsidentin/Ministerpräsident"
+        ],
+        "richtig": 3,
+        "bild": "",
+        "fa": {
+          "frage": "رئیس دولت ایالت نوردراین-وستفالن را چه می‌نامند؟",
+          "antwort": "نخست‌وزیر ایالتی (Ministerpräsident)",
+          "erklaerung": "رئیس دولت نوردراین-وستفالن «مینیستِرپرِزیدِنت» نام دارد و پارلمان ایالت او را انتخاب می‌کند."
+        }
+      },
+      {
+        "id": "nw-10",
+        "nummer": 10,
+        "frage": "Welche Ministerin/welchen Minister hat Nordrhein-Westfalen nicht?",
+        "antworten": [
+          "Justizministerin/Justizminister",
+          "Außenministerin/Außenminister",
+          "Finanzministerin/Finanzminister",
+          "Innenministerin/Innenminister"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "نوردراین-وستفالن کدام وزیر را ندارد؟",
+          "antwort": "وزیر امور خارجه",
+          "erklaerung": "سیاست خارجی وظیفهٔ دولت فدرال است، نه ایالت‌ها؛ بنابراین ایالت‌ها وزیر خارجه ندارند."
+        }
+      }
+    ],
+    "Rheinland-Pfalz": [
+      {
+        "id": "rp-01",
+        "nummer": 1,
+        "frage": "Welches Wappen gehört zum Bundesland Rheinland-Pfalz?",
+        "antworten": [
+          "Bild 1",
+          "Bild 2",
+          "Bild 3",
+          "Bild 4"
+        ],
+        "richtig": 0,
+        "bild": "",
+        "antwortBilder": [
+          "bilder/rp-01-1.png",
+          "bilder/rp-01-2.png",
+          "bilder/rp-01-3.png",
+          "bilder/rp-01-4.png"
+        ],
+        "fa": {
+          "frage": "کدام نشان متعلق به ایالت راینلاند-فالتس است؟",
+          "antwort": "تصویر ۱ (صلیب قرمز، چرخ و شیر طلایی با تاج)",
+          "erklaerung": "نشان راینلاند-فالتس صلیب قرمز (تریر)، چرخ (ماینتس) و شیر (فالتس) دارد."
+        }
+      },
+      {
+        "id": "rp-02",
+        "nummer": 2,
+        "frage": "Welches ist ein Landkreis in Rheinland-Pfalz?",
+        "antworten": [
+          "Westerwaldkreis",
+          "Altötting",
+          "Emsland",
+          "Prignitz"
+        ],
+        "richtig": 0,
+        "bild": "",
+        "fa": {
+          "frage": "کدام یک شهرستان (لاندکرایس) در راینلاند-فالتس است؟",
+          "antwort": "وستروالد (Westerwaldkreis)",
+          "erklaerung": "وستروالد در شمال راینلاند-فالتس است. آلتؤتینگ در بایرن، امسلند در نیدرزاکسن و پریگنیتس در براندنبورگ است."
+        }
+      },
+      {
+        "id": "rp-03",
+        "nummer": 3,
+        "frage": "Für wie viele Jahre wird der Landtag in Rheinland-Pfalz gewählt?",
+        "antworten": [
+          "3",
+          "4",
+          "5",
+          "6"
+        ],
+        "richtig": 2,
+        "bild": "",
+        "fa": {
+          "frage": "پارلمان ایالتی (لندتاگ) راینلاند-فالتس برای چند سال انتخاب می‌شود؟",
+          "antwort": "۵ سال",
+          "erklaerung": "مردم راینلاند-فالتس هر ۵ سال یک‌بار نمایندگان پارلمان ایالتی را انتخاب می‌کنند."
+        }
+      },
+      {
+        "id": "rp-04",
+        "nummer": 4,
+        "frage": "Ab welchem Alter darf man in Rheinland-Pfalz bei Kommunalwahlen wählen?",
+        "antworten": [
+          "14",
+          "16",
+          "18",
+          "20"
+        ],
+        "richtig": 2,
+        "bild": "",
+        "fa": {
+          "frage": "در راینلاند-فالتس از چند سالگی می‌توان در انتخابات محلی رأی داد؟",
+          "antwort": "از ۱۸ سالگی",
+          "erklaerung": "در راینلاند-فالتس برای رأی دادن در انتخابات محلی باید دست‌کم ۱۸ ساله بود؛ در بیشتر ایالت‌های دیگر این سن ۱۶ سال است."
+        }
+      },
+      {
+        "id": "rp-05",
+        "nummer": 5,
+        "frage": "Welche Farben hat die Landesflagge von Rheinland-Pfalz?",
+        "antworten": [
+          "weiß-rot",
+          "schwarz-rot-gold",
+          "schwarz-gelb",
+          "grün-weiß-rot"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "پرچم ایالت راینلاند-فالتس چه رنگ‌هایی دارد؟",
+          "antwort": "سیاه، قرمز و طلایی (با نشان ایالت)",
+          "erklaerung": "رنگ‌های پرچم راینلاند-فالتس: سیاه، قرمز و طلایی (با نشان ایالت)."
+        }
+      },
+      {
+        "id": "rp-06",
+        "nummer": 6,
+        "frage": "Wo können Sie sich in Rheinland-Pfalz über politische Themen informieren?",
+        "antworten": [
+          "bei den Kirchen",
+          "bei der Verbraucherzentrale",
+          "beim Ordnungsamt der Gemeinde",
+          "bei der Landeszentrale für politische Bildung"
+        ],
+        "richtig": 3,
+        "bild": "",
+        "fa": {
+          "frage": "در راینلاند-فالتس کجا می‌توانید دربارهٔ موضوعات سیاسی اطلاعات بگیرید؟",
+          "antwort": "در مرکز ایالتی آموزش سیاسی (Landeszentrale für politische Bildung)",
+          "erklaerung": "این یک ادارهٔ دولتی است که اطلاعات بی‌طرف و اغلب رایگان دربارهٔ سیاست و دموکراسی ارائه می‌دهد."
+        }
+      },
+      {
+        "id": "rp-07",
+        "nummer": 7,
+        "frage": "Die Landeshauptstadt von Rheinland-Pfalz heißt …",
+        "antworten": [
+          "Mainz.",
+          "Kaiserslautern.",
+          "Ludwigshafen.",
+          "Koblenz."
+        ],
+        "richtig": 0,
+        "bild": "",
+        "fa": {
+          "frage": "پایتخت ایالت راینلاند-فالتس … نام دارد.",
+          "antwort": "ماینتس",
+          "erklaerung": "ماینتس کنار رود راین، مرکز دولت و پارلمان راینلاند-فالتس است."
+        }
+      },
+      {
+        "id": "rp-08",
+        "nummer": 8,
+        "frage": "Welches Bundesland ist Rheinland-Pfalz?",
+        "antworten": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "richtig": 0,
+        "bild": "bilder/rp-08.png",
+        "fa": {
+          "frage": "در نقشه، کدام ایالت راینلاند-فالتس است؟",
+          "antwort": "شمارهٔ ۱",
+          "erklaerung": "راینلاند-فالتس در غرب آلمان، کنار فرانسه، لوکزامبورگ و بلژیک قرار دارد."
+        }
+      },
+      {
+        "id": "rp-09",
+        "nummer": 9,
+        "frage": "Wie nennt man die Regierungschefin/den Regierungschef in Rheinland-Pfalz?",
+        "antworten": [
+          "Erste Ministerin/Erster Minister",
+          "Premierministerin/Premierminister",
+          "Bürgermeisterin/Bürgermeister",
+          "Ministerpräsidentin/Ministerpräsident"
+        ],
+        "richtig": 3,
+        "bild": "",
+        "fa": {
+          "frage": "رئیس دولت ایالت راینلاند-فالتس را چه می‌نامند؟",
+          "antwort": "نخست‌وزیر ایالتی (Ministerpräsident)",
+          "erklaerung": "رئیس دولت راینلاند-فالتس «مینیستِرپرِزیدِنت» نام دارد و پارلمان ایالت او را انتخاب می‌کند."
+        }
+      },
+      {
+        "id": "rp-10",
+        "nummer": 10,
+        "frage": "Welche Ministerin/welchen Minister hat Rheinland-Pfalz nicht?",
+        "antworten": [
+          "Justizministerin/Justizminister",
+          "Außenministerin/Außenminister",
+          "Finanzministerin/Finanzminister",
+          "Innenministerin/Innenminister"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "راینلاند-فالتس کدام وزیر را ندارد؟",
+          "antwort": "وزیر امور خارجه",
+          "erklaerung": "سیاست خارجی وظیفهٔ دولت فدرال است، نه ایالت‌ها؛ بنابراین ایالت‌ها وزیر خارجه ندارند."
+        }
+      }
+    ],
+    "Saarland": [
+      {
+        "id": "sl-01",
+        "nummer": 1,
+        "frage": "Welches Wappen gehört zum Bundesland Saarland?",
+        "antworten": [
+          "Bild 1",
+          "Bild 2",
+          "Bild 3",
+          "Bild 4"
+        ],
+        "richtig": 3,
+        "bild": "",
+        "antwortBilder": [
+          "bilder/sl-01-1.png",
+          "bilder/sl-01-2.png",
+          "bilder/sl-01-3.png",
+          "bilder/sl-01-4.png"
+        ],
+        "fa": {
+          "frage": "کدام نشان متعلق به ایالت زارلند است؟",
+          "antwort": "تصویر ۴ (چهار بخش با شیر، صلیب و نوارها)",
+          "erklaerung": "نشان زارلند از چهار بخش تشکیل شده که یادآور سرزمین‌های تاریخی این منطقه است."
+        }
+      },
+      {
+        "id": "sl-02",
+        "nummer": 2,
+        "frage": "Welches ist ein Landkreis im Saarland?",
+        "antworten": [
+          "Mecklenburgische Seenplatte",
+          "Altötting",
+          "Neunkirchen",
+          "Rhein-Sieg-Kreis"
+        ],
+        "richtig": 2,
+        "bild": "",
+        "fa": {
+          "frage": "کدام یک شهرستان (لاندکرایس) در زارلند است؟",
+          "antwort": "نویکیرشن (Neunkirchen)",
+          "erklaerung": "نویکیرشن یکی از شهرستان‌های زارلند است. آلتؤتینگ در بایرن و راین-زیگ در نوردراین-وستفالن است."
+        }
+      },
+      {
+        "id": "sl-03",
+        "nummer": 3,
+        "frage": "Für wie viele Jahre wird der Landtag des Saarlandes gewählt?",
+        "antworten": [
+          "3",
+          "4",
+          "5",
+          "6"
+        ],
+        "richtig": 2,
+        "bild": "",
+        "fa": {
+          "frage": "پارلمان ایالتی (لندتاگ) زارلند برای چند سال انتخاب می‌شود؟",
+          "antwort": "۵ سال",
+          "erklaerung": "مردم زارلند هر ۵ سال یک‌بار نمایندگان پارلمان ایالتی را انتخاب می‌کنند."
+        }
+      },
+      {
+        "id": "sl-04",
+        "nummer": 4,
+        "frage": "Ab welchem Alter darf man im Saarland bei Kommunalwahlen wählen?",
+        "antworten": [
+          "14",
+          "16",
+          "18",
+          "20"
+        ],
+        "richtig": 2,
+        "bild": "",
+        "fa": {
+          "frage": "در زارلند از چند سالگی می‌توان در انتخابات محلی رأی داد؟",
+          "antwort": "از ۱۸ سالگی",
+          "erklaerung": "در زارلند برای رأی دادن در انتخابات محلی باید دست‌کم ۱۸ ساله بود؛ در بیشتر ایالت‌های دیگر این سن ۱۶ سال است."
+        }
+      },
+      {
+        "id": "sl-05",
+        "nummer": 5,
+        "frage": "Welche Farben hat die Landesflagge des Saarlandes?",
+        "antworten": [
+          "weiß-blau",
+          "schwarz-rot-gold",
+          "schwarz-gelb",
+          "grün-weiß-rot"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "پرچم ایالت زارلند چه رنگ‌هایی دارد؟",
+          "antwort": "سیاه، قرمز و طلایی (با نشان ایالت)",
+          "erklaerung": "رنگ‌های پرچم زارلند: سیاه، قرمز و طلایی (با نشان ایالت)."
+        }
+      },
+      {
+        "id": "sl-06",
+        "nummer": 6,
+        "frage": "Wo können Sie sich im Saarland über politische Themen informieren?",
+        "antworten": [
+          "bei den Kirchen",
+          "bei der Landeszentrale für politische Bildung",
+          "bei der Verbraucherzentrale",
+          "beim Ordnungsamt der Gemeinde"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "در زارلند کجا می‌توانید دربارهٔ موضوعات سیاسی اطلاعات بگیرید؟",
+          "antwort": "در مرکز ایالتی آموزش سیاسی (Landeszentrale für politische Bildung)",
+          "erklaerung": "این یک ادارهٔ دولتی است که اطلاعات بی‌طرف و اغلب رایگان دربارهٔ سیاست و دموکراسی ارائه می‌دهد."
+        }
+      },
+      {
+        "id": "sl-07",
+        "nummer": 7,
+        "frage": "Die Landeshauptstadt des Saarlandes heißt …",
+        "antworten": [
+          "Neunkirchen.",
+          "Homburg.",
+          "Saarbrücken.",
+          "Völklingen."
+        ],
+        "richtig": 2,
+        "bild": "",
+        "fa": {
+          "frage": "پایتخت زارلند … نام دارد.",
+          "antwort": "زاربروکن",
+          "erklaerung": "زاربروکن بزرگ‌ترین شهر و پایتخت زارلند است."
+        }
+      },
+      {
+        "id": "sl-08",
+        "nummer": 8,
+        "frage": "Welches Bundesland ist das Saarland?",
+        "antworten": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "richtig": 1,
+        "bild": "bilder/sl-08.png",
+        "fa": {
+          "frage": "در نقشه، کدام ایالت زارلند است؟",
+          "antwort": "شمارهٔ ۲",
+          "erklaerung": "زارلند کوچک‌ترین ایالت غیرشهری آلمان است و در جنوب‌غرب، کنار فرانسه قرار دارد."
+        }
+      },
+      {
+        "id": "sl-09",
+        "nummer": 9,
+        "frage": "Wie nennt man die Regierungschefin/den Regierungschef des Saarlandes?",
+        "antworten": [
+          "Erste Ministerin/Erster Minister",
+          "Premierministerin/Premierminister",
+          "Bürgermeisterin/Bürgermeister",
+          "Ministerpräsidentin/Ministerpräsident"
+        ],
+        "richtig": 3,
+        "bild": "",
+        "fa": {
+          "frage": "رئیس دولت ایالت زارلند را چه می‌نامند؟",
+          "antwort": "نخست‌وزیر ایالتی (Ministerpräsident)",
+          "erklaerung": "رئیس دولت زارلند «مینیستِرپرِزیدِنت» نام دارد و پارلمان ایالت او را انتخاب می‌کند."
+        }
+      },
+      {
+        "id": "sl-10",
+        "nummer": 10,
+        "frage": "Welche Ministerin/welchen Minister hat das Saarland nicht?",
+        "antworten": [
+          "Justizministerin/Justizminister",
+          "Außenministerin/Außenminister",
+          "Finanzministerin/Finanzminister",
+          "Innenministerin/Innenminister"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "زارلند کدام وزیر را ندارد؟",
+          "antwort": "وزیر امور خارجه",
+          "erklaerung": "سیاست خارجی وظیفهٔ دولت فدرال است، نه ایالت‌ها؛ بنابراین ایالت‌ها وزیر خارجه ندارند."
+        }
+      }
+    ],
+    "Sachsen": [
+      {
+        "id": "sn-01",
+        "nummer": 1,
+        "frage": "Welches Wappen gehört zum Freistaat Sachsen?",
+        "antworten": [
+          "Bild 1",
+          "Bild 2",
+          "Bild 3",
+          "Bild 4"
+        ],
+        "richtig": 3,
+        "bild": "",
+        "antwortBilder": [
+          "bilder/sn-01-1.png",
+          "bilder/sn-01-2.png",
+          "bilder/sn-01-3.png",
+          "bilder/sn-01-4.png"
+        ],
+        "fa": {
+          "frage": "کدام نشان متعلق به ایالت زاکسن است؟",
+          "antwort": "تصویر ۴ (نوارهای سیاه و زرد با تاج سبز مورب)",
+          "erklaerung": "نشان زاکسن نوارهای افقی سیاه و زرد با یک تاج‌گل سبز مورب است."
+        }
+      },
+      {
+        "id": "sn-02",
+        "nummer": 2,
+        "frage": "Welches ist ein Landkreis in Sachsen?",
+        "antworten": [
+          "Vogtlandkreis",
+          "Altötting",
+          "Uckermark",
+          "Nordfriesland"
+        ],
+        "richtig": 0,
+        "bild": "",
+        "fa": {
+          "frage": "کدام یک شهرستان (لاندکرایس) در زاکسن است؟",
+          "antwort": "فوگت‌لاندکرایس (Vogtlandkreis)",
+          "erklaerung": "فوگت‌لاند در جنوب‌غرب زاکسن است. اوکرمارک در براندنبورگ و آلتؤتینگ در بایرن است."
+        }
+      },
+      {
+        "id": "sn-03",
+        "nummer": 3,
+        "frage": "Für wie viele Jahre wird der Landtag in Sachsen gewählt?",
+        "antworten": [
+          "3",
+          "4",
+          "5",
+          "6"
+        ],
+        "richtig": 2,
+        "bild": "",
+        "fa": {
+          "frage": "پارلمان ایالتی (لندتاگ) زاکسن برای چند سال انتخاب می‌شود؟",
+          "antwort": "۵ سال",
+          "erklaerung": "مردم زاکسن هر ۵ سال یک‌بار نمایندگان پارلمان ایالتی را انتخاب می‌کنند."
+        }
+      },
+      {
+        "id": "sn-04",
+        "nummer": 4,
+        "frage": "Ab welchem Alter darf man in Sachsen bei Kommunalwahlen wählen?",
+        "antworten": [
+          "14",
+          "16",
+          "18",
+          "20"
+        ],
+        "richtig": 2,
+        "bild": "",
+        "fa": {
+          "frage": "در زاکسن از چند سالگی می‌توان در انتخابات محلی رأی داد؟",
+          "antwort": "از ۱۸ سالگی",
+          "erklaerung": "در زاکسن برای رأی دادن در انتخابات محلی باید دست‌کم ۱۸ ساله بود؛ در بیشتر ایالت‌های دیگر این سن ۱۶ سال است."
+        }
+      },
+      {
+        "id": "sn-05",
+        "nummer": 5,
+        "frage": "Welche Farben hat die Landesflagge von Sachsen?",
+        "antworten": [
+          "blau-weiß-rot",
+          "weiß-grün",
+          "grün-weiß-rot",
+          "schwarz-gelb"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "پرچم ایالت زاکسن چه رنگ‌هایی دارد؟",
+          "antwort": "سفید و سبز",
+          "erklaerung": "رنگ‌های پرچم زاکسن: سفید و سبز."
+        }
+      },
+      {
+        "id": "sn-06",
+        "nummer": 6,
+        "frage": "Wo können Sie sich in Sachsen über politische Themen informieren?",
+        "antworten": [
+          "bei der Landeszentrale für politische Bildung",
+          "beim Ordnungsamt der Gemeinde",
+          "bei den Kirchen",
+          "bei der Verbraucherzentrale"
+        ],
+        "richtig": 0,
+        "bild": "",
+        "fa": {
+          "frage": "در زاکسن کجا می‌توانید دربارهٔ موضوعات سیاسی اطلاعات بگیرید؟",
+          "antwort": "در مرکز ایالتی آموزش سیاسی (Landeszentrale für politische Bildung)",
+          "erklaerung": "این یک ادارهٔ دولتی است که اطلاعات بی‌طرف و اغلب رایگان دربارهٔ سیاست و دموکراسی ارائه می‌دهد."
+        }
+      },
+      {
+        "id": "sn-07",
+        "nummer": 7,
+        "frage": "Die Landeshauptstadt von Sachsen heißt …",
+        "antworten": [
+          "Leipzig.",
+          "Dresden.",
+          "Chemnitz.",
+          "Zwickau."
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "پایتخت ایالت زاکسن … نام دارد.",
+          "antwort": "درسدن",
+          "erklaerung": "پایتخت درسدن است، نه لایپزیگ که بزرگ‌ترین شهر ایالت است."
+        }
+      },
+      {
+        "id": "sn-08",
+        "nummer": 8,
+        "frage": "Welches Bundesland ist Sachsen?",
+        "antworten": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "richtig": 3,
+        "bild": "bilder/sn-08.png",
+        "fa": {
+          "frage": "در نقشه، کدام ایالت زاکسن است؟",
+          "antwort": "شمارهٔ ۴",
+          "erklaerung": "زاکسن در شرق آلمان، کنار لهستان و چک قرار دارد."
+        }
+      },
+      {
+        "id": "sn-09",
+        "nummer": 9,
+        "frage": "Wie nennt man die Regierungschefin/den Regierungschef in Sachsen?",
+        "antworten": [
+          "Erste Ministerin/Erster Minister",
+          "Premierministerin/Premierminister",
+          "Bürgermeisterin/Bürgermeister",
+          "Ministerpräsidentin/Ministerpräsident"
+        ],
+        "richtig": 3,
+        "bild": "",
+        "fa": {
+          "frage": "رئیس دولت ایالت زاکسن را چه می‌نامند؟",
+          "antwort": "نخست‌وزیر ایالتی (Ministerpräsident)",
+          "erklaerung": "رئیس دولت زاکسن «مینیستِرپرِزیدِنت» نام دارد و پارلمان ایالت او را انتخاب می‌کند."
+        }
+      },
+      {
+        "id": "sn-10",
+        "nummer": 10,
+        "frage": "Welche Ministerin/welchen Minister hat Sachsen nicht?",
+        "antworten": [
+          "Justizministerin/Justizminister",
+          "Außenministerin/Außenminister",
+          "Finanzministerin/Finanzminister",
+          "Innenministerin/Innenminister"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "زاکسن کدام وزیر را ندارد؟",
+          "antwort": "وزیر امور خارجه",
+          "erklaerung": "سیاست خارجی وظیفهٔ دولت فدرال است، نه ایالت‌ها؛ بنابراین ایالت‌ها وزیر خارجه ندارند."
+        }
+      }
+    ],
+    "Sachsen-Anhalt": [
+      {
+        "id": "st-01",
+        "nummer": 1,
+        "frage": "Welches Wappen gehört zum Bundesland Sachsen-Anhalt?",
+        "antworten": [
+          "Bild 1",
+          "Bild 2",
+          "Bild 3",
+          "Bild 4"
+        ],
+        "richtig": 3,
+        "bild": "",
+        "antwortBilder": [
+          "bilder/st-01-1.png",
+          "bilder/st-01-2.png",
+          "bilder/st-01-3.png",
+          "bilder/st-01-4.png"
+        ],
+        "fa": {
+          "frage": "کدام نشان متعلق به ایالت زاکسن-آنهالت است؟",
+          "antwort": "تصویر ۴ (نوارهای سیاه و زرد، عقاب و خرس روی دیوار)",
+          "erklaerung": "نشان زاکسن-آنهالت بالای آن نوارهای زاکسن و عقاب، و پایین آن خرس روی دیوار آجری (آنهالت) است."
+        }
+      },
+      {
+        "id": "st-02",
+        "nummer": 2,
+        "frage": "Welches ist ein Landkreis in Sachsen-Anhalt?",
+        "antworten": [
+          "Ammerland",
+          "Altötting",
+          "Uckermark",
+          "Börde"
+        ],
+        "richtig": 3,
+        "bild": "",
+        "fa": {
+          "frage": "کدام یک شهرستان (لاندکرایس) در زاکسن-آنهالت است؟",
+          "antwort": "بورده (Börde)",
+          "erklaerung": "بورده نزدیک ماگدبورگ است. آمرلند در نیدرزاکسن، آلتؤتینگ در بایرن و اوکرمارک در براندنبورگ است."
+        }
+      },
+      {
+        "id": "st-03",
+        "nummer": 3,
+        "frage": "Für wie viele Jahre wird der Landtag in Sachsen-Anhalt gewählt?",
+        "antworten": [
+          "3",
+          "4",
+          "5",
+          "6"
+        ],
+        "richtig": 2,
+        "bild": "",
+        "fa": {
+          "frage": "پارلمان ایالتی (لندتاگ) زاکسن-آنهالت برای چند سال انتخاب می‌شود؟",
+          "antwort": "۵ سال",
+          "erklaerung": "مردم زاکسن-آنهالت هر ۵ سال یک‌بار نمایندگان پارلمان ایالتی را انتخاب می‌کنند."
+        }
+      },
+      {
+        "id": "st-04",
+        "nummer": 4,
+        "frage": "Ab welchem Alter darf man in Sachsen-Anhalt bei Kommunalwahlen wählen?",
+        "antworten": [
+          "14",
+          "16",
+          "18",
+          "20"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "در زاکسن-آنهالت از چند سالگی می‌توان در انتخابات محلی رأی داد؟",
+          "antwort": "از ۱۶ سالگی",
+          "erklaerung": "در زاکسن-آنهالت نوجوانان از ۱۶ سالگی اجازهٔ رأی دادن در این انتخابات را دارند."
+        }
+      },
+      {
+        "id": "st-05",
+        "nummer": 5,
+        "frage": "Welche Farben hat die Landesflagge von Sachsen-Anhalt?",
+        "antworten": [
+          "blau-weiß-rot",
+          "gelb-schwarz",
+          "grün-weiß-rot",
+          "weiß-rot"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "پرچم ایالت زاکسن-آنهالت چه رنگ‌هایی دارد؟",
+          "antwort": "زرد و سیاه",
+          "erklaerung": "رنگ‌های پرچم زاکسن-آنهالت: زرد و سیاه."
+        }
+      },
+      {
+        "id": "st-06",
+        "nummer": 6,
+        "frage": "Wo können Sie sich in Sachsen-Anhalt über politische Themen informieren?",
+        "antworten": [
+          "bei den Kirchen",
+          "bei der Landeszentrale für politische Bildung",
+          "beim Ordnungsamt der Gemeinde",
+          "bei der Verbraucherzentrale"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "در زاکسن-آنهالت کجا می‌توانید دربارهٔ موضوعات سیاسی اطلاعات بگیرید؟",
+          "antwort": "در مرکز ایالتی آموزش سیاسی (Landeszentrale für politische Bildung)",
+          "erklaerung": "این یک ادارهٔ دولتی است که اطلاعات بی‌طرف و اغلب رایگان دربارهٔ سیاست و دموکراسی ارائه می‌دهد."
+        }
+      },
+      {
+        "id": "st-07",
+        "nummer": 7,
+        "frage": "Die Landeshauptstadt von Sachsen-Anhalt heißt …",
+        "antworten": [
+          "Halle.",
+          "Dessau.",
+          "Magdeburg.",
+          "Wittenberg."
+        ],
+        "richtig": 2,
+        "bild": "",
+        "fa": {
+          "frage": "پایتخت ایالت زاکسن-آنهالت … نام دارد.",
+          "antwort": "ماگدبورگ",
+          "erklaerung": "پایتخت ماگدبورگ است، نه هاله که بزرگ‌ترین شهر ایالت است."
+        }
+      },
+      {
+        "id": "st-08",
+        "nummer": 8,
+        "frage": "Welches Bundesland ist Sachsen-Anhalt?",
+        "antworten": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "richtig": 2,
+        "bild": "bilder/st-08.png",
+        "fa": {
+          "frage": "در نقشه، کدام ایالت زاکسن-آنهالت است؟",
+          "antwort": "شمارهٔ ۳",
+          "erklaerung": "زاکسن-آنهالت در شرق آلمان، بین نیدرزاکسن، براندنبورگ، زاکسن و تورینگن قرار دارد."
+        }
+      },
+      {
+        "id": "st-09",
+        "nummer": 9,
+        "frage": "Wie nennt man die Regierungschefin/den Regierungschef in Sachsen-Anhalt?",
+        "antworten": [
+          "Erste Ministerin/Erster Minister",
+          "Premierministerin/Premierminister",
+          "Bürgermeisterin/Bürgermeister",
+          "Ministerpräsidentin/Ministerpräsident"
+        ],
+        "richtig": 3,
+        "bild": "",
+        "fa": {
+          "frage": "رئیس دولت ایالت زاکسن-آنهالت را چه می‌نامند؟",
+          "antwort": "نخست‌وزیر ایالتی (Ministerpräsident)",
+          "erklaerung": "رئیس دولت زاکسن-آنهالت «مینیستِرپرِزیدِنت» نام دارد و پارلمان ایالت او را انتخاب می‌کند."
+        }
+      },
+      {
+        "id": "st-10",
+        "nummer": 10,
+        "frage": "Welche Ministerin/welchen Minister hat Sachsen-Anhalt nicht?",
+        "antworten": [
+          "Justizministerin/Justizminister",
+          "Außenministerin/Außenminister",
+          "Finanzministerin/Finanzminister",
+          "Innenministerin/Innenminister"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "زاکسن-آنهالت کدام وزیر را ندارد؟",
+          "antwort": "وزیر امور خارجه",
+          "erklaerung": "سیاست خارجی وظیفهٔ دولت فدرال است، نه ایالت‌ها؛ بنابراین ایالت‌ها وزیر خارجه ندارند."
+        }
+      }
+    ],
+    "Schleswig-Holstein": [
+      {
+        "id": "sh-01",
+        "nummer": 1,
+        "frage": "Welches Wappen gehört zum Bundesland Schleswig-Holstein?",
+        "antworten": [
+          "Bild 1",
+          "Bild 2",
+          "Bild 3",
+          "Bild 4"
+        ],
+        "richtig": 2,
+        "bild": "",
+        "antwortBilder": [
+          "bilder/sh-01-1.png",
+          "bilder/sh-01-2.png",
+          "bilder/sh-01-3.png",
+          "bilder/sh-01-4.png"
+        ],
+        "fa": {
+          "frage": "کدام نشان متعلق به ایالت شلسویگ-هولشتاین است؟",
+          "antwort": "تصویر ۳ (دو شیر آبی و برگ گزنهٔ سفید)",
+          "erklaerung": "نشان شلسویگ-هولشتاین دو شیر آبی (شلسویگ) و برگ گزنهٔ سفید روی قرمز (هولشتاین) دارد."
+        }
+      },
+      {
+        "id": "sh-02",
+        "nummer": 2,
+        "frage": "Welches ist ein Landkreis in Schleswig-Holstein?",
+        "antworten": [
+          "Ammerland",
+          "Mecklenburgische Seenplatte",
+          "Nordfriesland",
+          "Rhein-Sieg-Kreis"
+        ],
+        "richtig": 2,
+        "bild": "",
+        "fa": {
+          "frage": "کدام یک شهرستان (لاندکرایس) در شلسویگ-هولشتاین است؟",
+          "antwort": "نوردفریسلاند (Nordfriesland)",
+          "erklaerung": "نوردفریسلاند در ساحل دریای شمال است. آمرلند در نیدرزاکسن و راین-زیگ در نوردراین-وستفالن است."
+        }
+      },
+      {
+        "id": "sh-03",
+        "nummer": 3,
+        "frage": "Für wie viele Jahre wird der Landtag in Schleswig-Holstein gewählt?",
+        "antworten": [
+          "3",
+          "4",
+          "5",
+          "6"
+        ],
+        "richtig": 2,
+        "bild": "",
+        "fa": {
+          "frage": "پارلمان ایالتی (لندتاگ) شلسویگ-هولشتاین برای چند سال انتخاب می‌شود؟",
+          "antwort": "۵ سال",
+          "erklaerung": "مردم شلسویگ-هولشتاین هر ۵ سال یک‌بار نمایندگان پارلمان ایالتی را انتخاب می‌کنند."
+        }
+      },
+      {
+        "id": "sh-04",
+        "nummer": 4,
+        "frage": "Ab welchem Alter darf man in Schleswig-Holstein bei Kommunalwahlen wählen?",
+        "antworten": [
+          "14",
+          "16",
+          "18",
+          "20"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "در شلسویگ-هولشتاین از چند سالگی می‌توان در انتخابات محلی رأی داد؟",
+          "antwort": "از ۱۶ سالگی",
+          "erklaerung": "در شلسویگ-هولشتاین نوجوانان از ۱۶ سالگی اجازهٔ رأی دادن در این انتخابات را دارند."
+        }
+      },
+      {
+        "id": "sh-05",
+        "nummer": 5,
+        "frage": "Welche Farben hat die Landesflagge von Schleswig-Holstein?",
+        "antworten": [
+          "weiß-blau",
+          "blau-weiß-rot",
+          "weiß-rot",
+          "grün-weiß-rot"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "پرچم ایالت شلسویگ-هولشتاین چه رنگ‌هایی دارد؟",
+          "antwort": "آبی، سفید و قرمز",
+          "erklaerung": "رنگ‌های پرچم شلسویگ-هولشتاین: آبی، سفید و قرمز."
+        }
+      },
+      {
+        "id": "sh-06",
+        "nummer": 6,
+        "frage": "Wo können Sie sich in Schleswig-Holstein über politische Themen informieren?",
+        "antworten": [
+          "bei der Verbraucherzentrale",
+          "beim Ordnungsamt der Gemeinde",
+          "beim / bei der Landesbeauftragten für politische Bildung",
+          "bei den Kirchen"
+        ],
+        "richtig": 2,
+        "bild": "",
+        "fa": {
+          "frage": "در شلسویگ-هولشتاین کجا می‌توانید دربارهٔ موضوعات سیاسی اطلاعات بگیرید؟",
+          "antwort": "نزد مسئول ایالتی آموزش سیاسی (Landesbeauftragte für politische Bildung)",
+          "erklaerung": "در شلسویگ-هولشتاین به‌جای «مرکز»، یک «مسئول ایالتی آموزش سیاسی» وجود دارد که اطلاعات بی‌طرف دربارهٔ سیاست ارائه می‌دهد."
+        }
+      },
+      {
+        "id": "sh-07",
+        "nummer": 7,
+        "frage": "Die Landeshauptstadt von Schleswig-Holstein heißt …",
+        "antworten": [
+          "Husum.",
+          "Flensburg.",
+          "Lübeck.",
+          "Kiel."
+        ],
+        "richtig": 3,
+        "bild": "",
+        "fa": {
+          "frage": "پایتخت ایالت شلسویگ-هولشتاین … نام دارد.",
+          "antwort": "کیل",
+          "erklaerung": "کیل کنار دریای بالتیک، مرکز دولت و پارلمان شلسویگ-هولشتاین است."
+        }
+      },
+      {
+        "id": "sh-08",
+        "nummer": 8,
+        "frage": "Welches Bundesland ist Schleswig-Holstein?",
+        "antworten": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "richtig": 0,
+        "bild": "bilder/sh-08.png",
+        "fa": {
+          "frage": "در نقشه، کدام ایالت شلسویگ-هولشتاین است؟",
+          "antwort": "شمارهٔ ۱",
+          "erklaerung": "شلسویگ-هولشتاین شمالی‌ترین ایالت آلمان است و بین دریای شمال و دریای بالتیک، کنار دانمارک قرار دارد."
+        }
+      },
+      {
+        "id": "sh-09",
+        "nummer": 9,
+        "frage": "Wie nennt man die Regierungschefin/den Regierungschef in Schleswig-Holstein?",
+        "antworten": [
+          "Erste Ministerin/Erster Minister",
+          "Premierministerin/Premierminister",
+          "Bürgermeisterin/Bürgermeister",
+          "Ministerpräsidentin/Ministerpräsident"
+        ],
+        "richtig": 3,
+        "bild": "",
+        "fa": {
+          "frage": "رئیس دولت ایالت شلسویگ-هولشتاین را چه می‌نامند؟",
+          "antwort": "نخست‌وزیر ایالتی (Ministerpräsident)",
+          "erklaerung": "رئیس دولت شلسویگ-هولشتاین «مینیستِرپرِزیدِنت» نام دارد و پارلمان ایالت او را انتخاب می‌کند."
+        }
+      },
+      {
+        "id": "sh-10",
+        "nummer": 10,
+        "frage": "Welche Ministerin/welchen Minister hat Schleswig-Holstein nicht?",
+        "antworten": [
+          "Justizministerin/Justizminister",
+          "Außenministerin/Außenminister",
+          "Finanzministerin/Finanzminister",
+          "Innenministerin/Innenminister"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "شلسویگ-هولشتاین کدام وزیر را ندارد؟",
+          "antwort": "وزیر امور خارجه",
+          "erklaerung": "سیاست خارجی وظیفهٔ دولت فدرال است، نه ایالت‌ها؛ بنابراین ایالت‌ها وزیر خارجه ندارند."
+        }
+      }
+    ],
+    "Thüringen": [
+      {
+        "id": "th-01",
+        "nummer": 1,
+        "frage": "Welches Wappen gehört zum Freistaat Thüringen?",
+        "antworten": [
+          "Bild 1",
+          "Bild 2",
+          "Bild 3",
+          "Bild 4"
+        ],
+        "richtig": 3,
+        "bild": "",
+        "antwortBilder": [
+          "bilder/th-01-1.png",
+          "bilder/th-01-2.png",
+          "bilder/th-01-3.png",
+          "bilder/th-01-4.png"
+        ],
+        "fa": {
+          "frage": "کدام نشان متعلق به ایالت تورینگن است؟",
+          "antwort": "تصویر ۴ (شیر راه‌راه با هشت ستارهٔ سفید روی زمینهٔ آبی)",
+          "erklaerung": "نشان تورینگن یک شیر با نوارهای سفید و قرمز و هشت ستارهٔ سفید روی سپر آبی است."
+        }
+      },
+      {
+        "id": "th-02",
+        "nummer": 2,
+        "frage": "Welches ist ein Landkreis in Thüringen?",
+        "antworten": [
+          "Ammerland",
+          "Altötting",
+          "Nordfriesland",
+          "Wartburgkreis"
+        ],
+        "richtig": 3,
+        "bild": "",
+        "fa": {
+          "frage": "کدام یک شهرستان (لاندکرایس) در تورینگن است؟",
+          "antwort": "وارتبورگ (Wartburgkreis)",
+          "erklaerung": "وارتبورگ‌کرایس در غرب تورینگن است و نامش از قلعهٔ وارتبورگ گرفته شده است."
+        }
+      },
+      {
+        "id": "th-03",
+        "nummer": 3,
+        "frage": "Für wie viele Jahre wird der Landtag in Thüringen gewählt?",
+        "antworten": [
+          "3",
+          "4",
+          "5",
+          "6"
+        ],
+        "richtig": 2,
+        "bild": "",
+        "fa": {
+          "frage": "پارلمان ایالتی (لندتاگ) تورینگن برای چند سال انتخاب می‌شود؟",
+          "antwort": "۵ سال",
+          "erklaerung": "مردم تورینگن هر ۵ سال یک‌بار نمایندگان پارلمان ایالتی را انتخاب می‌کنند."
+        }
+      },
+      {
+        "id": "th-04",
+        "nummer": 4,
+        "frage": "Ab welchem Alter darf man in Thüringen bei Kommunalwahlen wählen?",
+        "antworten": [
+          "14",
+          "16",
+          "18",
+          "20"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "در تورینگن از چند سالگی می‌توان در انتخابات محلی رأی داد؟",
+          "antwort": "از ۱۶ سالگی",
+          "erklaerung": "در تورینگن نوجوانان از ۱۶ سالگی اجازهٔ رأی دادن در این انتخابات را دارند."
+        }
+      },
+      {
+        "id": "th-05",
+        "nummer": 5,
+        "frage": "Welche Farben hat die Landesflagge von Thüringen?",
+        "antworten": [
+          "blau-weiß-rot",
+          "weiß-rot",
+          "grün-weiß-rot",
+          "schwarz-gold"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "پرچم ایالت تورینگن چه رنگ‌هایی دارد؟",
+          "antwort": "سفید و قرمز",
+          "erklaerung": "رنگ‌های پرچم تورینگن: سفید و قرمز."
+        }
+      },
+      {
+        "id": "th-06",
+        "nummer": 6,
+        "frage": "Wo können Sie sich in Thüringen über politische Themen informieren?",
+        "antworten": [
+          "bei den Kirchen",
+          "bei der Verbraucherzentrale",
+          "bei der Landeszentrale für politische Bildung",
+          "beim Ordnungsamt der Gemeinde"
+        ],
+        "richtig": 2,
+        "bild": "",
+        "fa": {
+          "frage": "در تورینگن کجا می‌توانید دربارهٔ موضوعات سیاسی اطلاعات بگیرید؟",
+          "antwort": "در مرکز ایالتی آموزش سیاسی (Landeszentrale für politische Bildung)",
+          "erklaerung": "این یک ادارهٔ دولتی است که اطلاعات بی‌طرف و اغلب رایگان دربارهٔ سیاست و دموکراسی ارائه می‌دهد."
+        }
+      },
+      {
+        "id": "th-07",
+        "nummer": 7,
+        "frage": "Die Landeshauptstadt von Thüringen heißt …",
+        "antworten": [
+          "Eisenach.",
+          "Erfurt.",
+          "Gera.",
+          "Jena."
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "پایتخت ایالت تورینگن … نام دارد.",
+          "antwort": "ارفورت",
+          "erklaerung": "ارفورت مرکز دولت و پارلمان تورینگن است."
+        }
+      },
+      {
+        "id": "th-08",
+        "nummer": 8,
+        "frage": "Welches Bundesland ist Thüringen?",
+        "antworten": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "richtig": 1,
+        "bild": "bilder/th-08.png",
+        "fa": {
+          "frage": "در نقشه، کدام ایالت تورینگن است؟",
+          "antwort": "شمارهٔ ۲",
+          "erklaerung": "تورینگن در مرکز آلمان قرار دارد و به آن «قلب سبز آلمان» می‌گویند."
+        }
+      },
+      {
+        "id": "th-09",
+        "nummer": 9,
+        "frage": "Wie nennt man die Regierungschefin/den Regierungschef in Thüringen?",
+        "antworten": [
+          "Erste Ministerin/Erster Minister",
+          "Premierministerin/Premierminister",
+          "Bürgermeisterin/Bürgermeister",
+          "Ministerpräsidentin/Ministerpräsident"
+        ],
+        "richtig": 3,
+        "bild": "",
+        "fa": {
+          "frage": "رئیس دولت ایالت تورینگن را چه می‌نامند؟",
+          "antwort": "نخست‌وزیر ایالتی (Ministerpräsident)",
+          "erklaerung": "رئیس دولت تورینگن «مینیستِرپرِزیدِنت» نام دارد و پارلمان ایالت او را انتخاب می‌کند."
+        }
+      },
+      {
+        "id": "th-10",
+        "nummer": 10,
+        "frage": "Welche Ministerin/welchen Minister hat Thüringen nicht?",
+        "antworten": [
+          "Justizministerin/Justizminister",
+          "Außenministerin/Außenminister",
+          "Finanzministerin/Finanzminister",
+          "Innenministerin/Innenminister"
+        ],
+        "richtig": 1,
+        "bild": "",
+        "fa": {
+          "frage": "تورینگن کدام وزیر را ندارد؟",
+          "antwort": "وزیر امور خارجه",
+          "erklaerung": "سیاست خارجی وظیفهٔ دولت فدرال است، نه ایالت‌ها؛ بنابراین ایالت‌ها وزیر خارجه ندارند."
+        }
+      }
+    ]
   }
 };

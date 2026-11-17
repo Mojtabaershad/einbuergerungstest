@@ -136,7 +136,7 @@
 
   /* ================= Tabs ================= */
   .tabs {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 6px;
+    display: grid; grid-template-columns: 1fr 1.6fr 1fr; gap: 6px;
     background: #e6e9f0; padding: 5px; border-radius: 12px; margin-bottom: 16px;
   }
   .tab {
@@ -250,7 +250,39 @@
   }
   .fa-box .muted { color: var(--muted); }
 
+  /* ================= Prüfungssimulation ================= */
+  .exam-intro h2 { margin: 0 0 6px; }
+  .exam-intro ul { margin: 10px 0 16px; padding-left: 20px; color: var(--text); }
+  .exam-intro li { margin: 4px 0; }
+  .timer { font-variant-numeric: tabular-nums; font-weight: 700; padding: 3px 10px; border-radius: 999px; background: var(--primary-soft); color: var(--primary); }
+  .timer.low { background: var(--red-bg); color: var(--red); }
+  .answer.selected { border-color: var(--primary); background: var(--primary-soft); }
+  .answer.selected .letter { background: var(--primary); color: #fff; }
+  .exam-nav { display: flex; justify-content: space-between; gap: 8px; margin-top: 18px; flex-wrap: wrap; }
+  .exam-grid { display: grid; grid-template-columns: repeat(11, 1fr); gap: 5px; margin-top: 18px; }
+  .exam-grid button { border: 1.5px solid var(--border); background: #fff; border-radius: 7px; padding: 5px 0; font-size: .78rem; color: var(--muted); }
+  .exam-grid button.done { background: var(--primary-soft); color: var(--primary); border-color: transparent; font-weight: 600; }
+  .exam-grid button.cur { border-color: var(--primary); }
+  .exam-grid button.ok { background: var(--green-bg); color: var(--green); border-color: transparent; }
+  .exam-grid button.bad { background: var(--red-bg); color: var(--red); border-color: transparent; }
+  .confirm-box { margin-top: 14px; padding: 14px; border-radius: 12px; background: var(--amber-bg); color: var(--amber); }
+  .confirm-box .row-btns { display: flex; gap: 8px; justify-content: flex-end; margin-top: 10px; }
+  .btn-danger { background: var(--red); color: #fff; }
+  .result-head { text-align: center; padding: 10px 0 4px; }
+  .result-head .big { font-size: 2.6rem; font-weight: 800; }
+  .verdict { display: inline-block; margin: 6px 0 4px; padding: 6px 16px; border-radius: 999px; font-weight: 700; }
+  .verdict.ok { background: var(--green-bg); color: var(--green); }
+  .verdict.bad { background: var(--red-bg); color: var(--red); }
+  .review-item { border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; margin-top: 10px; }
+  .review-item .q { font-weight: 600; margin-bottom: 6px; }
+  .review-item .line { font-size: .9rem; margin: 2px 0; }
+  .review-item .line.you { color: var(--red); }
+  .review-item .line.right { color: var(--green); }
+  .history { font-size: .85rem; color: var(--muted); margin-top: 16px; }
+  .history div { padding: 3px 0; border-bottom: 1px dashed var(--border); }
+
   @media (max-width: 520px) {
+    .exam-grid { grid-template-columns: repeat(8, 1fr); }
     .a-img { height: 90px; }
     .wrap { padding: 12px; }
     .card { padding: 18px 16px; }
@@ -306,6 +338,7 @@
       <button class="tab" id="tabFehler" role="tab" data-tab="fehler">
         Fehler-Ordner (Wiederholung) <span class="badge" id="fehlerBadge">0</span>
       </button>
+      <button class="tab" id="tabPruefung" role="tab" data-tab="pruefung">🎯 Prüfung</button>
     </nav>
 
     <div id="progressWrap">
@@ -483,7 +516,9 @@ function defaultState() {
     main: { index: 0, chosen: null },
     review: { currentId: null, chosen: null, msg: null },
     fehler: {},
-    stats: { beantwortet: 0, richtig: 0 }
+    stats: { beantwortet: 0, richtig: 0 },
+    exam: null,          // laufende/abgeschlossene Prüfungssimulation
+    examHistory: []      // letzte Ergebnisse
   };
 }
 
@@ -500,12 +535,24 @@ function loadState(email) {
 
   const s = {
     bundesland: BUNDESLAENDER.includes(saved.bundesland) ? saved.bundesland : null,
-    tab: saved.tab === "fehler" ? "fehler" : "alle",
+    tab: ["fehler", "pruefung"].includes(saved.tab) ? saved.tab : "alle",
     main: Object.assign(base.main, saved.main || {}),
     review: Object.assign(base.review, saved.review || {}),
     fehler: {},
-    stats: Object.assign(base.stats, saved.stats || {})
+    stats: Object.assign(base.stats, saved.stats || {}),
+    exam: null,
+    examHistory: Array.isArray(saved.examHistory) ? saved.examHistory.slice(-10) : []
   };
+  // Prüfung nur übernehmen, wenn alle Fragen noch existieren
+  const ex = saved.exam;
+  if (ex && Array.isArray(ex.ids) && ex.ids.length && ex.ids.every(id => FRAGE_BY_ID[id])) {
+    s.exam = {
+      ids: ex.ids, answers: (ex.answers && typeof ex.answers === "object") ? ex.answers : {},
+      current: Number.isInteger(ex.current) ? Math.min(Math.max(ex.current, 0), ex.ids.length - 1) : 0,
+      start: Number(ex.start) || Date.now(), dauer: Number(ex.dauer) || PRUEFUNG.dauerMs,
+      done: !!ex.done, ergebnis: ex.ergebnis || null, bundesland: ex.bundesland || null
+    };
+  }
   // Nur Fehler-Einträge übernehmen, deren Frage noch existiert
   for (const [id, entry] of Object.entries(saved.fehler || {})) {
     if (FRAGE_BY_ID[id]) s.fehler[id] = { richtigInFolge: Number(entry && entry.richtigInFolge) || 0 };
@@ -604,6 +651,7 @@ function login() {
 }
 
 function logout() {
+  stopExamTimer();
   saveState();
   currentEmail = null;
   state = null;
@@ -696,11 +744,13 @@ function render() {
   $("blLabel").textContent = state.bundesland;
   $("tabAlle").classList.toggle("active", state.tab === "alle");
   $("tabFehler").classList.toggle("active", state.tab === "fehler");
+  $("tabPruefung").classList.toggle("active", state.tab === "pruefung");
   const n = fehlerIds().length;
   $("fehlerBadge").textContent = n;
   $("fehlerBadge").classList.toggle("zero", n === 0);
 
   if (state.tab === "alle") renderMain();
+  else if (state.tab === "pruefung") renderExam();
   else renderReview();
 }
 
@@ -945,7 +995,218 @@ function nextReview() {
   render();
 }
 
+/* =====================================================================
+   PRÜFUNGSSIMULATION
+   ---------------------------------------------------------------------
+   Wie der echte Test: 30 zufällige allgemeine Fragen + 3 Fragen zum
+   gewählten Bundesland, 60 Minuten, bestanden ab 17 richtigen Antworten
+   (für das Zertifikat „Leben in Deutschland“ reichen 15).
+   Kein Sofort-Feedback; Auswertung erst nach Abgabe. Falsche Antworten
+   wandern automatisch in den Fehler-Ordner.
+   ===================================================================== */
+const PRUEFUNG = { allgemein: 30, land: 3, dauerMs: 60 * 60 * 1000, bestanden: 17, lid: 15 };
+let examTimer = null;
+
+function mischen(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  return a;
+}
+
+function startExam() {
+  const allg = mischen(allgemeineFragen).slice(0, PRUEFUNG.allgemein);
+  const land = mischen(bundeslandFragen[state.bundesland] || []).slice(0, PRUEFUNG.land);
+  state.exam = {
+    ids: allg.concat(land).map(f => f.id), answers: {}, current: 0,
+    start: Date.now(), dauer: PRUEFUNG.dauerMs, done: false, ergebnis: null, bundesland: state.bundesland
+  };
+  state.exam.confirm = false;
+  saveState(); render();
+}
+
+function restZeit() { return Math.max(0, state.exam.start + state.exam.dauer - Date.now()); }
+function fmtZeit(ms) {
+  const s = Math.ceil(ms / 1000), m = Math.floor(s / 60), r = s % 60;
+  return `${String(m).padStart(2, "0")}:${String(r).padStart(2, "0")}`;
+}
+
+function finishExam(zeitAbgelaufen) {
+  const ex = state.exam; if (!ex || ex.done) return;
+  let richtig = 0;
+  const falsch = [];
+  ex.ids.forEach(id => {
+    const f = FRAGE_BY_ID[id];
+    if (ex.answers[id] === f.richtig) richtig++;
+    else { falsch.push(id); state.fehler[id] = { richtigInFolge: 0 }; }  // in den Fehler-Ordner
+  });
+  const dauer = Math.min(Date.now() - ex.start, ex.dauer);
+  ex.done = true;
+  ex.ergebnis = { richtig, gesamt: ex.ids.length, dauer, zeitAbgelaufen: !!zeitAbgelaufen, datum: Date.now() };
+  state.examHistory.push({ richtig, gesamt: ex.ids.length, datum: Date.now(), bundesland: ex.bundesland });
+  state.examHistory = state.examHistory.slice(-10);
+  stopExamTimer(); saveState(); render();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function startExamTimer() {
+  stopExamTimer();
+  examTimer = setInterval(() => {
+    if (!state || !state.exam || state.exam.done) return stopExamTimer();
+    const rest = restZeit();
+    if (rest <= 0) return finishExam(true);
+    const t = $("examTimer");
+    if (t) { t.textContent = "⏱ " + fmtZeit(rest); t.classList.toggle("low", rest < 5 * 60 * 1000); }
+  }, 1000);
+}
+function stopExamTimer() { if (examTimer) { clearInterval(examTimer); examTimer = null; } }
+
+function renderExam() {
+  $("progressWrap").classList.add("hidden");
+  const ex = state.exam;
+  if (!ex) return renderExamIntro();
+  if (ex.done) return renderExamResult();
+  if (restZeit() <= 0) return finishExam(true);
+  renderExamQuestion();
+  startExamTimer();
+}
+
+function renderExamIntro() {
+  stopExamTimer();
+  const content = $("content"); content.innerHTML = "";
+  const landAnz = Math.min(PRUEFUNG.land, (bundeslandFragen[state.bundesland] || []).length);
+  const box = el("div", { class: "exam-intro" }, [
+    el("h2", { text: "🎯 Prüfungssimulation" }),
+    el("p", { style: "color:var(--muted);margin:0", text: "So wie der echte Einbürgerungstest:" }),
+    el("ul", {}, [
+      el("li", { text: `${PRUEFUNG.allgemein + landAnz} Fragen: ${PRUEFUNG.allgemein} allgemeine + ${landAnz} zu ${state.bundesland}` }),
+      el("li", { text: "60 Minuten Zeit – die Uhr läuft weiter, auch wenn du die App schließt" }),
+      el("li", { text: `Bestanden ab ${PRUEFUNG.bestanden} richtigen Antworten (Zertifikat „Leben in Deutschland“: ab ${PRUEFUNG.lid})` }),
+      el("li", { text: "Keine Lösungen während der Prüfung – Auswertung nach der Abgabe" }),
+      el("li", { text: "Falsche Antworten kommen automatisch in den Fehler-Ordner" })
+    ]),
+    el("p", { lang: "fa", dir: "rtl", text: "آزمون آزمایشی مثل آزمون واقعی: ۳۳ سؤال در ۶۰ دقیقه. با ۱۷ پاسخ درست قبول می‌شوید. پاسخ‌ها پس از پایان آزمون نشان داده می‌شوند." }),
+    el("div", { class: "actions", style: "justify-content:center" },
+      el("button", { class: "btn btn-primary", type: "button", id: "nextBtn", text: "Prüfung starten", onclick: startExam }))
+  ]);
+  content.append(box);
+  if (state.examHistory.length) {
+    content.append(el("div", { class: "history" }, [
+      el("b", { text: "Deine letzten Ergebnisse" }),
+      ...state.examHistory.slice().reverse().map(h => el("div", {
+        text: `${new Date(h.datum).toLocaleDateString("de-DE")} · ${h.richtig}/${h.gesamt} richtig · ` +
+              (h.richtig >= PRUEFUNG.bestanden ? "✅ bestanden" : "❌ nicht bestanden")
+      }))
+    ]));
+  }
+}
+
+function renderExamQuestion() {
+  const ex = state.exam, idx = ex.current, id = ex.ids[idx], frage = FRAGE_BY_ID[id];
+  const content = $("content"); content.innerHTML = "";
+  const rest = restZeit();
+  content.append(el("div", { class: "meta" }, [
+    el("span", { text: `Frage ${idx + 1} von ${ex.ids.length}` + (frage.bundesland ? " · Landesfrage" : "") }),
+    el("span", { class: "timer" + (rest < 5 * 60 * 1000 ? " low" : ""), id: "examTimer", text: "⏱ " + fmtZeit(rest) })
+  ]));
+  content.append(el("p", { class: "question", text: frage.frage }));
+  if (frage.bild) {
+    content.append(el("figure", { class: "q-figure" }, [
+      (() => { const img = bildElement(frage.bild, "Abbildung zur Frage", "q-img"); img.addEventListener("click", () => zeigeLightbox(frage.bild)); return img; })(),
+      el("div", { class: "img-credit", text: "🔍 Antippen zum Vergrößern" }),
+      frage.bildQuelle ? el("figcaption", { class: "img-credit", text: frage.bildQuelle }) : null
+    ]));
+  }
+  const mitBildern = !!frage.antwortBilder;
+  const list = el("div", { class: "answers" + (mitBildern ? " img-grid" : "") });
+  frage.antworten.forEach((txt, i) => {
+    const sel = ex.answers[id] === i;
+    const btn = el("button", { class: "answer" + (mitBildern ? " has-img" : "") + (sel ? " selected" : ""), type: "button" }, [
+      mitBildern && frage.antwortBilder[i] ? bildElement(frage.antwortBilder[i], txt, "a-img") : null,
+      el("span", { class: "a-label" }, [el("span", { class: "letter", text: LETTERS[i] }), el("span", { text: txt })])
+    ]);
+    btn.addEventListener("click", () => { ex.answers[id] = i; saveState(); renderExamQuestion(); });
+    list.append(btn);
+  });
+  content.append(list);
+
+  const letzte = idx === ex.ids.length - 1;
+  content.append(el("div", { class: "exam-nav" }, [
+    el("button", { class: "btn btn-ghost", type: "button", text: "← Zurück", onclick: () => gotoExam(idx - 1), ...(idx === 0 ? { disabled: "" } : {}) }),
+    letzte
+      ? el("button", { class: "btn btn-primary", type: "button", id: "nextBtn", text: "Prüfung abgeben", onclick: () => { ex.confirm = true; renderExamQuestion(); } })
+      : el("button", { class: "btn btn-primary", type: "button", id: "nextBtn", text: "Weiter →", onclick: () => gotoExam(idx + 1) })
+  ]));
+
+  // Übersicht aller Fragen (zum Springen)
+  const grid = el("div", { class: "exam-grid" });
+  ex.ids.forEach((qid, i) => grid.append(el("button", {
+    type: "button", text: String(i + 1), title: `Frage ${i + 1}`,
+    class: (ex.answers[qid] !== undefined ? "done" : "") + (i === idx ? " cur" : ""),
+    onclick: () => gotoExam(i)
+  })));
+  content.append(grid);
+
+  const offen = ex.ids.filter(q => ex.answers[q] === undefined).length;
+  if (ex.confirm) {
+    content.append(el("div", { class: "confirm-box" }, [
+      el("div", { text: offen ? `Noch ${offen} Frage(n) unbeantwortet. Trotzdem abgeben?` : "Alle Fragen beantwortet. Jetzt abgeben?" }),
+      el("div", { class: "row-btns" }, [
+        el("button", { class: "btn btn-ghost", type: "button", text: "Weiter bearbeiten", onclick: () => { ex.confirm = false; renderExamQuestion(); } }),
+        el("button", { class: "btn btn-danger", type: "button", text: "Ja, abgeben", onclick: () => finishExam(false) })
+      ])
+    ]));
+  } else {
+    content.append(el("div", { class: "actions" },
+      el("button", { class: "btn btn-ghost", type: "button", text: `Prüfung abgeben (${ex.ids.length - offen}/${ex.ids.length} beantwortet)`,
+        onclick: () => { ex.confirm = true; renderExamQuestion(); } })));
+  }
+}
+
+function gotoExam(i) {
+  const ex = state.exam; if (i < 0 || i >= ex.ids.length) return;
+  ex.current = i; ex.confirm = false; saveState(); renderExamQuestion();
+  window.scrollTo({ top: 0 });
+}
+
+function renderExamResult() {
+  stopExamTimer();
+  const ex = state.exam, e = ex.ergebnis;
+  const ok = e.richtig >= PRUEFUNG.bestanden;
+  const content = $("content"); content.innerHTML = "";
+  content.append(el("div", { class: "result-head" }, [
+    el("div", { class: "big", text: `${e.richtig} / ${e.gesamt}` }),
+    el("div", { class: "verdict " + (ok ? "ok" : "bad"), text: ok ? "✅ Bestanden" : "❌ Nicht bestanden" }),
+    el("p", { style: "color:var(--muted);margin:6px 0 0", text:
+      `Benötigt: ${PRUEFUNG.bestanden} richtige · Zeit: ${fmtZeit(e.dauer)} min` + (e.zeitAbgelaufen ? " (Zeit abgelaufen)" : "") }),
+    el("p", { lang: "fa", dir: "rtl", style: "text-align:center;margin:6px 0 0", text: ok ? "تبریک! شما قبول شدید." : "این بار قبول نشدید. سؤال‌های اشتباه در پوشهٔ اشتباه‌ها ذخیره شدند." })
+  ]));
+  const grid = el("div", { class: "exam-grid" });
+  ex.ids.forEach((id, i) => grid.append(el("button", { type: "button", text: String(i + 1),
+    class: ex.answers[id] === FRAGE_BY_ID[id].richtig ? "ok" : "bad",
+    onclick: () => { const t = document.getElementById("rv-" + i); if (t) t.scrollIntoView({ behavior: "smooth", block: "center" }); } })));
+  content.append(grid);
+
+  const falsch = ex.ids.map((id, i) => ({ id, i })).filter(x => ex.answers[x.id] !== FRAGE_BY_ID[x.id].richtig);
+  content.append(el("div", { class: "actions", style: "justify-content:center;gap:10px;flex-wrap:wrap" }, [
+    falsch.length ? el("button", { class: "btn btn-ghost", type: "button", text: "Fehler üben", onclick: () => switchTab("fehler") }) : null,
+    el("button", { class: "btn btn-primary", type: "button", id: "nextBtn", text: "Neue Prüfung", onclick: () => { state.exam = null; saveState(); render(); } })
+  ]));
+  if (falsch.length) {
+    content.append(el("h3", { style: "margin:22px 0 4px", text: `Falsch beantwortet (${falsch.length})` }));
+    falsch.forEach(({ id, i }) => {
+      const f = FRAGE_BY_ID[id], du = ex.answers[id];
+      content.append(el("div", { class: "review-item", id: "rv-" + i }, [
+        el("div", { class: "q", text: `${i + 1}. ${f.frage}` }),
+        el("div", { class: "line you", text: "✗ Deine Antwort: " + (du === undefined ? "keine" : f.antworten[du]) }),
+        el("div", { class: "line right", text: "✓ Richtig: " + f.antworten[f.richtig] }),
+        f.fa && f.fa.antwort ? el("div", { class: "line", lang: "fa", dir: "rtl", text: "پاسخ درست: " + f.fa.antwort + (f.fa.erklaerung ? " — " + f.fa.erklaerung : "") }) : null
+      ]));
+    });
+  }
+}
+
 function switchTab(tab) {
+  if (tab !== "pruefung") stopExamTimer();
   state.tab = tab;
   saveState();
   render();
