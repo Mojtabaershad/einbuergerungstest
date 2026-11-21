@@ -13,6 +13,11 @@
   /* Atkinson Hyperlegible: für maximale Lesbarkeit entworfen – ideal für Deutsch als Fremdsprache */
   @font-face { font-family: "Atkinson"; font-weight: 400; font-display: swap; src: url("fonts/atkinson-hyperlegible-latin-400-normal.woff2") format("woff2"); }
   @font-face { font-family: "Atkinson"; font-weight: 700; font-display: swap; src: url("fonts/atkinson-hyperlegible-latin-700-normal.woff2") format("woff2"); }
+  /* Zusatzzeichen z. B. für Türkisch (ğ, ş, ı, İ) */
+  @font-face { font-family: "Atkinson"; font-weight: 400; font-display: swap; src: url("fonts/atkinson-hyperlegible-latin-ext-400-normal.woff2") format("woff2");
+    unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: "Atkinson"; font-weight: 700; font-display: swap; src: url("fonts/atkinson-hyperlegible-latin-ext-700-normal.woff2") format("woff2");
+    unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
 </style>
 
 <style>
@@ -52,12 +57,11 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* Alle Farsi-Texte: Vazirmatn + RTL (dir="rtl" wird zusätzlich im HTML gesetzt) */
-  [lang="fa"] {
-    font-family: "Vazirmatn", Tahoma, sans-serif;
-    direction: rtl;
-    text-align: right;
-  }
+  /* Hilfssprachen: Farsi und Arabisch mit Vazirmatn (kann beide Schriften), Rechts-nach-links über dir="rtl" */
+  [lang="fa"], [lang="ar"] { font-family: "Vazirmatn", Tahoma, sans-serif; }
+  [lang="ru"] { font-family: "Atkinson", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }
+  [dir="rtl"] { direction: rtl; text-align: right; }
+  [dir="ltr"].hl { direction: ltr; text-align: left; }
 
   .hidden { display: none !important; }
 
@@ -412,6 +416,13 @@
 
   .result { border-radius: 12px; }
   .fa-box { border-right-color: var(--gold); border-radius: 14px; background: #fbfaf6; border-color: #ece6d6; }
+  .fa-box[dir="ltr"] { border-right: 1px solid #ece6d6; border-left: 4px solid var(--gold); }
+  header.cover .lang-chip { background: rgba(255,255,255,.08); color: #fff; border: 1px solid rgba(255,255,255,.28); border-radius: 999px;
+    padding: 7px 12px; font-size: .9rem; font-weight: 700; display: inline-flex; gap: 6px; align-items: center; }
+  header.cover .lang-chip:hover { background: rgba(255,255,255,.16); }
+  .chips { display: flex; gap: 8px; flex-wrap: wrap; }
+  .lang-row { display: flex; flex-wrap: wrap; gap: 6px 10px; justify-content: center; color: var(--muted); font-size: .92rem; margin: 2px 0 18px; }
+  .lang-row span[lang="fa"], .lang-row span[lang="ar"] { font-size: 1rem; }
   .fa-box h3 { color: #7a5a17; }
   .tool-btn.on { background: var(--gold-soft); border-color: var(--gold); color: #7a5a17; }
   .exam-grid button.done { background: var(--primary-soft); color: var(--primary); }
@@ -483,10 +494,10 @@
     <div class="login-cover">
       <span class="brand-mark big" aria-hidden="true"></span>
       <h1>Einbürgerungstest</h1>
-      <div class="login-sub">Trainer mit Farsi-Hilfe · 460 Fragen</div>
+      <div class="login-sub">Mit Übersetzung in 5 Sprachen · 460 Fragen</div>
     </div>
     <p>Erstelle ein kostenloses Konto. Dein Lernfortschritt wird sicher gespeichert – auf Handy und Laptop.</p>
-    <p lang="fa" dir="rtl">یک حساب رایگان بسازید و وارد شوید. پیشرفت شما روی همهٔ دستگاه‌ها ذخیره می‌شود.</p>
+    <div class="lang-row" aria-label="Verfügbare Hilfssprachen"><span lang="fa">فارسی</span><span lang="ar">العربية</span><span>Türkçe</span><span lang="ru">Русский</span><span>English</span></div>
 
     <div id="authLoading" class="hint">⏳ Verbindung wird hergestellt …</div>
 
@@ -541,6 +552,10 @@
           <label for="bundeslandSelect">Bundesland <span style="color:var(--red)">*</span></label>
           <select id="bundeslandSelect" required></select>
         </div>
+        <div class="field">
+          <label for="regSprache">Deine Sprache für Übersetzungen <span style="color:var(--red)">*</span></label>
+          <select id="regSprache" required></select>
+        </div>
         <label class="consent"><input type="checkbox" id="regConsent">
           <span>Ich habe die <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzhinweise</a> gelesen und bin mit der Speicherung meiner E-Mail-Adresse und meines Lernfortschritts einverstanden.</span></label>
         <div class="error-text" id="regError"></div>
@@ -567,7 +582,10 @@
         </div>
       </div>
       <div class="cover-bottom">
-        <button class="bl-chip" id="changeBlBtn" title="Bundesland ändern"><span class="pin" aria-hidden="true">📍</span><span id="blLabel"></span><span class="chip-edit">ändern</span></button>
+        <div class="chips">
+          <button class="bl-chip" id="changeBlBtn" title="Bundesland ändern"><span class="pin" aria-hidden="true">📍</span><span id="blLabel"></span><span class="chip-edit">ändern</span></button>
+          <button class="lang-chip" id="changeLangBtn" title="Sprache der Übersetzung ändern"><span aria-hidden="true">🌐</span><span id="langLabel"></span></button>
+        </div>
         <div class="account"><span class="user-email" id="userEmail"></span><span class="sync" id="syncState" title="Speicherstatus"></span></div>
       </div>
     </header>
@@ -707,13 +725,12 @@ function pruefeFrage(f, herkunft) {
     bild: istText(f.bild) ? f.bild.trim() : "",
     bildQuelle: istText(f.bildQuelle) ? f.bildQuelle.trim() : "",
     antwortBilder: null,
-    fa: (f.fa && typeof f.fa === "object") ? f.fa : null
+    fa: null   // Übersetzungen kommen aus sprachen/<code>.js
   };
   if (Array.isArray(f.antwortBilder) && f.antwortBilder.some(istText)) {
     if (f.antwortBilder.length !== 4) DATEN_WARNUNGEN.push(`${wo}: antwortBilder sollte 4 Einträge haben`);
     sauber.antwortBilder = [0, 1, 2, 3].map(i => istText(f.antwortBilder[i]) ? f.antwortBilder[i].trim() : "");
   }
-  if (!sauber.fa) DATEN_WARNUNGEN.push(`${wo}: keine Farsi-Hilfe (fa) – Hinweis wird angezeigt`);
   return sauber;
 }
 
@@ -804,7 +821,7 @@ function defaultState() {
     review: { currentId: null, chosen: null, msg: null },
     fehler: {},
     stats: { beantwortet: 0, richtig: 0 },
-    prefs: { faVorher: false },   // Lernhilfen-Einstellungen
+    prefs: { faVorher: false, sprache: "fa" },   // Lernhilfen: Übersetzung vorher zeigen, Hilfssprache
     exam: null,          // laufende/abgeschlossene Prüfungssimulation
     examHistory: []      // letzte Ergebnisse
   };
@@ -828,7 +845,7 @@ function normalizeState(saved) {
     review: Object.assign(base.review, saved.review || {}),
     fehler: {},
     stats: Object.assign(base.stats, saved.stats || {}),
-    prefs: Object.assign({ faVorher: false }, saved.prefs || {}),
+    prefs: Object.assign({ faVorher: false, sprache: "fa" }, saved.prefs || {}),
     exam: null,
     examHistory: Array.isArray(saved.examHistory) ? saved.examHistory.slice(-10) : [],
     updatedAt: Number(saved.updatedAt) || 0
@@ -977,6 +994,8 @@ async function registrieren() {
   if (pw.length < 8) { err.textContent = "Das Passwort muss mindestens 8 Zeichen lang sein."; return $("regPassword").focus(); }
   if (pw !== pw2) { err.textContent = "Die beiden Passwörter stimmen nicht überein."; return $("regPassword2").focus(); }
   if (!BUNDESLAENDER.includes(bl)) { err.textContent = "Bitte wähle dein Bundesland aus."; return $("bundeslandSelect").focus(); }
+  const sprache = $("regSprache").value;
+  if (!SPRACH_CODES.includes(sprache)) { err.textContent = "Bitte wähle deine Sprache aus."; return $("regSprache").focus(); }
   if (!$("regConsent").checked) { err.textContent = "Bitte bestätige die Datenschutzhinweise."; return; }
   const btn = $("regSubmit"); busy(btn, true, "Konto wird erstellt …");
   registrierungLaeuft = true;
@@ -985,7 +1004,7 @@ async function registrieren() {
     // Startzustand mit Bundesland anlegen – inkl. evtl. vorhandenem altem Fortschritt dieser E-Mail
     const alt = readSaved(email);
     const start = normalizeState(alt || {});
-    start.bundesland = bl; start.updatedAt = Date.now();
+    start.bundesland = bl; start.prefs.sprache = sprache; start.updatedAt = Date.now();
     await window.FB.saveState(user.uid, JSON.stringify(start), email).catch(() => {});
     await window.FB.sendVerification().catch(() => {});
     await window.FB.logout();
@@ -1023,7 +1042,9 @@ async function passwortVergessen() {
 }
 
 /** Nach erfolgreicher Anmeldung: Fortschritt laden (Cloud ↔ lokal) und App starten */
+let sitzungNr = 0;   // schützt vor veralteten Ladevorgängen, wenn sich der Anmeldestatus zwischendurch ändert
 async function startSession(user) {
+  const meine = ++sitzungNr;
   currentUser = { uid: user.uid, email: (user.email || "").toLowerCase() };
   $("authForms").classList.add("hidden");
   $("authLoading").classList.remove("hidden");
@@ -1031,6 +1052,7 @@ async function startSession(user) {
 
   let cloud = null;
   try { const d = await window.FB.loadState(user.uid); cloud = d && d.state ? parseJSON(d.state) : null; } catch (e) { cloud = null; }
+  if (meine !== sitzungNr) return;
   const lokal = parseJSON(storage.get(LOCAL_PREFIX + user.uid));
   const alt = readSaved(currentUser.email);                       // Fortschritt aus der Zeit vor den Konten
   // Den neuesten Stand verwenden
@@ -1044,6 +1066,8 @@ async function startSession(user) {
   $("loginScreen").classList.add("hidden");
   $("appScreen").classList.remove("hidden");
 
+  await ladeSprache(aktSprache());
+  if (meine !== sitzungNr || !state) return;
   if (!state.bundesland) { openBlModal(true); return; }            // Pflichtauswahl, falls noch keins gespeichert
   applyBundesland();
   saveState();
@@ -1051,6 +1075,7 @@ async function startSession(user) {
 }
 
 function endeSession() {
+  sitzungNr++;
   stopExamTimer(); stopVorlesen();
   currentUser = null; state = null;
   $("appScreen").classList.add("hidden");
@@ -1161,6 +1186,71 @@ function frageTags(frage) {
 }
 
 /* =====================================================================
+   HILFSSPRACHEN
+   ---------------------------------------------------------------------
+   Jede Sprache liegt in sprachen/<code>.js und wird erst bei Bedarf geladen.
+   Inhalt: ui (Texte der Bedienung) und fragen { id: { frage, antworten[4], erklaerung } }.
+   "de" = keine Übersetzung.
+   ===================================================================== */
+const SPRACHEN = [
+  { code: "fa", name: "فارسی / دری (Farsi/Dari)", kurz: "فارسی", dir: "rtl" },
+  { code: "ar", name: "العربية (Arabisch)", kurz: "العربية", dir: "rtl" },
+  { code: "tr", name: "Türkçe (Türkisch)", kurz: "Türkçe", dir: "ltr" },
+  { code: "ru", name: "Русский (Russisch)", kurz: "Русский", dir: "ltr" },
+  { code: "en", name: "English (Englisch)", kurz: "English", dir: "ltr" },
+  { code: "de", name: "Keine Übersetzung – nur Deutsch", kurz: "Nur Deutsch", dir: "ltr" }
+];
+const SPRACH_CODES = SPRACHEN.map(x => x.code);
+const sprachInfo = c => SPRACHEN.find(x => x.code === c) || SPRACHEN[0];
+const ladeVersuche = {};
+
+/** Sprachdatei nachladen (einmalig); liefert true, wenn verfügbar */
+function ladeSprache(code) {
+  if (code === "de") return Promise.resolve(true);
+  const U = window.UEBERSETZUNGEN || {};
+  if (U[code]) return Promise.resolve(true);
+  if (ladeVersuche[code]) return ladeVersuche[code];
+  ladeVersuche[code] = new Promise(res => {
+    const sc = document.createElement("script");
+    sc.src = `sprachen/${code}.js`;
+    sc.onload = () => res(!!(window.UEBERSETZUNGEN || {})[code]);
+    sc.onerror = () => { delete ladeVersuche[code]; res(false); };
+    document.head.append(sc);
+  });
+  return ladeVersuche[code];
+}
+function aktSprache() { return (state && state.prefs && SPRACH_CODES.includes(state.prefs.sprache)) ? state.prefs.sprache : "fa"; }
+function sprachDaten() { const c = aktSprache(); return c === "de" ? null : ((window.UEBERSETZUNGEN || {})[c] || null); }
+/** Übersetzung einer Frage in der gewählten Sprache (oder null) */
+function hilfe(frage) { const d = sprachDaten(); return d && d.fragen ? (d.fragen[frage.id] || null) : null; }
+/** Bedienungstext in der gewählten Sprache */
+function T(key) { const d = sprachDaten(); return d && d.ui ? (d.ui[key] || "") : ""; }
+/** lang/dir-Attribute für Hilfetexte */
+function hl(extra) { const c = aktSprache(); return Object.assign({ lang: c, dir: sprachInfo(c).dir }, extra || {}); }
+
+/* ---------- Modal: Sprache ändern ---------- */
+function oeffneSprachwahl() {
+  stopVorlesen();
+  const sel = el("select", { "aria-label": "Sprache wählen" });
+  SPRACHEN.forEach(x => sel.append(new Option(x.name, x.code)));
+  sel.value = aktSprache();
+  const box = el("div", { class: "modal-backdrop", id: "langModal" }, el("div", { class: "modal", role: "dialog", "aria-label": "Sprache ändern" }, [
+    el("h2", { text: "Sprache der Übersetzung" }),
+    el("p", { text: "Die Fragen bleiben auf Deutsch – wie in der echten Prüfung. Übersetzungen und Erklärungen erscheinen in dieser Sprache." }),
+    sel,
+    el("div", { class: "row-btns" }, [
+      el("button", { class: "btn btn-ghost", type: "button", text: "Abbrechen", onclick: () => box.remove() }),
+      el("button", { class: "btn btn-primary", type: "button", text: "Übernehmen", onclick: async () => {
+        const c = sel.value; await ladeSprache(c);
+        state.prefs.sprache = c; saveState(); box.remove(); render();
+      } })
+    ])
+  ]));
+  box.addEventListener("click", e => { if (e.target === box) box.remove(); });
+  document.body.append(box); sel.focus();
+}
+
+/* =====================================================================
    LERNHILFEN: Vorlesen, Farsi-Optionen, Suche
    ===================================================================== */
 const kannVorlesen = typeof window.speechSynthesis !== "undefined" && typeof window.SpeechSynthesisUtterance !== "undefined";
@@ -1185,10 +1275,8 @@ function stopVorlesen() { try { if (kannVorlesen) speechSynthesis.cancel(); } ca
 
 /** Farsi-Übersetzung einer Antwortoption (falls vorhanden) */
 function faOption(frage, i) {
-  const fa = frage.fa || {};
-  if (Array.isArray(fa.antworten) && istText(fa.antworten[i])) return fa.antworten[i];
-  if (i === frage.richtig && istText(fa.antwort)) return fa.antwort;
-  return "";
+  const h = hilfe(frage);
+  return h && Array.isArray(h.antworten) && istText(h.antworten[i]) ? h.antworten[i] : "";
 }
 
 /** Werkzeugleiste unter der Frage: Vorlesen + Farsi-Hilfe vor dem Antworten */
@@ -1199,10 +1287,10 @@ function frageWerkzeuge(frage, answered) {
     b.addEventListener("click", () => vorlesen(frage, b));
     bar.append(b);
   }
-  if (!answered && frage.fa) {
+  if (!answered && hilfe(frage)) {
     const on = !!(state.prefs && state.prefs.faVorher);
-    const b = el("button", { class: "tool-btn" + (on ? " on" : ""), type: "button", title: "Farsi-Übersetzung schon vor dem Antworten zeigen" },
-      [el("span", { text: "🌐" }), el("span", { class: "fa-lbl", text: on ? "ترجمه روشن" : "ترجمه فارسی" })]);
+    const b = el("button", { class: "tool-btn" + (on ? " on" : ""), type: "button", title: "Übersetzung schon vor dem Antworten zeigen" },
+      [el("span", { text: "🌐" }), el("span", hl({ class: "fa-lbl", text: on ? T("an") : T("aus") }))]);
     b.addEventListener("click", () => { state.prefs = state.prefs || {}; state.prefs.faVorher = !on; saveState(); render(); });
     bar.append(b);
   }
@@ -1214,7 +1302,7 @@ function oeffneSuche() {
   stopVorlesen();
   const input = el("input", { type: "search", placeholder: "Nummer (z. B. 112) oder Suchwort (z. B. Grundgesetz)", "aria-label": "Fragen suchen" });
   const results = el("div", { class: "search-results" });
-  const hint = el("div", { class: "search-hint", text: "Tipp: Eine Zahl springt direkt zur allgemeinen Frage mit dieser Katalog-Nummer. Auch Farsi-Wörter werden gefunden." });
+  const hint = el("div", { class: "search-hint", text: "Tipp: Eine Zahl springt direkt zur allgemeinen Frage mit dieser Katalog-Nummer. Auch Wörter in deiner Sprache werden gefunden." });
   const box = el("div", { class: "modal-backdrop", id: "searchModal" }, el("div", { class: "modal search-panel", role: "dialog", "aria-label": "Fragen suchen" }, [
     el("h2", { text: "🔎 Frage suchen" }), input, hint, results,
     el("div", { class: "row-btns" }, el("button", { class: "btn btn-ghost", type: "button", text: "Schließen", onclick: () => box.remove() }))
@@ -1232,7 +1320,7 @@ function oeffneSuche() {
       const w = norm(q);
       treffer = FRAGEN.map((f, i) => ({ f, i })).filter(({ f }) =>
         norm(f.frage).includes(w) || f.antworten.some(a => norm(a).includes(w)) ||
-        (f.fa && (norm(f.fa.frage).includes(w) || norm(f.fa.antwort).includes(w))));
+        (hilfe(f) && (norm(hilfe(f).frage).includes(w) || (hilfe(f).antworten || []).some(a => norm(a).includes(w)))));
     }
     if (!treffer.length) { results.append(el("div", { class: "search-hint", text: "Keine Treffer." })); return; }
     treffer.slice(0, 50).forEach(({ f, i }) => {
@@ -1264,6 +1352,8 @@ function oeffneSuche() {
    ===================================================================== */
 function render() {
   stopVorlesen();
+  const li = sprachInfo(aktSprache());
+  $("langLabel").textContent = li.kurz;
   $("blLabel").textContent = state.bundesland;
   $("tabAlle").classList.toggle("active", state.tab === "alle");
   $("tabFehler").classList.toggle("active", state.tab === "fehler");
@@ -1291,9 +1381,10 @@ function buildQuestionCard({ frage, chosen, metaLeft, tags, onAnswer, onNext, re
   ]));
   content.append(el("p", { class: "question", text: frage.frage }));
   const answered = chosen !== null && chosen !== undefined;
-  const faVorher = !answered && !!(state.prefs && state.prefs.faVorher) && frage.fa;
+  const H = hilfe(frage);
+  const faVorher = !answered && !!(state.prefs && state.prefs.faVorher) && !!H;
   content.append(frageWerkzeuge(frage, answered));
-  if (faVorher && istText(frage.fa.frage)) content.append(el("div", { class: "fa-q", lang: "fa", dir: "rtl", text: frage.fa.frage }));
+  if (faVorher && istText(H.frage)) content.append(el("div", hl({ class: "fa-q hl", text: H.frage })));
 
   // Optionales Fragebild (z. B. Landkarte)
   if (frage.bild) {
@@ -1322,7 +1413,7 @@ function buildQuestionCard({ frage, chosen, metaLeft, tags, onAnswer, onNext, re
         el("span", { class: "a-text" }, [
           el("span", { text: txt }),
           (faVorher || answered) && !mitBildern && faOption(frage, i) && faOption(frage, i) !== txt
-            ? el("span", { class: "a-fa", lang: "fa", dir: "rtl", text: faOption(frage, i) }) : null
+            ? el("span", hl({ class: "a-fa hl", text: faOption(frage, i) })) : null
         ])
       ])
     ]);
@@ -1336,29 +1427,29 @@ function buildQuestionCard({ frage, chosen, metaLeft, tags, onAnswer, onNext, re
     content.append(el("div", { class: "result " + (resultOk ? "ok" : "bad"), text: resultMsg }));
 
     // Farsi-Infokasten (RTL + Vazirmatn)
-    // (fa ist optional – fehlende Teile werden einfach weggelassen)
-    const fa = frage.fa || {};
+    // Hilfe in der gewählten Sprache (fehlende Teile werden weggelassen; "Nur Deutsch" = kein Kasten)
+    const fa = H ? { frage: H.frage, antwort: faOption(frage, frage.richtig), antworten: H.antworten, erklaerung: H.erklaerung } : {};
     const zeile = (label, wert) => istText(wert)
       ? el("div", { class: "row" }, [el("span", { class: "label", text: label }), el("span", { text: wert })])
       : null;
     const zeilen = [
-      zeile("ترجمهٔ سؤال: ", fa.frage),
-      zeile("پاسخ درست: ", fa.antwort),
-      zeile("توضیح: ", fa.erklaerung)
+      zeile(T("frage") + " ", fa.frage),
+      zeile(T("antwort") + " ", fa.antwort),
+      zeile(T("erklaerung") + " ", fa.erklaerung)
     ].filter(Boolean);
     // alle vier Antwortmöglichkeiten auf Farsi (falls vorhanden)
     if (Array.isArray(fa.antworten) && fa.antworten.some(istText)) {
       zeilen.push(el("div", { class: "row" }, [
-        el("span", { class: "label", text: "همهٔ گزینه‌ها:" }),
+        el("span", { class: "label", text: T("optionen") }),
         el("ul", { class: "fa-opts" }, frage.antworten.map((_, i) => el("li", {
           class: i === frage.richtig ? "ok" : "",
-          text: `${"الف ب ج د".split(" ")[i]}) ${faOption(frage, i) || "—"}${i === frage.richtig ? " ✓" : ""}`
+          text: `${(sprachDaten().ui.buchstaben || LETTERS)[i]}) ${faOption(frage, i) || "—"}${i === frage.richtig ? " ✓" : ""}`
         })))
       ]));
     }
-    content.append(el("div", { class: "fa-box", lang: "fa", dir: "rtl" }, [
-      el("h3", { text: "راهنمای فارسی" }),
-      ...(zeilen.length ? zeilen : [el("div", { class: "row muted", text: "ترجمهٔ فارسی برای این سؤال هنوز اضافه نشده است." })])
+    if (sprachDaten()) content.append(el("div", hl({ class: "fa-box hl" }), [
+      el("h3", { text: T("titel") }),
+      ...(zeilen.length ? zeilen : [el("div", { class: "row muted", text: T("fehlt") })])
     ]));
 
     if (onRedo) content.append(el("div", { class: "redo-row" },
@@ -1507,7 +1598,7 @@ function renderReview() {
       el("div", { class: "icon", text: "✅" }),
       el("h2", { text: "Fehler-Ordner ist leer" }),
       el("p", { text: "Falsch beantwortete Fragen aus „Alle Fragen“ landen automatisch hier." }),
-      el("p", { lang: "fa", dir: "rtl", style: "text-align:center", text: "پوشهٔ اشتباه‌ها خالی است. سؤال‌هایی که اشتباه جواب بدهید، خودکار اینجا ذخیره می‌شوند." }),
+      T("fehlerLeer") ? el("p", hl({ style: "text-align:center", text: T("fehlerLeer") })) : null,
       el("div", { class: "actions", style: "justify-content:center" },
         el("button", { class: "btn btn-primary", type: "button", text: "Zu allen Fragen", onclick: () => switchTab("alle") }))
     ]));
@@ -1657,7 +1748,7 @@ function renderExamIntro() {
       el("li", { text: "Keine Lösungen während der Prüfung – Auswertung nach der Abgabe" }),
       el("li", { text: "Falsche Antworten kommen automatisch in den Fehler-Ordner" })
     ]),
-    el("p", { lang: "fa", dir: "rtl", text: "آزمون آزمایشی مثل آزمون واقعی: ۳۳ سؤال در ۶۰ دقیقه. با ۱۷ پاسخ درست قبول می‌شوید. پاسخ‌ها پس از پایان آزمون نشان داده می‌شوند." }),
+    T("examIntro") ? el("p", hl({ text: T("examIntro") })) : null,
     el("div", { class: "actions", style: "justify-content:center" },
       el("button", { class: "btn btn-primary", type: "button", id: "nextBtn", text: "Prüfung starten", onclick: startExam }))
   ]);
@@ -1751,7 +1842,7 @@ function renderExamResult() {
     el("div", { class: "verdict " + (ok ? "ok" : "bad"), text: ok ? "Bestanden" : "Nicht bestanden" }),
     el("p", { style: "color:var(--muted);margin:6px 0 0", text:
       `Benötigt: ${PRUEFUNG.bestanden} richtige · Zeit: ${fmtZeit(e.dauer)} min` + (e.zeitAbgelaufen ? " (Zeit abgelaufen)" : "") }),
-    el("p", { lang: "fa", dir: "rtl", style: "text-align:center;margin:6px 0 0", text: ok ? "تبریک! شما قبول شدید." : "این بار قبول نشدید. سؤال‌های اشتباه در پوشهٔ اشتباه‌ها ذخیره شدند." })
+    T(ok ? "bestanden" : "nichtBestanden") ? el("p", hl({ style: "text-align:center;margin:6px 0 0", text: T(ok ? "bestanden" : "nichtBestanden") })) : null
   ]));
   const grid = el("div", { class: "exam-grid" });
   ex.ids.forEach((id, i) => grid.append(el("button", { type: "button", text: String(i + 1),
@@ -1772,7 +1863,7 @@ function renderExamResult() {
         el("div", { class: "q", text: `${i + 1}. ${f.frage}` }),
         el("div", { class: "line you", text: "✗ Deine Antwort: " + (du === undefined ? "keine" : f.antworten[du]) }),
         el("div", { class: "line right", text: "✓ Richtig: " + f.antworten[f.richtig] }),
-        f.fa && f.fa.antwort ? el("div", { class: "line", lang: "fa", dir: "rtl", text: "پاسخ درست: " + f.fa.antwort + (f.fa.erklaerung ? " — " + f.fa.erklaerung : "") }) : null
+        hilfe(f) ? el("div", hl({ class: "line hl", text: T("antwort") + " " + faOption(f, f.richtig) + (hilfe(f).erklaerung ? " — " + hilfe(f).erklaerung : "") })) : null
       ]));
     });
   }
@@ -1791,6 +1882,11 @@ function switchTab(tab) {
    ===================================================================== */
 fillBundeslandSelect($("bundeslandSelect"), true);
 fillBundeslandSelect($("blModalSelect"), false);
+(function () {
+  const s = $("regSprache"); const ph = new Option("Bitte Sprache auswählen …", ""); ph.disabled = true; ph.selected = true; s.append(ph);
+  SPRACHEN.forEach(x => s.append(new Option(x.name, x.code)));
+})();
+$("changeLangBtn").addEventListener("click", oeffneSprachwahl);
 
 $("loginForm").addEventListener("submit", e => { e.preventDefault(); anmelden(); });
 $("registerForm").addEventListener("submit", e => { e.preventDefault(); registrieren(); });
@@ -1817,7 +1913,7 @@ document.querySelectorAll(".tab").forEach(t => t.addEventListener("click", () =>
 // Tastatur: 1–4 = Antwort, Enter = weiter, Esc = Modal schließen
 document.addEventListener("keydown", e => {
   if (!state || $("appScreen").classList.contains("hidden")) return;
-  if (document.getElementById("searchModal")) return;
+  if (document.getElementById("searchModal") || document.getElementById("langModal")) return;
   if (!$("blModal").classList.contains("hidden")) {
     if (e.key === "Escape") closeBlModal();
     return;
