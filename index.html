@@ -418,6 +418,13 @@
   .exam-grid button.cur { border-color: var(--primary); }
   .timer { background: var(--gold-soft); color: #7a5a17; }
 
+  /* Navigation unter der Frage */
+  .q-nav { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 20px;
+    padding-top: 16px; border-top: 1px solid var(--border); }
+  .nav-btn { min-height: 46px; padding: 10px 18px; }
+  .nav-btn:disabled { opacity: .4; cursor: default; }
+  .redo-row { margin-top: 8px; }
+
   /* Prüfungsergebnis als Amtsstempel – der eine laute Moment */
   .result-head { padding: 18px 0 6px; }
   .result-head .big { font-size: 3rem; letter-spacing: -.02em; }
@@ -583,7 +590,7 @@
     </div>
 
     <main class="card" id="content"></main>
-    <div class="kbd-hint">Tastatur: <b>1–4</b> wählt eine Antwort, <b>Enter</b> geht weiter.</div>
+    <div class="kbd-hint">Tastatur: <b>1–4</b> wählt eine Antwort, <b>←</b> / <b>→</b> blättert, <b>Enter</b> geht weiter.</div>
   </div>
 </section>
 
@@ -793,7 +800,7 @@ function defaultState() {
   return {
     bundesland: null,
     tab: "alle",
-    main: { index: 0, chosen: null },
+    main: { index: 0, chosen: null, antworten: {} },   // antworten: { frageId: 0–3 }
     review: { currentId: null, chosen: null, msg: null },
     fehler: {},
     stats: { beantwortet: 0, richtig: 0 },
@@ -836,6 +843,13 @@ function normalizeState(saved) {
       done: !!ex.done, ergebnis: ex.ergebnis || null, bundesland: ex.bundesland || null
     };
   }
+  // Antworten im Hauptmodus säubern
+  const ant = {};
+  if (s.main.antworten && typeof s.main.antworten === "object") {
+    for (const [id, v] of Object.entries(s.main.antworten)) if (FRAGE_BY_ID[id] && Number.isInteger(v) && v >= -1 && v <= 3) ant[id] = v;
+  }
+  s.main.antworten = ant;
+  s.main.altMigration = !saved.main || !saved.main.antworten;   // alter Stand ohne Antwort-Liste
   // Nur Fehler-Einträge übernehmen, deren Frage noch existiert
   for (const [id, entry] of Object.entries(saved.fehler || {})) {
     if (FRAGE_BY_ID[id]) s.fehler[id] = { richtigInFolge: Number(entry && entry.richtigInFolge) || 0 };
@@ -851,6 +865,14 @@ function applyBundesland() {
   FRAGEN = fragenFuer(state.bundesland);
   FRAGEN_IDS = new Set(FRAGEN.map(f => f.id));
   const m = state.main;
+  // Übernahme aus der Zeit vor der freien Navigation: alles vor der aktuellen Frage gilt als beantwortet
+  if (m.altMigration) {
+    const bis = Math.min(Number(m.index) || 0, FRAGEN.length);
+    for (let i = 0; i < bis; i++) if (m.antworten[FRAGEN[i].id] === undefined) m.antworten[FRAGEN[i].id] = -1;
+    if (Number.isInteger(m.chosen) && FRAGEN[m.index]) m.antworten[FRAGEN[m.index].id] = m.chosen;
+    m.chosen = null;
+  }
+  delete m.altMigration;
   if (!Number.isInteger(m.index) || m.index < 0 || m.index > FRAGEN.length) { m.index = 0; m.chosen = null; }
   if (m.index === FRAGEN.length) m.chosen = null;
   // Aktuelle Fehler-Frage gehört nicht (mehr) zum Ablauf -> neu wählen
@@ -866,7 +888,7 @@ function setBundesland(neu) {
   state.bundesland = neu;
   // Stand der Nutzer bereits im Landesteil (oder war fertig) -> an den Anfang der neuen Landesfragen
   if (hatteSchon && state.main.index >= allgemeineFragen.length) {
-    state.main = { index: allgemeineFragen.length, chosen: null };
+    state.main.index = allgemeineFragen.length; state.main.chosen = null;
   }
   applyBundesland();
 }
@@ -1220,7 +1242,7 @@ function oeffneSuche() {
       ]);
       b.addEventListener("click", () => {
         box.remove();
-        state.main = { index: i, chosen: null }; state.tab = "alle"; saveState(); render();
+        state.main.index = i; state.main.chosen = null; state.tab = "alle"; saveState(); render();
         window.scrollTo({ top: 0, behavior: "smooth" });
       });
       results.append(b);
@@ -1256,7 +1278,8 @@ function render() {
 }
 
 /** Baut die Fragekarte (für beide Modi) */
-function buildQuestionCard({ frage, chosen, metaLeft, tags, onAnswer, onNext, resultMsg, resultOk, nextLabel, notice }) {
+function buildQuestionCard({ frage, chosen, metaLeft, tags, onAnswer, onNext, resultMsg, resultOk, nextLabel, notice,
+                             onPrev, onSkip, skipLabel, onRedo }) {
   const content = $("content");
   content.innerHTML = "";
 
@@ -1338,20 +1361,39 @@ function buildQuestionCard({ frage, chosen, metaLeft, tags, onAnswer, onNext, re
       ...(zeilen.length ? zeilen : [el("div", { class: "row muted", text: "ترجمهٔ فارسی برای این سؤال هنوز اضافه نشده است." })])
     ]));
 
-    const next = el("button", { class: "btn btn-primary", type: "button", id: "nextBtn", text: nextLabel || "Weiter →" });
-    next.addEventListener("click", onNext);
-    content.append(el("div", { class: "actions" }, next));
-    next.focus({ preventScroll: true });
+    if (onRedo) content.append(el("div", { class: "redo-row" },
+      el("button", { class: "link-btn", type: "button", text: "↺ Nochmal beantworten", onclick: onRedo })));
+  }
+
+  // Navigation: Zurück | Weiter (nach dem Antworten) bzw. Überspringen (vorher)
+  const prevBtn = onPrev !== undefined
+    ? el("button", { class: "btn btn-ghost nav-btn", type: "button", id: "prevBtn", text: "← Zurück", title: "Vorherige Frage (Pfeiltaste links)" })
+    : null;
+  if (prevBtn) { if (onPrev) prevBtn.addEventListener("click", onPrev); else prevBtn.disabled = true; }
+  let nextBtn = null;
+  if (answered) {
+    nextBtn = el("button", { class: "btn btn-primary nav-btn", type: "button", id: "nextBtn", text: nextLabel || "Weiter →", title: "Nächste Frage (Pfeiltaste rechts)" });
+    nextBtn.addEventListener("click", onNext);
+  } else if (onSkip) {
+    nextBtn = el("button", { class: "btn btn-ghost nav-btn", type: "button", id: "nextBtn", text: skipLabel || "Überspringen →", title: "Weiter ohne Antwort (Pfeiltaste rechts)" });
+    nextBtn.addEventListener("click", onSkip);
+  }
+  if (prevBtn || nextBtn) {
+    content.append(el("div", { class: "q-nav" }, [prevBtn || el("span"), nextBtn || el("span")]));
+    if (answered && nextBtn) nextBtn.focus({ preventScroll: true });
   }
 }
 
 /* ---------- Hauptmodus: allgemeine Fragen, danach Landesfragen ---------- */
+/** gespeicherte Antwort im Hauptmodus: 0–3, -1 = früher beantwortet (vor der Navigation), undefined = offen */
+function mainAntwort(id) { const v = state.main.antworten[id]; return Number.isInteger(v) ? v : undefined; }
+
 function renderMain() {
   $("progressWrap").classList.remove("hidden");
   const idx = state.main.index;
   const total = FRAGEN.length;
-  const done = Math.min(idx + (state.main.chosen !== null ? 1 : 0), total);
-  $("progressLabel").textContent = `Fortschritt: ${done} / ${total}`;
+  const done = FRAGEN.filter(f => mainAntwort(f.id) !== undefined).length;
+  $("progressLabel").textContent = `Beantwortet: ${done} / ${total}`;
   const quote = state.stats.beantwortet ? Math.round(100 * state.stats.richtig / state.stats.beantwortet) : 0;
   $("scoreLabel").textContent = `Trefferquote: ${quote} %`;
   $("progressBar").style.width = (total ? 100 * done / total : 0) + "%";
@@ -1374,6 +1416,7 @@ function renderMain() {
         el("div", { class: "stat" }, [el("b", { text: quote + " %" }), el("span", { text: "Quote" })])
       ]),
       el("div", { class: "actions", style: "justify-content:center; gap:10px; flex-wrap:wrap" }, [
+        el("button", { class: "btn btn-ghost", type: "button", id: "prevBtn", text: "← Zurück zur letzten Frage", onclick: () => gotoMain(total - 1) }),
         n ? el("button", { class: "btn btn-ghost", type: "button", text: "Zum Fehler-Ordner", onclick: () => switchTab("fehler") }) : null,
         el("button", { class: "btn btn-primary", type: "button", text: "Von vorne beginnen", onclick: restartMain })
       ])
@@ -1382,7 +1425,8 @@ function renderMain() {
   }
 
   const frage = FRAGEN[idx];
-  const chosen = state.main.chosen;
+  const gespeichert = mainAntwort(frage.id);
+  const chosen = gespeichert !== undefined && gespeichert >= 0 ? gespeichert : null;
   const isRight = chosen === frage.richtig;
   const istLandesfrage = idx >= allgemeineFragen.length;
   const tags = frageTags(frage);
@@ -1399,17 +1443,31 @@ function renderMain() {
       ? `Die allgemeinen Fragen sind geschafft – jetzt folgen die ${landAnzahl} Fragen zu ${state.bundesland}.`
       : null,
     onAnswer: answerMain,
-    onNext: nextMain,
+    onNext: () => gotoMain(idx + 1),
+    onPrev: idx > 0 ? () => gotoMain(idx - 1) : null,
+    onSkip: () => gotoMain(idx + 1),
+    skipLabel: idx === total - 1 ? "Zum Abschluss →" : "Überspringen →",
+    onRedo: () => { delete state.main.antworten[frage.id]; saveState(); render(); },
     resultOk: isRight,
     resultMsg: isRight ? "✓ Richtig!" : "✗ Leider falsch – die Frage wurde im Fehler-Ordner gespeichert.",
-    nextLabel: idx === total - 1 ? "Abschließen" : "Nächste Frage →"
+    nextLabel: idx === total - 1 ? "Abschließen" : "Weiter →"
   });
 }
 
+/** Zu einer Frage im Hauptmodus springen (Zurück / Weiter / Überspringen) */
+function gotoMain(i) {
+  stopVorlesen();
+  state.main.index = Math.max(0, Math.min(i, FRAGEN.length));
+  state.main.chosen = null;
+  saveState(); render();
+  window.scrollTo({ top: 0 });
+}
+
 function answerMain(i) {
-  if (state.main.chosen !== null) return;
   const frage = FRAGEN[state.main.index];
-  state.main.chosen = i;
+  const vorher = mainAntwort(frage.id);
+  if (vorher !== undefined && vorher >= 0) return;
+  state.main.antworten[frage.id] = i;
   state.stats.beantwortet++;
   if (i === frage.richtig) {
     state.stats.richtig++;
@@ -1421,15 +1479,10 @@ function answerMain(i) {
   render();
 }
 
-function nextMain() {
-  state.main.index = Math.min(state.main.index + 1, FRAGEN.length);
-  state.main.chosen = null;
-  saveState();
-  render();
-}
+function nextMain() { gotoMain(state.main.index + 1); }
 
 function restartMain() {
-  state.main = { index: 0, chosen: null };
+  state.main = { index: 0, chosen: null, antworten: {} };
   state.stats = { beantwortet: 0, richtig: 0 };
   saveState();
   render();
@@ -1475,6 +1528,8 @@ function renderReview() {
     tags,
     onAnswer: answerReview,
     onNext: nextReview,
+    onSkip: n > 1 ? nextReview : null,
+    skipLabel: "Andere Frage →",
     resultOk: r.chosen === frage.richtig,
     resultMsg: r.msg || "",
     nextLabel: n ? "Nächste Zufallsfrage →" : "Fertig"
@@ -1649,7 +1704,7 @@ function renderExamQuestion() {
 
   const letzte = idx === ex.ids.length - 1;
   content.append(el("div", { class: "exam-nav" }, [
-    el("button", { class: "btn btn-ghost", type: "button", text: "← Zurück", onclick: () => gotoExam(idx - 1), ...(idx === 0 ? { disabled: "" } : {}) }),
+    el("button", { class: "btn btn-ghost", type: "button", id: "prevBtn", text: "← Zurück", onclick: () => gotoExam(idx - 1), ...(idx === 0 ? { disabled: "" } : {}) }),
     letzte
       ? el("button", { class: "btn btn-primary", type: "button", id: "nextBtn", text: "Prüfung abgeben", onclick: () => { ex.confirm = true; renderExamQuestion(); } })
       : el("button", { class: "btn btn-primary", type: "button", id: "nextBtn", text: "Weiter →", onclick: () => gotoExam(idx + 1) })
@@ -1771,6 +1826,10 @@ document.addEventListener("keydown", e => {
     const btns = document.querySelectorAll(".answer:not(:disabled)");
     const b = btns[Number(e.key) - 1];
     if (b) b.click();
+  } else if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+    const t = e.target; if (t && /^(INPUT|SELECT|TEXTAREA)$/.test(t.tagName)) return;
+    const b = $(e.key === "ArrowLeft" ? "prevBtn" : "nextBtn");
+    if (b && !b.disabled) { e.preventDefault(); b.click(); }
   } else if (e.key === "Enter") {
     const next = $("nextBtn");
     if (next && document.activeElement !== next) { e.preventDefault(); next.click(); }
